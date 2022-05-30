@@ -32,6 +32,7 @@ async function updateQuantity(cartItemDetails) {
   async function removeAllCartItems(cartId) {
     let sql = "DELETE FROM cart_items WHERE (`cart_id` = ?)";
     let parameters = [cartId];
+    
     await connection.executeWithParameters(sql, parameters);
 }
 
