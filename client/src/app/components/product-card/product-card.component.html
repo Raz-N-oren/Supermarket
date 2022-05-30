@@ -1,0 +1,11 @@
+<div class="product-card">
+  <span class="delete-product">
+    <button (click)="_products.deleteProduct(product.id)">✖️</button>
+  </span>
+
+  <div class="details">
+    <br /><br />
+    <h1>{{ product.name }}</h1>
+    <h3>{{ product.price | currency: "ILS"}}</h3>
+  </div>
+</div>

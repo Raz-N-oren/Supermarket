@@ -1,0 +1,15 @@
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  font-size: x-large;
+  color: blue;
+  margin: 10px;
+}
+
+.active-link {
+  color: magenta;
+  font-weight: bold;
+}
