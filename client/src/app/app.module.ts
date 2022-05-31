@@ -13,6 +13,7 @@ import { ProductsContainerComponent } from './components/products-container/prod
 import { AuthenticationInterceptor } from './interceptors/AuthenticationInterceptor';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AddNewProductComponent } from './components/add-new-product/add-new-product.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
     ProductsContainerComponent,
     LoginComponent,
     RegisterComponent,
+    AddNewProductComponent,
 
   ],
   imports: [
