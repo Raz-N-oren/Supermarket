@@ -3,10 +3,12 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Page404Component } from './components/page404/page404.component';
+import { LoginGuard } from './guards/login.guard';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: "login", component: ProductCardComponent },
-  { path: "shopping", component: ProductsContainerComponent },
+  { path: "login", component: LoginComponent },
+  { path: "shopping",canActivate:[LoginGuard], component: ProductsContainerComponent },
   { path: "", redirectTo: "/login", pathMatch: "full" },
   { path: "**", component: Page404Component },
 ];

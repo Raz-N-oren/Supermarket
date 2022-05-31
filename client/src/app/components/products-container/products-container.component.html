@@ -1,5 +1,19 @@
 <div class="products">
   <app-product-card *ngFor="let product of _products.productsArray" [product]="product">
-    
   </app-product-card>
+  <div>
+    <select
+      class="select-categories"
+      (change)="_categories.getAllCustomers()"
+      [(ngModel)]="selectedCategoryId"
+    >
+      <option value="">Select category</option>
+      <option
+        *ngFor="let category of _categories.categoriesArray"
+        value="{{ category.id }}"
+      >
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
 </div>

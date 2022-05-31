@@ -45,7 +45,6 @@ router.get("/amount_of_orders", async (request, response) => {
 
 });
 
-
 router.get("/last_purchase", async (request, response) => {
     try {
         let userInfo = tokenDecoder.decodeTokenFromRequest(request);

@@ -15,8 +15,6 @@ async function addUser(userRegistrationData) {
     throw new Error("User name already exist");
   }
 
-  normalizeOptionalData(userRegistrationData);
-
   userRegistrationData.password = hashPassword(userRegistrationData.password);
   userRegistrationData.role = "user";
   await usersDal.addUser(userRegistrationData);
@@ -84,12 +82,6 @@ function validateUserData(userRegistrationData) {
     throw new Error("Please enter street . (At least 3 characters)")
   }
 
-}
-
-function normalizeOptionalData(userRegistrationData) {
-  if (!userRegistrationData.lastName) {
-    userRegistrationData.lastName = "";
-  }
 }
 
 module.exports = {

@@ -1,7 +1,10 @@
 let connection = require("./connection-wrapper");
 
 async function getCartItemsByCartId(cartId) {
-    let sql = `SELECT id as cartItemId,product_id as productId, quantity from cart_items where cart_id = ?;`;
+    let sql = `SELECT ci.id, ci.product_id as productId, ci.quantity, p.name as productName, p.price 
+    FROM supermarket.cart_items ci join products p
+    on ci.product_id = p.id 
+    where ci.cart_id = ?;`;
     let parameters = [cartId]
     let cartItems = await connection.executeWithParameters(sql, parameters);
     return cartItems;
@@ -32,7 +35,7 @@ async function updateQuantity(cartItemDetails) {
   async function removeAllCartItems(cartId) {
     let sql = "DELETE FROM cart_items WHERE (`cart_id` = ?)";
     let parameters = [cartId];
-    
+
     await connection.executeWithParameters(sql, parameters);
 }
 

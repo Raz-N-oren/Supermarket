@@ -29,10 +29,10 @@ async function getAmountOfOrders() {
 }
 
 async function getLastPurchaseDate(userId) {
-    let sql = `SELECT order_date as orderDate 
+    let sql = `SELECT max(order_date) as orderDate
     FROM orders
-    where user_id = ? and order_date in (select max(order_date) from orders);`;
-    let parameters = [userId]
+    where user_id = ?;`;
+    let parameters = [userId];
     let lastPurchase = await connection.executeWithParameters(sql, parameters);
     return lastPurchase;
 }

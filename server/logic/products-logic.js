@@ -33,20 +33,37 @@ async function editProduct(product) {
 }
 
 const validateProduct = (product) => {
-    if (product.name == "") {
+
+    if (product.name.trim() == "") {
       throw new Error("Name can not be empty.");
     }
 
-    if (product.categoryId == "") {
-      throw new Error("Select a category.");
+    if (!product.name) {
+      throw new Error("Please enter a product's name.");
     }
 
     if (product.name.length > 15) {
       throw new Error("Name is limited to 15 characters.");
     }
+
+    if (!product.categoryId) {
+      throw new Error("Select a category.");
+    }
+
+    if (product.categoryId == "") {
+      throw new Error("Please enter a category.");
+    }
     
-    if (product.price <= 0 || product.price > 10,000) {
-        throw new Error("Invalid price.");
+    if(!product.price){
+      throw new Error("Please enter price.");
+    }
+
+    if(product.price == ""){
+      throw new Error("Please enter price.");
+    }
+
+    if (product.price <= 0 || product.price > 10000) {
+      throw new Error("Price must be between 0 and 10,000.");
     }
     
     if (product.imgUrl == "") {
