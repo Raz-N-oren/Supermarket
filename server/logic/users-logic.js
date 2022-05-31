@@ -45,6 +45,7 @@ function hashPassword(password) {
 }
 
 function validateUserData(userRegistrationData) {
+  console.log("test", userRegistrationData);
   let format = /[^a-zA-Z]/g;
   if (!userRegistrationData.userName) {
     throw new Error("Invalid user name or password");

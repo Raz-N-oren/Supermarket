@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
         let loggedInUser: IUser = {
           "token": response.token,
           "firstName": response.firstName,
-          "lastName": response.lastName
+          "lastName": response.lastName,
+          "city": response.city,
+          "street": response.street,
         }
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
         this.stateService.firstName = response.firstName;

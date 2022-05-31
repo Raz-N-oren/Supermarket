@@ -12,6 +12,7 @@ import { Page404Component } from './components/page404/page404.component';
 import { ProductsContainerComponent } from './components/products-container/products-container.component';
 import { AuthenticationInterceptor } from './interceptors/AuthenticationInterceptor';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { LoginComponent } from './components/login/login.component';
     Page404Component,
     ProductsContainerComponent,
     LoginComponent,
+    RegisterComponent,
 
   ],
   imports: [

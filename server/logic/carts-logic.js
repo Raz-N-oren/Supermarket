@@ -14,7 +14,7 @@ async function openCart(userInfo) {
         throw new Error("Invalid open cart request.");
     }
     let newCart = {
-        userId : userInfo.userId,
+        userId: userInfo.userId,
         isOpen: true,
         creationDate: new Date()
     }
@@ -22,7 +22,14 @@ async function openCart(userInfo) {
     return cartId;
 }
 
+
+async function validateCartForUser(cartId, userId) {
+    let isCartBelongToUser = await cartsDal.validateCartForUser(cartId, userId);
+    return isCartBelongToUser;
+}
+
 module.exports = {
     getLastCart,
-    openCart
+    openCart,
+    validateCartForUser
 }

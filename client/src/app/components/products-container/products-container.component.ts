@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsContainerComponent implements OnInit {
 
-  public selectedCategoryId:string;
+  public selectedCategoryId: string= '';
   constructor(
     public _products: ProductsService,
     public _categories: CategoriesService

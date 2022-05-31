@@ -1,10 +1,17 @@
 const cartItemsDal = require('../dal/cart-items-dal');
+const cartLogic = require('../logic/carts-logic');
 
-async function addToCart(cartItem) {
-    let id = await cartItemsDal.addToCart(cartItem);
-    cartItem.id = id;
-    return id;
-};
+async function addToCart(cartItem, userInfo) {
+    let userId = userInfo.userId;
+    let isCartVerified = await cartLogic.validateCartForUser(cartItem.cartId, userId);
+    if (isCartVerified) {
+        let cartItemId = await cartItemsDal.addToCart(cartItem);
+        return cartItemId;
+    }
+    else {
+        throw new Error("Illegal request.")
+    }
+}
 
 async function getCartItemsByCartId(cartId) {
     let cartItems = await cartItemsDal.getCartItemsByCartId(cartId);

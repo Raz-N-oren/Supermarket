@@ -1,6 +1,9 @@
 .products{
   overflow: auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
   flex-wrap: wrap;
+  gap: 3px;
 }

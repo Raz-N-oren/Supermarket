@@ -17,7 +17,15 @@ async function openCart(newCart) {
     return response.insertId;
 }
 
+async function validateCartForUser(cartId, userId) {
+    let sql = "select id from carts where id = ? and user_id = ?";
+    let parameters = [cartId, userId];
+    let response = await connection.executeWithParameters(sql, parameters);
+    return response.length > 0;
+}
+
 module.exports = {
     getLastCart,
-    openCart
+    openCart,
+    validateCartForUser
 }

@@ -33,8 +33,8 @@ export class ProductsService {
 
     public addNewProduct(product: object): void {
       this._http.post<IProduct>(this.baseUrl, product)
-        .subscribe((movie) => {
-          console.log("Product has been added. ");
+        .subscribe((product) => {
+          console.log("Product has been added. ", product);
         },
           err => {
             console.log(err);

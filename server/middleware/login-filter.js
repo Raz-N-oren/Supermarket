@@ -21,7 +21,7 @@ function authenticateJwtRequestToken() {
             return true;
         };
 
-        if (request.method == 'GET' && request.url.endsWith('/')) {
+        if (request.method == 'GET' && request.url.endsWith('/products')) {
             console.log("Returned true")
             return true;
         };

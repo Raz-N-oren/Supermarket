@@ -15,7 +15,7 @@ async function addNewOrder(order) {
 async function getBusyDays() {
     let sql = `SELECT shipping_date as shippingDate 
     FROM supermarket.orders 
-    GROUP BY shipping_date HAVING count(*) > 3;`;
+    GROUP BY shipping_date HAVING count(*) >= 3;`;
 
     let busyDays = await connection.execute(sql);
     return busyDays;
@@ -24,8 +24,8 @@ async function getBusyDays() {
 
 async function getAmountOfOrders() {
     let sql = `SELECT count(id) as amountOfOrders FROM supermarket.orders;`;
-    let amountOfOrders = await connection.execute(sql);
-    return amountOfOrders;
+    let [serverResponse] = await connection.execute(sql);
+    return serverResponse.amountOfOrders;
 }
 
 async function getLastPurchaseDate(userId) {

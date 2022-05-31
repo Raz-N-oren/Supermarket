@@ -1,13 +1,15 @@
 const { request, response } = require("express");
 const express = require("express");
 const router = express.Router();
+const tokenDecoder = require("../utils/token-decoder");
 
 const cartItemsLogic = require('../logic/cart-items-logic');
 
 router.post("/", async (request, response) => {
     try {
+        let userInfo = tokenDecoder.decodeTokenFromRequest(request);
         let cartItemsDetails = request.body;
-        let id = await cartItemsLogic.addToCart(cartItemsDetails);
+        let id = await cartItemsLogic.addToCart(cartItemsDetails,userInfo);
 
         response.json(id);
     }
@@ -19,7 +21,9 @@ router.post("/", async (request, response) => {
 
 router.get("/:id", async (request, response) => {
     try {
-        let cartItems = await cartItemsLogic.getCartItemsByCartId(request.params.id)
+        let userInfo = tokenDecoder.decodeTokenFromRequest(request);
+        let cartId = request.params.id;
+        let cartItems = await cartItemsLogic.getCartItemsByCartId(cartId,userInfo)
 
         response.json(cartItems);
     }
