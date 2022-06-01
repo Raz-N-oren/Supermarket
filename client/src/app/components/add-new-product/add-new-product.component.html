@@ -4,7 +4,7 @@
   <input
   placeholder="Product price"
   type="number"
-  [(ngModel)]="newMovieLength"
+  [(ngModel)]="newProductPrice"
   />
   <input placeholder="Product image url" type="text" [(ngModel)]="newProductImgUrl" />
   <div>
@@ -22,5 +22,5 @@
       </option>
     </select>
   </div>
-  <button (click)="addNewProduct()">Add new Product</button>
+  <button class="newProductButton" (click)="addNewProduct()">Add new Product</button>
 </div>

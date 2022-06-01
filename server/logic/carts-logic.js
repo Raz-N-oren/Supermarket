@@ -1,4 +1,4 @@
-const cartsDal = require('../dal/carts-dal');
+ const cartsDal = require('../dal/carts-dal');
 
 async function getLastCart(userInfo) {
     let userId = userInfo.userId;
@@ -21,7 +21,6 @@ async function openCart(userInfo) {
     let cartId = await cartsDal.openCart(newCart);
     return cartId;
 }
-
 
 async function validateCartForUser(cartId, userId) {
     let isCartBelongToUser = await cartsDal.validateCartForUser(cartId, userId);

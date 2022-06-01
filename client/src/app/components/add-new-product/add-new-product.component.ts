@@ -23,26 +23,28 @@ export class AddNewProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._categories.getAllCategories();  }
+    this._categories.getAllCategories();
+  }
 
   public addNewProduct(): void {
     try {
       const productToSave: object = {
         name: this.newProductName,
-        category_id: this.selectedCategoryId,
+        categoryId: +this.selectedCategoryId,
         price: this.newProductPrice,
         imgUrl: this.newProductImgUrl
       }
-      // if(this.newMovieName == "" || this.newMovieLength == null || this.newMovieDate == undefined || this.selectedTheaterId === undefined){
-      //   alert("Please Fill all Fields.")
-      // }
-      // else{
+      if (this.newProductName == "" || this.selectedCategoryId == null || this.newProductPrice == null || this.newProductImgUrl == "") {
+        alert("Please Fill all Fields.")
+      }
+      else {
         this._products.addNewProduct(productToSave)
-      // this.selectedTheaterId = "";
-      // this.newMovieLength = null;
-      // this.newMovieDate = new Date;
-      // this.newMovieName = "";
-      // }
+        this.selectedCategoryId = "";
+        this.newProductPrice = null;
+        this.newProductImgUrl = '';
+        this.newProductName = "";
+        alert("Product has been successfully added")
+      }
     }
     catch (error) {
       console.log(error);

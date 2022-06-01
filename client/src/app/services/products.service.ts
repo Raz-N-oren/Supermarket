@@ -21,7 +21,6 @@ export class ProductsService {
         })
   }
 
-    //GET movies by theater
     public getProductsByCategory(categoryId: string): void {
       this._http.get<IProduct[]>(this.baseUrl + categoryId)
         .subscribe((products) => { this.productsArray = products },
@@ -56,7 +55,7 @@ export class ProductsService {
     }
 
     public getProductsBySearchString(searchInputString: string): void {
-      this._http.get<IProduct[]>(this.baseUrl + `search/:searchString` +searchInputString)
+      this._http.get<IProduct[]>(this.baseUrl + `search/`+searchInputString)
         .subscribe((products) => { this.productsArray = products },
           err => {
             console.log(err);

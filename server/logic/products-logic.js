@@ -11,6 +11,7 @@ async function getProductsByCategory(categoryId) {
 }
 
 async function addNewProduct(product) {
+  console.log("Add test", product);
     validateProduct(product);
     let id = await productsDal.addNewProduct(product);
     product.id = id;
