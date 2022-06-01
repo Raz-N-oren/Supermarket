@@ -23,7 +23,6 @@ async function getProductsByCategory(categoryId) {
 }
 
 async function addNewProduct(product) {
-    validateProduct(product)
     let sql = "INSERT INTO products (name, category_id, price, img_url)  values(?,?, ?, ?)";
     let parameters = [product.name, product.categoryId, product.price, product.imgUrl];
 
@@ -59,33 +58,7 @@ async function editProduct(product) {
 }
 
 
-function validateProduct(product) {
 
-    if (!product.name) {
-      throw new Error("Please enter a name.");
-    }
-    
-    if(product.name.length > 15) {
-        throw new Error("Please enter a name shorter than 15 characters")
-    }
-
-    if (!product.price) {
-      throw new Error("Please enter a price.");
-    }
-  
-    if (product.price < 1 || product.price > 20000) {
-      throw new Error("Price must be between 1 and 20,000.");
-    }
-  
-    if (!product.imgUrl) {
-      throw new Error("Please Enter a valid image url.");
-    }
-  
-    if (product.imgUrl.length > 3000) {
-      throw new Error("Please Enter a image url shorter than 3,000 charterers.");
-    }
-  
-  }
 
 module.exports = {
     getAllProducts,

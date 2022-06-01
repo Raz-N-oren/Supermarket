@@ -19,18 +19,19 @@ async function addToCart(cartItem) {
     return cartItemData.insertId;
 }
 
-async function removeFromCart(cartItemId){
-    sql = 'DELETE FROM cart_items WHERE id = ?;';
-    parameters = [cartItemId];
-    await connection.executeWithParameters(sql, parameters);
-}
 
 async function updateQuantity(cartItemDetails) {
     let sql = "UPDATE cart_items SET quantity = ? WHERE id = ?;"
     let parameters = [cartItemDetails.quantity, cartItemDetails.id];
     let cartItemData = await connection.executeWithParameters(sql, parameters);
     return cartItemData;
-  }
+}
+
+async function removeFromCart(cartItemId){
+    sql = 'DELETE FROM cart_items WHERE id = ?;';
+    parameters = [cartItemId];
+    await connection.executeWithParameters(sql, parameters);
+}
 
   async function removeAllCartItems(cartId) {
     let sql = "DELETE FROM cart_items WHERE (`cart_id` = ?)";

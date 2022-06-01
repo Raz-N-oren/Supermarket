@@ -22,8 +22,15 @@ async function removeFromCart(cartItemId) {
     await cartItemsDal.removeFromCart(cartItemId);
 }
 
-async function updateQuantity(cartItemDetails) {
-    await cartItemsDal.updateQuantity(cartItemDetails);
+async function updateQuantity(cartItemDetails, userInfo) {
+    let userId = userInfo.userId;
+    let isCartVerified = await cartLogic.validateCartForUser(cartItem.cartId, userId);
+    if (isCartVerified) {
+        await cartItemsDal.updateQuantity(cartItemDetails);    }
+    else {
+        throw new Error("Illegal request.")
+    }
+
 };
 
 async function removeAllCartItems(cartId) {

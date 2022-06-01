@@ -2,13 +2,11 @@
 
 async function getLastCart(userInfo) {
     let userId = userInfo.userId;
-    console.log(userId);
     let lastCart = await cartsDal.getLastCart(userId);
     return lastCart;
 }
 
 async function openCart(userInfo) {
-    console.log(userInfo)
     let role = userInfo.role;
     if (role != "user") {
         throw new Error("Invalid open cart request.");

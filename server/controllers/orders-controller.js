@@ -11,6 +11,8 @@ router.post("/", async (request, response) => {
         let user_id = userInfo.userId;
         let orderDetails = request.body;
         orderDetails.userId = user_id;
+        orderDetails.orderDate = new Date();
+        orderDetails.shippingDate = new Date(orderDetails.shippingDate);
         let id = await ordersLogic.addNewOrder(orderDetails);
 
         response.json(id);
@@ -51,6 +53,20 @@ router.get("/last_purchase", async (request, response) => {
         let lastPurchase = await ordersLogic.getLastPurchaseDate(userInfo);
 
         response.json(lastPurchase);
+    }
+    catch (e) {
+        console.error(e);
+        response.status(600).send(e.message);
+    }
+});
+
+router.get("/receipt/:cartId", async (request, response) => {
+    try {
+        let cartId = request.params.cartId;
+        let userId = tokenDecoder.decodeTokenFromRequest(request).userId;
+        let receipt = await ordersLogic.getReceipt(cartId, userId);
+
+        response.json(receipt);
     }
     catch (e) {
         console.error(e);

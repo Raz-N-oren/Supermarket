@@ -12,10 +12,14 @@ async function addNewOrder(order) {
 
 }
 
+async function getReceipt(cartId, userId) {
+    return ("FIX THIS!");
+}
+
 async function getBusyDays() {
-    let sql = `SELECT shipping_date as shippingDate 
+    let sql = `SELECT shipping_date as busyDays 
     FROM supermarket.orders 
-    GROUP BY shipping_date HAVING count(*) >= 3;`;
+    GROUP BY shipping_date HAVING count(id) >= 3;`;
 
     let busyDays = await connection.execute(sql);
     return busyDays;
@@ -41,5 +45,6 @@ module.exports = {
     addNewOrder,
     getBusyDays,
     getAmountOfOrders,
-    getLastPurchaseDate
+    getLastPurchaseDate,
+    getReceipt
 }
