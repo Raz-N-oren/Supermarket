@@ -1,16 +1,5 @@
-.menu {
-  display: flex;
-  justify-content: center;
+.navbar{
+  min-height: 100%;
+  background-color: #e3f2fd;
 }
 
-a {
-  font-size: x-large;
-  color: blue;
-  margin: 10px;
-
-}
-
-.active-link {
-  color: magenta;
-  font-weight: bold;
-}

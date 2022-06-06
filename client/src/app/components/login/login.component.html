@@ -1,3 +1,57 @@
+<form #formInfo="ngForm">
+  <div class="emailInput">
+    <span class="p-float-label">
+      <input
+        pInputText
+        #emailInfo="ngModel"
+        required
+        email
+        pattern="^[a-z].*$"
+        type="text"
+        [(ngModel)]="userName"
+        name="email"
+      />
+      <span *ngIf="emailInfo.invalid && emailInfo.touched">Missing email</span>
+      <label for="emailInfo">Email</label>
+    </span>
+  </div>
+  <!-- <span *ngIf="nameInfo.errors?.required && nameInfo.touched">Missing name</span>
+  <span *ngIf="nameInfo.errors?.pattern && nameInfo.touched">Name must start with capital letter!</span> -->
+  <br /><br />
+  <div class="passwordInput">
+    <span class="p-float-label">
+      <input
+        pInputText
+        #passwordInfo="ngModel"
+        required
+        min="0"
+        max="1000"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+      />
+      <span *ngIf="passwordInfo.invalid && passwordInfo.touched"
+        >Missing password</span
+      >
+      <label for="passwordInfo">Password</label>
+    </span>
+  </div>
+  <br /><br />
+  <div class="loginButton">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Log in"
+      class="p-button-rounded p-button-info"
+      [disabled]="!formInfo.form.valid"
+      (click)="onLoginClicked()"
+    ></button>
+  </div>
+</form>
+
+<!-- <div class="login-container">
 User Name: <input type="text" placeholder="User Name" [(ngModel)]='userName'><br>
 Password: <input type="password" placeholder="password" [(ngModel)]='password'><br>
 <input type="button" value="login" (click)="onLoginClicked()">
+</div> -->

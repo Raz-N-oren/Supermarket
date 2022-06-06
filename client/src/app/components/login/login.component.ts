@@ -30,12 +30,14 @@ export class LoginComponent implements OnInit {
           "lastName": response.lastName,
           "shippingCity": response.shippingCity,
           "shippingStreet": response.shippingStreet,
+          "role": response.role
         }
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
         this.stateService.firstName = response.firstName;
         this.stateService.lastName = response.lastName;
         this.stateService.shippingCity = response.shippingCity;
         this.stateService.shippingStreet = response.shippingStreet;
+        this.stateService.userRole = response.role
         this.router.navigate(['/shopping']);
       },
        error =>{

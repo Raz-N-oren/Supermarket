@@ -4,4 +4,5 @@ export default interface IUser{
   lastName: string,
   shippingCity: string,
   shippingStreet: string,
+  role: string
 }

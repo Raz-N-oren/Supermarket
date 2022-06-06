@@ -1,0 +1,23 @@
+
+form {
+  margin-top: 50px;
+}
+
+.loginButton{
+  margin: 3% 5% ;
+  float: left;
+}
+
+span {
+  color: red;
+  margin: 10px;
+  position: absolute;
+  font-size: x-large;
+}
+
+.passwordInput{
+  margin-top: 2%;
+  justify-content: center;
+}
+
+

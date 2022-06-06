@@ -4,7 +4,7 @@ section {
   text-align: center;
   box-sizing: border-box;
   display: grid;
-  grid-template-rows: 7% 88% 5%;
+  grid-template-rows: 6% 89% 5%;
   grid-template-columns: repeat(12, 1fr);
 }
 

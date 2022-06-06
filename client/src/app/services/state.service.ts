@@ -9,6 +9,7 @@ export class StateService {
   public lastName: string = '';
   public shippingCity: string = '';
   public shippingStreet: string = '';
+  public userRole: string = 'guest';
 
   constructor() {
     let userData: string = sessionStorage.getItem("userData");
@@ -18,7 +19,7 @@ export class StateService {
       this.lastName = currentUser.lastName;
       this.shippingCity = currentUser.city;
       this.shippingStreet = currentUser.street;
-
+      this.userRole = currentUser.role;
     }
   }
 }

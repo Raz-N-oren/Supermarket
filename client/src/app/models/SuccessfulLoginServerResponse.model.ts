@@ -3,5 +3,6 @@ export default interface SuccessfulLoginServerResponse{
   firstName: string;
   lastName: string,
   shippingCity: string,
-  shippingStreet: string
+  shippingStreet: string,
+  role: string
 }
