@@ -4,7 +4,7 @@ async function addNewOrder(order) {
     let sql = `INSERT INTO orders 
     (user_id, cart_id, final_price, city, street, shipping_date,order_date,payment_last_digits)
      values(?,?, ?, ?,?,?,?,?);`;
-    let parameters = [order.userId, order.cartId, order.finalPrice, order.city, order.street, order.shippingDate, order.orderDate, order.paymentLastDigits];
+    let parameters = [order.userId, order.cartId, order.finalPrice, order.shippingCity, order.shippingStreet, order.shippingDate, order.orderDate, order.paymentLastDigits];
 
     let orderData = await connection.executeWithParameters(sql, parameters);
 

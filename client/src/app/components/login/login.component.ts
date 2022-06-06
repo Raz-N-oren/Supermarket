@@ -28,14 +28,14 @@ export class LoginComponent implements OnInit {
           "token": response.token,
           "firstName": response.firstName,
           "lastName": response.lastName,
-          "city": response.city,
-          "street": response.street,
+          "shippingCity": response.shippingCity,
+          "shippingStreet": response.shippingStreet,
         }
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
         this.stateService.firstName = response.firstName;
         this.stateService.lastName = response.lastName;
-        this.stateService.city = response.city;
-        this.stateService.street = response.street;
+        this.stateService.shippingCity = response.shippingCity;
+        this.stateService.shippingStreet = response.shippingStreet;
         this.router.navigate(['/shopping']);
       },
        error =>{

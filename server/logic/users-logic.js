@@ -75,11 +75,11 @@ function validateUserData(userRegistrationData) {
     throw new Error("Please enter last name . (At least 3 characters)")
   }
 
-  if (!userRegistrationData.city || userRegistrationData.city.length < 3) {
+  if (!userRegistrationData.shippingCity || userRegistrationData.shippingCity.length < 3) {
     throw new Error("Please enter city . (At least 3 characters)")
   }
 
-  if (!userRegistrationData.street || userRegistrationData.street.length < 3) {
+  if (!userRegistrationData.shippingStreet || userRegistrationData.shippingStreet.length < 3) {
     throw new Error("Please enter street . (At least 3 characters)")
   }
 
