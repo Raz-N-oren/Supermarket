@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
@@ -14,13 +15,15 @@ export class ProductsContainerComponent implements OnInit {
   constructor(
     public _products: ProductsService,
     public _categories: CategoriesService,
-    public _carts: CartsService
+    public _carts: CartsService,
+    public _cartItems: CartItemsService
   ) { }
 
   ngOnInit(): void {
     this._products.getAllProducts();
     this._categories.getAllCategories();
     this._carts.getLastCart();
+    this._cartItems.getCartItemsByCartId(1);
   }
 
 }
