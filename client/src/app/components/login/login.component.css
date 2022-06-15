@@ -1,19 +1,8 @@
-
-.loginButton{
-  margin: 3% 5% ;
-  float: left;
-}
-
-span {
+.errors-div{
   color: red;
-  margin: 10px;
-  position: absolute;
-  font-size: x-large;
 }
 
-.passwordInput{
-  margin-top: 2%;
-  justify-content: center;
+input
+{
+  width: 100%;
 }
-
-

@@ -1,59 +1,47 @@
-<form #formInfo="ngForm">
-  <div class="emailInput">
-    <span class="p-float-label">
-      <input
-        pInputText
-        #emailInfo="ngModel"
-        required
-        email
-        pattern="^[a-z].*$"
-        type="text"
-        [(ngModel)]="userName"
-        name="email"
-      />
-      <span *ngIf="emailInfo.invalid && emailInfo.touched">Missing email</span>
-      <label for="emailInfo">Email</label>
-    </span>
+<p-card
+  header="Log In"
+  [style]="{ width: '25rem', height: '600px', 'margin-bottom': '2em' }"
+  >
+  <br>
+<form [formGroup]="userLoginForm">
+  <span class="p-float-label">
+    <input formControlName="userEmail" id="float-input userEmail" type="text" pInputText name="userEmail" />
+    <br>
+    <label for="float-input">Email</label>
+  </span>
+  <div class="errors-div" *ngIf="userLoginForm.controls['userEmail'].invalid && (userLoginForm.controls['userEmail'].dirty || userLoginForm.controls['userEmail'].touched)">
+    <div *ngIf="userLoginForm.controls['userEmail'].errors.required">
+    Please enter email
+    </div>
+    <div *ngIf="userLoginForm.controls['userEmail'].errors.email">
+      Please enter valid email
+    </div>
+    <div *ngIf="userLoginForm.controls['userEmail'].errors.maxlength">
+      Maximum length is 50 characters
+    </div>
   </div>
-  <!-- <span *ngIf="nameInfo.errors?.required && nameInfo.touched">Missing name</span>
-  <span *ngIf="nameInfo.errors?.pattern && nameInfo.touched">Name must start with capital letter!</span> -->
-  <br /><br />
-  <div class="passwordInput">
-    <span class="p-float-label">
-      <!-- <input
-        pInputText
-        #passwordInfo="ngModel"
-        required
-        min="0"
-        max="1000"
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-      /> -->
-      <p-password         #passwordInfo="ngModel"
-      required name="password" [(ngModel)]="password" [feedback]="false" [toggleMask]="true"></p-password>
-      <span *ngIf="passwordInfo.invalid && passwordInfo.touched"
-        >Missing password</span
-      >
-      <label for="passwordInfo">Password</label>
-    </span>
+  <br><br>
+  <span class="p-float-label">
+    <input formControlName="password" id="float-input password" type="password" pInputText  name="password"/>
+    <label for="float-input">Password</label>
+  </span>
+  <div class="errors-div" *ngIf="userLoginForm.controls['password'].invalid && (userLoginForm.controls['password'].dirty || userLoginForm.controls['password'].touched)">
+    <div *ngIf="userLoginForm.controls['password'].errors.required">
+    Please enter password
+    </div>
+    <div *ngIf="userLoginForm.controls['password'].errors.minlength">
+      Length should be at least 6 characters
+    </div>
+    <div *ngIf="userLoginForm.controls['password'].errors.maxlength">
+      Maximum length is 10 characters
+    </div>
   </div>
-  <br /><br />
-  <div class="loginButton">
-    <button
-      pButton
-      pRipple
-      type="button"
-      label="Log in"
-      class="p-button-rounded p-button-info"
-      [disabled]="!formInfo.form.valid"
-      (click)="onLoginClicked()"
-    ></button>
+  <div class="errors-div" *ngIf="isLoginFail">
+    password is incorrect or user name doesn't exists
   </div>
+  <br><br>
+  <p-button [disabled]="userLoginForm.invalid || isLoginFail" (click)="onLoginClicked()">Submit</p-button>
 </form>
-
-<!-- <div class="login-container">
-User Name: <input type="text" placeholder="User Name" [(ngModel)]='userName'><br>
-Password: <input type="password" placeholder="password" [(ngModel)]='password'><br>
-<input type="button" value="login" (click)="onLoginClicked()">
-</div> -->
+<br>
+<a routerLink="/landing-page/register/step-one">not registered? click here</a>
+</p-card>
