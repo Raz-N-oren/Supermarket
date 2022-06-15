@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginClicked(): void {
-    const observable = this.usersService.login({userName: this.userName, password: this.password});
+    const observable = this.usersService.login({userEmail: this.userName, password: this.password});
     observable.subscribe(
       response => {
         let loggedInUser: IUser = {

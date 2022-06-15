@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,6 +23,17 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
+import {PasswordModule} from 'primeng/password';
+import { RippleModule } from 'primeng/ripple';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CardModule } from 'primeng/card';
+import {StepsModule} from 'primeng/steps';
+import { RegisterStepOneComponent } from './components/register-step-one/register-step-one.component';
+import { RegisterStepTwoComponent } from './components/register-step-two/register-step-two.component';
+import {DropdownModule} from 'primeng/dropdown';
+import {DialogModule} from 'primeng/dialog';
+
 
 @NgModule({
   declarations: [
@@ -35,12 +46,17 @@ import {ButtonModule} from 'primeng/button';
     LoginComponent,
     RegisterComponent,
     AddNewProductComponent,
+    LandingPageComponent,
+    RegisterStepOneComponent,
+    RegisterStepTwoComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    RippleModule,
     HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -50,7 +66,13 @@ import {ButtonModule} from 'primeng/button';
     FlexLayoutModule,
     BrowserAnimationsModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    PasswordModule,
+    NgbModule,
+    CardModule,
+    StepsModule,
+    DropdownModule,
+    DialogModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
   bootstrap: [AppComponent]

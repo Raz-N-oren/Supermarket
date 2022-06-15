@@ -1,0 +1,24 @@
+<div class="card-container">
+  <p-card class="account card">
+    <p-button
+      (click)="handleStoreButton()"
+      [label]="storeButtonLabel"
+      *ngIf="_users.currentUser"
+    ></p-button>
+    <a routerLink="register/step-one">Register</a>
+    <a routerLink="login">Log In</a>
+    <router-outlet></router-outlet>
+  </p-card>
+  <p-card class="about card">
+    <p> We have the best prices, products and service online!</p>
+    <img src="/assets/images/Grocery.png" alt="Grocery" height="400px" width="400px">
+
+  </p-card>
+  <p-card class="general-info card">
+    Amount of products: <br />
+    {{ _products.productsArray.length }}
+    <br />
+    Amount of orders: <br />
+    {{ _orders.amountOfOrders }} <br />
+  </p-card>
+</div>

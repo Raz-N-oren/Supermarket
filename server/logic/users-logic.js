@@ -11,7 +11,7 @@ const saltLeft = "--mnlcfs;@!$ ";
 
 async function addUser(userRegistrationData) {
   validateUserData(userRegistrationData);
-  if (await usersDal.isUserNameExist(userRegistrationData.id, userRegistrationData.userName)) {
+  if (await usersDal.isUserExist(userRegistrationData.userId, userRegistrationData.userEmail)) {
     throw new Error("User name already exist");
   }
 
@@ -47,7 +47,7 @@ function hashPassword(password) {
 function validateUserData(userRegistrationData) {
   console.log("test", userRegistrationData);
   let format = /[^a-zA-Z]/g;
-  if (!userRegistrationData.userName) {
+  if (!userRegistrationData.userEmail) {
     throw new Error("Invalid user name or password");
   }
 
@@ -75,17 +75,23 @@ function validateUserData(userRegistrationData) {
     throw new Error("Please enter last name . (At least 3 characters)")
   }
 
-  if (!userRegistrationData.shippingCity || userRegistrationData.shippingCity.length < 3) {
+  if (!userRegistrationData.city || userRegistrationData.city.length < 3) {
     throw new Error("Please enter city . (At least 3 characters)")
   }
 
-  if (!userRegistrationData.shippingStreet || userRegistrationData.shippingStreet.length < 3) {
+  if (!userRegistrationData.street || userRegistrationData.street.length < 3) {
     throw new Error("Please enter street . (At least 3 characters)")
   }
 
 }
 
+async function isUserExist(userId, userEmail) {
+  let isUserExist = await usersDal.isUserExist(userId, userEmail);
+  return isUserExist;
+}
+
 module.exports = {
   addUser,
-  loginUser
+  loginUser,
+  isUserExist
 };

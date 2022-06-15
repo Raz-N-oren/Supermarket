@@ -1,4 +1,4 @@
 export default interface UserLoginData{
-  userName: string;
+  userEmail: string;
   password: string;
 }

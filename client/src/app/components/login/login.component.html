@@ -20,7 +20,7 @@
   <br /><br />
   <div class="passwordInput">
     <span class="p-float-label">
-      <input
+      <!-- <input
         pInputText
         #passwordInfo="ngModel"
         required
@@ -29,7 +29,9 @@
         type="password"
         [(ngModel)]="password"
         name="password"
-      />
+      /> -->
+      <p-password         #passwordInfo="ngModel"
+      required name="password" [(ngModel)]="password" [feedback]="false" [toggleMask]="true"></p-password>
       <span *ngIf="passwordInfo.invalid && passwordInfo.touched"
         >Missing password</span
       >

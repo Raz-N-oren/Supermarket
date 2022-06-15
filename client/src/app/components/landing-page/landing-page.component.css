@@ -1,0 +1,14 @@
+.card-container {
+  display: flex;
+  padding-top: 10px;
+  justify-content: space-around;
+  height: 84vh;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: inline-block;
+  height: 100% !important;
+  width: 30%;
+  margin: 5px;
+}

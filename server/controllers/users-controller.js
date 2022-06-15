@@ -29,5 +29,19 @@ router.post("/login", async (request, response) => {
     }
 });
 
+router.post("/is-exist", async (request, response) => {
+    try {
+        let userId = request.body.userId;
+        let userEmail = request.body.userEmail;
+        let loginResponse = await usersLogic.isUserExist(userId, userEmail);
+        
+        response.json(loginResponse);
+    }
+    catch(e) {
+        console.error(e);
+        response.status(600).send(e.message);
+    }
+});
+
 module.exports = router;
 

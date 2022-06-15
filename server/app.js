@@ -15,7 +15,7 @@ const loginFilter = require('./middleware/login-filter');
 
 app.use(cors({origin: ["http://localhost:4200"]}));
 
-app.use(loginFilter());
+// app.use(loginFilter());
 // Extract the JSON from the body and create request.body object containing it:
 app.use(express.json());
 

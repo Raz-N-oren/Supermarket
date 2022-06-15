@@ -1,0 +1,72 @@
+<br>
+<form [formGroup]="userRegisterForm">
+  <div class="container">
+  <div>
+  <span class="p-float-label">
+  <p-dropdown [options]="cities" formControlName="city" placeholder="Select a City *"
+    [showClear]="true"></p-dropdown>
+  </span>
+   <div class="errors-div" *ngIf="userRegisterForm.controls['city'].invalid && (userRegisterForm.controls['city'].dirty || userRegisterForm.controls['city'].touched)">
+    <div *ngIf="userRegisterForm.controls['city'].errors.required">
+    Please choose city
+    </div>
+  </div>
+  <br>
+  <span class="p-float-label">
+    <input formControlName="street" id="float-input" type="text" pInputText name="street" />
+    <br>
+    <label for="float-input">Street *</label>
+  </span>
+  <div class="errors-div" *ngIf="userRegisterForm.controls['street'].invalid && (userRegisterForm.controls['street'].dirty || userRegisterForm.controls['street'].touched)">
+    <div *ngIf="userRegisterForm.controls['street'].errors.required">
+    Please enter street
+    </div>
+    <div *ngIf="userRegisterForm.controls['street'].errors.maxlength">
+      Maximum length is 40 characters
+    </div>
+  </div>
+  <br>
+  <span class="p-float-label">
+    <input formControlName="firstName" id="float-input" type="text" pInputText name="firstName" />
+    <br>
+    <label for="float-input">First Name *</label>
+  </span>
+  <div class="errors-div" *ngIf="userRegisterForm.controls['firstName'].invalid && (userRegisterForm.controls['firstName'].dirty || userRegisterForm.controls['firstName'].touched)">
+    <div *ngIf="userRegisterForm.controls['firstName'].errors.required">
+    Please enter first name
+    </div>
+    <div *ngIf="userRegisterForm.controls['firstName'].errors.maxlength">
+      Maximum length is 12 characters
+    </div>
+  </div>
+  <br>
+  <span class="p-float-label">
+    <input formControlName="lastName" id="float-input" type="text" pInputText name="lastName" />
+    <br>
+    <label for="float-input">Last Name *</label>
+  </span>
+  <div class="errors-div" *ngIf="userRegisterForm.controls['lastName'].invalid && (userRegisterForm.controls['lastName'].dirty || userRegisterForm.controls['lastName'].touched)">
+    <div *ngIf="userRegisterForm.controls['lastName'].errors.required">
+    Please enter last name
+    </div>
+    <div *ngIf="userRegisterForm.controls['lastName'].errors.maxlength">
+      Maximum length is 12 characters
+    </div>
+  </div>
+
+  <br><br>
+</div>
+</div>
+  <div class="buttons">
+    <p-button (click)="goBackToStepOne()"> &lt; Go Back</p-button>
+    <p-button [disabled]="userRegisterForm.invalid" (click)="addNewUser()">Register</p-button>
+  </div>
+</form>
+
+<p-dialog (onHide)="router.navigate([''])" successfully="Your registered successfully!"  [(visible)]="displayModal" [breakpoints]="{'960px': '75vw'}" [modal]="true" [style]="{width: '30vw'}"
+    [draggable]="false" [resizable]="false">
+    Your registered successfully!
+        <ng-template pTemplate="footer">
+        <p-button (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>

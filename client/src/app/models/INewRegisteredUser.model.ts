@@ -1,6 +1,6 @@
 export default interface INewRegisteredUser{
-  id: number,
-  userName: string,
+  userId: string,
+  userEmail: string,
   firstName: string,
   lastName: string,
   password: string,

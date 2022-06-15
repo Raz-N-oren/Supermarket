@@ -1,40 +1,7 @@
-<div class="new-user-container">
-  <input
-    placeholder="User id"
-    type="text"
-    [(ngModel)]="userId"
-  />
-  <input
-    placeholder="User email"
-    type="text"
-    [(ngModel)]="userName"
-  />
-  <input
-    placeholder="User first name"
-    type="text"
-    [(ngModel)]="userFirstName"
-  />
-  <input
-    placeholder="User last name"
-    type="text"
-    [(ngModel)]="userLastName"
-  />
-  <input
-    placeholder="User password"
-    type="password"
-    [(ngModel)]="userPassword"
-  />
-  <input
-    placeholder="User city"
-    type="text"
-    [(ngModel)]="userCity"
-  />
-  <input
-    placeholder="User street"
-    type="text"
-    [(ngModel)]="userStreet"
-  />
-
-
-  <button (click)="addNewUser()">Register</button>
-</div>
+<p-card
+  header="Register"
+  [style]="{ width: '25rem', height: '600px', 'margin-bottom': '2em' }"
+>
+  <p-steps [model]="items" [readonly]="true"></p-steps>
+  <router-outlet></router-outlet>
+</p-card>

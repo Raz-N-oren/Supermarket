@@ -17,6 +17,8 @@ main {
   grid-column: span 12;
   border: 2px solid black;
   overflow: auto;
+  padding: 2px;
+  margin-top: 12px;
   /* display: flex;
   justify-content: stretch;
   align-items: stretch;

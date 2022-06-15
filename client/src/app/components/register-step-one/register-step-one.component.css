@@ -1,0 +1,17 @@
+.errors-div{
+  color: red;
+}
+
+.next-button{
+  float: right;
+}
+
+
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+input{
+  min-width: 300px;
+}
