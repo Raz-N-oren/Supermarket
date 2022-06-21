@@ -4,8 +4,8 @@ export default interface SuccessfulLoginServerResponse{
   token: string;
   firstName: string;
   lastName: string,
-  shippingCity: string,
-  shippingStreet: string,
+  city: string,
+  street: string,
   role: string,
   cart: ICart
 }

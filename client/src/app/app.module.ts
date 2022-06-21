@@ -33,6 +33,9 @@ import { RegisterStepOneComponent } from './components/register-step-one/registe
 import { RegisterStepTwoComponent } from './components/register-step-two/register-step-two.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
+import { BeforeShoppingComponent } from './components/before-shopping/before-shopping.component';
+import { StoreComponent } from './components/store/store.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -49,6 +52,9 @@ import {DialogModule} from 'primeng/dialog';
     LandingPageComponent,
     RegisterStepOneComponent,
     RegisterStepTwoComponent,
+    BeforeShoppingComponent,
+    StoreComponent,
+    CartComponent,
 
   ],
   imports: [

@@ -3,3 +3,11 @@
   background-color: #e3f2fd;
 }
 
+.log-out-button{
+  margin-right: 20px;
+   background-color: transparent;
+   outline: none;
+   border: none;
+   cursor: pointer;
+   color: #71797e;
+}

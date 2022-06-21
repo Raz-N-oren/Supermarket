@@ -1,10 +1,5 @@
 <div class="card-container">
   <p-card class="account card">
-    <p-button
-      (click)="handleStoreButton()"
-      [label]="storeButtonLabel"
-      *ngIf="_users.currentUser"
-    ></p-button>
     <router-outlet></router-outlet>
   </p-card>
   <p-card class="about card">

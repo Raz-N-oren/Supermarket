@@ -19,17 +19,11 @@
         <a class="nav-link" routerLink="add-new-product" routerLinkActive="active-link">Add New Product</a>
       </li>
     </ul>
-    <form *ngIf="_state.userRole != 'guest'" class="form-inline my-2 my-lg-0">
+    <form *ngIf="stateService.role != 'guest'" class="form-inline my-2 my-lg-0">
+      <button class="log-out-button" (click)="onLogOutClicked()">Log out</button>
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </nav>
 
-<!--
-<div class="menu">
-  <a routerLink="login" routerLinkActive="active-link">Login</a>
-  <a routerLink="register" routerLinkActive="active-link">Register</a>
-  <a routerLink="shopping" routerLinkActive="active-link">Shopping</a>
-  <a routerLink="add-new-product" routerLinkActive="active-link">Add New Product</a>
-</div> -->

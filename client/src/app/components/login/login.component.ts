@@ -51,16 +51,18 @@ export class LoginComponent implements OnInit {
           "token": response.token,
           "firstName": response.firstName,
           "lastName": response.lastName,
-          "shippingCity": response.shippingCity,
-          "shippingStreet": response.shippingStreet,
+          "city": response.city,
+          "street": response.street,
           "role": response.role
         }
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
+        this._usersService.currentUser = loggedInUser;
         this.stateService.firstName = response.firstName;
         this.stateService.lastName = response.lastName;
-        this.stateService.shippingCity = response.shippingCity;
-        this.stateService.shippingStreet = response.shippingStreet;
-        this.stateService.userRole = response.role
+        this.stateService.shippingCity = response.city;
+        this.stateService.shippingStreet = response.street;
+        this.stateService.role = response.role ;
+
 
         let userDataAsString = sessionStorage.getItem("userData");
         let userData = JSON.parse(userDataAsString);
@@ -69,7 +71,7 @@ export class LoginComponent implements OnInit {
         console.log(this._cartService.cart)
         console.log("login response", response);
 
-        this.router.navigate(['/shopping']);
+        this.router.navigate(['/landing-page/before-shopping']);
       },
        error =>{
          alert("Password is incorrect or user name doesn't exists");

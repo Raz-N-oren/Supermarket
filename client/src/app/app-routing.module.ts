@@ -9,6 +9,7 @@ import { AddNewProductComponent } from './components/add-new-product/add-new-pro
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { RegisterStepOneComponent } from './components/register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './components/register-step-two/register-step-two.component';
+import { BeforeShoppingComponent } from './components/before-shopping/before-shopping.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
         {path: '', redirectTo: 'step-one', pathMatch: 'full'}
 
       ]},
+      { path: "before-shopping", component: BeforeShoppingComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full', }
     ],
   },

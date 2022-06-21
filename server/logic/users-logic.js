@@ -33,7 +33,7 @@ async function loginUser(userLoginData) {
   let tokenInfo = { userId: userData.userId, role: userData.role }
   console.log("tokenInfo",tokenInfo);
   const token = jwt.sign(tokenInfo, config.secret);
-  const successfulLogInResponse = { token: token, firstName: userData.firstName, lastName: userData.lastName, city: userData.city, street: userData.street };
+  const successfulLogInResponse = { token: token, firstName: userData.firstName, lastName: userData.lastName, city: userData.city, street: userData.street , role: userData.role};
   console.log();
   
   return successfulLogInResponse;

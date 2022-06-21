@@ -9,17 +9,19 @@ export class StateService {
   public lastName: string = '';
   public shippingCity: string = '';
   public shippingStreet: string = '';
-  public userRole: string = 'guest';
+  public role: string = 'guest';
 
   constructor() {
     let userData: string = sessionStorage.getItem("userData");
+    console.log(userData);
+
     if(userData){
       let currentUser = JSON.parse(userData);
       this.firstName = currentUser.firstName;
       this.lastName = currentUser.lastName;
       this.shippingCity = currentUser.city;
       this.shippingStreet = currentUser.street;
-      this.userRole = currentUser.role;
+      this.role = currentUser.role;
     }
   }
 }
