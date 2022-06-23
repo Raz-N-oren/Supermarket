@@ -1,7 +1,8 @@
 let connection = require("./connection-wrapper");
 
 async function getCartItemsByCartId(cartId) {
-    let sql = `SELECT ci.id, ci.product_id as productId, ci.quantity, p.name as productName, p.price as productPrice 
+    let sql = `SELECT ci.id, ci.product_id as productId, ci.quantity,
+    p.name as productName, p.price as productPrice, p.img_url as productImage
     FROM supermarket.cart_items ci join products p
     on ci.product_id = p.id 
     where ci.cart_id = ?;`;

@@ -10,7 +10,7 @@ async function addUser(userDetails) {
 
 async function loginUser(user) {
     let sql = `SELECT id as userId, first_name as firstName, last_name as lastName,
-     city as shippingCity, street as shippingStreet, role FROM users WHERE email = ? AND password = ? ;`;
+     city, street, role FROM users WHERE email = ? AND password = ? ;`;
     let parameters = [user.userEmail, user.password];
     console.log(parameters);
 
