@@ -11,3 +11,8 @@
    cursor: pointer;
    color: #71797e;
 }
+
+.welcome{
+  top: 20%;
+  position:relative;
+}

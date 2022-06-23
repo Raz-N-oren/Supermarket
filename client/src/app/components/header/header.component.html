@@ -6,20 +6,18 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      <li *ngIf="currentUser" class="nav-item">
+        <a class="welcome"  > Welcome {{  currentUser.firstName }} {{  currentUser.lastName }} </a>
+        </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="login" routerLinkActive="active-link">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="register" routerLinkActive="active-link">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="shopping" routerLinkActive="active-link">Shopping</a>
+        <a class="nav-link" routerLink="store" routerLinkActive="active-link">Shopping</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="add-new-product" routerLinkActive="active-link">Add New Product</a>
       </li>
     </ul>
-    <form *ngIf="stateService.role != 'guest'" class="form-inline my-2 my-lg-0">
+
+    <form *ngIf="currentUser" class="form-inline my-2 my-lg-0">
       <button class="log-out-button" (click)="onLogOutClicked()">Log out</button>
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import ICart from '../models/ICarts.model';
 
 @Injectable({
@@ -9,6 +10,7 @@ export class CartsService {
 
   public cart: ICart;
   public baseUrl: string = 'http://localhost:3001/carts/';
+  private currentCartSubject = new BehaviorSubject<ICart>(null);
 
   constructor(private _http: HttpClient) { }
 
@@ -31,5 +33,14 @@ export class CartsService {
           alert("Cannot Open New Cart")
         }
       )
+  }
+
+  followCurrentCart = (): Observable<ICart> =>{
+    return this.currentCartSubject.asObservable();
+  }
+
+  setCurrentCart = (newCart: ICart) => {
+    this.cart = newCart;
+    this.currentCartSubject.next(newCart);
   }
 }

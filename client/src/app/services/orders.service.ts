@@ -7,17 +7,24 @@ import { Injectable } from '@angular/core';
 })
 export class OrdersService {
 
-  public busyDays: Date[] = [];
-  public amountOfOrders: number;
-  public lastPurchaseDate: Date;
+  busyDays: Date[] = [];
+  amountOfOrders: number;
+  lastPurchaseDate: Date;
 
   public baseUrl: string = 'http://localhost:3001/orders/';
 
   constructor(private _http: HttpClient) { }
 
   public getLastPurchaseDate(): void {
-    this._http.get<IOrder>(this.baseUrl + 'last_purchase')
-      .subscribe((orderResponse) => { this.lastPurchaseDate = new Date(orderResponse.orderDate); },
+    this._http.get<any>(this.baseUrl + 'last_purchase')
+      .subscribe((orderResponse) => {
+        console.log(orderResponse);
+
+        if(orderResponse.orderDate !== null){
+        this.lastPurchaseDate = new Date(orderResponse.orderDate);
+        console.log("lastPurchase",this.lastPurchaseDate);
+
+      }},
         err => {
           console.log(err);
           alert("Cannot get last purchase. ")

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import INewRegisteredUser from '../models/INewRegisteredUser.model';
 import IUser from '../models/IUser.model';
 import SuccessfulLoginServerResponse from '../models/SuccessfulLoginServerResponse.model';
@@ -11,7 +11,8 @@ import UserLoginData from '../models/UserLoginData.model';
 })
 export class UsersService {
   public baseUrl: string = "http://localhost:3001/users/";
-  public currentUser?: IUser;
+  private currentUser?: IUser;
+  private currentUserSubject = new BehaviorSubject<IUser>(null);
 
   userRegisterData: INewRegisteredUser = {
     userId: "",
@@ -59,5 +60,14 @@ export class UsersService {
     }
     )
     return isExist;
+  }
+
+  followCurrentUser = (): Observable<IUser> =>{
+    return this.currentUserSubject.asObservable();
+  }
+
+  setCurrentUser = (newUser: IUser) => {
+    this.currentUser = newUser;
+    this.currentUserSubject.next(newUser);
   }
 }

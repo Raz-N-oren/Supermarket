@@ -1,17 +1,23 @@
 <div class="card-container">
-  <p-card class="account card">
+  <div class="account card">
     <router-outlet></router-outlet>
-  </p-card>
-  <p-card class="about card">
+  </div>
+  <div class="about card">
     <p> We have the best prices, products and service online!</p>
     <img src="/assets/images/Grocery.png" alt="Grocery" height="400px" width="400px">
 
-  </p-card>
-  <p-card  class="general-info card">
+  </div>
+  <div  class="general-info card">
     Amount of products: <br />
     {{ _products.productsArray.length }}
     <br />
     Amount of orders: <br />
     {{ _orders.amountOfOrders }} <br />
-  </p-card>
+    <br />
+    <div *ngIf="_orders.lastPurchaseDate">
+      <h6>Your last order was at:</h6>
+      <h6>{{ _orders.lastPurchaseDate | date: "fullDate" }}</h6>
+    </div>
+
+  </div>
 </div>

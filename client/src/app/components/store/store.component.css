@@ -1,0 +1,35 @@
+.store{
+  width: 100%;
+  /* display: grid; */
+   height: 88vh;
+  /* grid-template-areas: "a b";
+  grid-template-columns: 3fr 1fr; */
+  position: relative;
+  display: flex;
+}
+
+app-cart{
+  /* grid-template: "a"; */
+  border-radius: 4px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  display: inline-flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 10px;
+  height: 100%;
+}
+
+app-products-container{
+  /* grid-template: "b"; */
+  display: inline-flex;
+  min-width: 69%;
+  height: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+
+
+

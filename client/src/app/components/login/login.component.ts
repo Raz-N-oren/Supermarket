@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { combineLatest } from 'rxjs';
 import IUser from 'src/app/models/IUser.model';
 import UserLoginData from 'src/app/models/UserLoginData.model';
@@ -17,14 +18,14 @@ export class LoginComponent implements OnInit {
 
   loginUserData: UserLoginData = {userEmail: "", password: ""};
   isLoginFail: boolean = false;
-  userLoginForm: FormGroup;
+  userLoginForm: UntypedFormGroup;
 
 
   constructor(
     private _usersService: UsersService,
     private router: Router,
     private stateService: StateService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _cartService: CartsService
 
 
@@ -47,26 +48,31 @@ export class LoginComponent implements OnInit {
     const observable = this._usersService.login(this.loginUserData);
     observable.subscribe(
       response => {
+        let helper = new JwtHelperService();
+        let decoded = helper.decodeToken(response.token);
         let loggedInUser: IUser = {
           "token": response.token,
           "firstName": response.firstName,
           "lastName": response.lastName,
           "city": response.city,
           "street": response.street,
-          "role": response.role
+          "role": decoded.role
         }
+        console.log("Test Role:", loggedInUser);
+
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
-        this._usersService.currentUser = loggedInUser;
-        this.stateService.firstName = response.firstName;
-        this.stateService.lastName = response.lastName;
-        this.stateService.shippingCity = response.city;
-        this.stateService.shippingStreet = response.street;
-        this.stateService.role = response.role ;
+        this._usersService.setCurrentUser(loggedInUser);
+        // this._usersService.currentUser = loggedInUser;
+        // this.stateService.firstName = response.firstName;
+        // this.stateService.lastName = response.lastName;
+        // this.stateService.city = response.city;
+        // this.stateService.street = response.street;
+        // this.stateService.role = response.role ;
 
 
-        let userDataAsString = sessionStorage.getItem("userData");
-        let userData = JSON.parse(userDataAsString);
-        console.log(userData);
+        // let userDataAsString = sessionStorage.getItem("userData");
+        // let userData = JSON.parse(userDataAsString);
+        // console.log(userData);
         this._cartService.cart = response.cart;
         console.log(this._cartService.cart)
         console.log("login response", response);

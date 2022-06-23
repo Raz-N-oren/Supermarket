@@ -2,7 +2,7 @@
   display: flex;
   padding-top: 10px;
   justify-content: space-around;
-  height: 84vh;
+  height: 84vh ;
   flex-wrap: wrap;
 }
 
@@ -11,5 +11,8 @@
   height: 100% !important;
   width: 30%;
   margin: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  padding: 10px;
 }
 

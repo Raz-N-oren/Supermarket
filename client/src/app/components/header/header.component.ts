@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import IUser from 'src/app/models/IUser.model';
 import { StateService } from 'src/app/services/state.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -8,23 +10,24 @@ import { StateService } from 'src/app/services/state.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  currentUser: IUser;
 
   constructor(
-    public stateService: StateService,
-    public router: Router
-    ) { }
+    private router: Router,
+    private _usersService: UsersService
+    ) {
+      this._usersService.followCurrentUser().subscribe((currentUser)=>{
+        this.currentUser = currentUser;
+      })
+     }
 
   ngOnInit(): void {
   }
 
   onLogOutClicked(): void  {
     sessionStorage.removeItem("userData");
-    this.stateService.firstName = 'Guest';
-    this.stateService.lastName = "";
-    this.stateService.shippingCity = "";
-    this.stateService.shippingStreet = "";
-    this.stateService.role = 'guest';
-    this.router.navigate(['/landing-page/register/step-one']);
+    this._usersService.setCurrentUser(null);
+    this.router.navigate(['/landing-page/login']);
 
   }
 }

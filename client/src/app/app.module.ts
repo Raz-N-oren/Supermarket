@@ -36,7 +36,8 @@ import {DialogModule} from 'primeng/dialog';
 import { BeforeShoppingComponent } from './components/before-shopping/before-shopping.component';
 import { StoreComponent } from './components/store/store.component';
 import { CartComponent } from './components/cart/cart.component';
-
+import {TabMenuModule} from 'primeng/tabmenu';
+import {DataViewModule} from 'primeng/dataview';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,10 @@ import { CartComponent } from './components/cart/cart.component';
     CardModule,
     StepsModule,
     DropdownModule,
-    DialogModule
+    DialogModule,
+    TabMenuModule,
+    DataViewModule,
+
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
   bootstrap: [AppComponent]

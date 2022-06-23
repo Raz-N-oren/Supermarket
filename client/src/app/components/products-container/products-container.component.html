@@ -1,7 +1,13 @@
 <div class="products">
-  <app-product-card *ngFor="let product of _products.productsArray" [product]="product">
-  </app-product-card>
+  <div class="menu-bar"></div>
   <div>
+    <app-product-card
+      *ngFor="let product of _products.productsArray"
+      [product]="product"
+    >
+    </app-product-card>
+  </div>
+  <!-- <div>
     <select
       class="select-categories"
       (change)="_categories.getAllCategories()"
@@ -15,5 +21,5 @@
         {{ category.name }}
       </option>
     </select>
-  </div>
+  </div> -->
 </div>

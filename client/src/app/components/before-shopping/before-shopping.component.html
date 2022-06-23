@@ -1,3 +1,4 @@
+<div>
 <form>
   <!-- <p-button
     (click)="handleStoreButton()"
@@ -14,11 +15,15 @@
   >
     Welcome to your first purchase
   </h3>
-  <div *ngIf="_ordersService.lastOrderDate">
-    <h6>Your last order was at:</h6>
-    <h6>{{ _ordersService.lastPurchaseDate | date: "medium" }}</h6>
-  </div>
+  <h3
+    *ngIf="
+      _ordersService.lastPurchaseDate
+    "
+  >
+   Welcome Back!
+  </h3>
 
-  <p-button (click)="router.navigate(['/shopping'])" *ngIf="_cartItemsService.cartItemsArray && _cartItemsService.cartItemsArray.length">Resume Shopping</p-button>
-  <p-button (click)="router.navigate(['/shopping'])" *ngIf="_cartItemsService.cartItemsArray && !_cartItemsService.cartItemsArray.length">Start Shopping</p-button>
+  <p-button (click)="onResumeShoppingClicked()" *ngIf="_cartItemsService.cartItemsArray && _cartItemsService.cartItemsArray.length">Resume Shopping</p-button>
+  <p-button (click)="onStartShoppingClicked()" *ngIf="_cartItemsService.cartItemsArray && !_cartItemsService.cartItemsArray.length">Start Shopping</p-button>
 </form>
+

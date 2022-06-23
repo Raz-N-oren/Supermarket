@@ -1,8 +1,8 @@
 export interface IOrder {
   cartId: number;
   finalPrice: number;
-  shippingCity: string;
-  shippingStreet: string;
+  city: string;
+  street: string;
   shippingDate: Date;
   orderDate: Date;
   paymentLastDigits: string;

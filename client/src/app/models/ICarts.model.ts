@@ -1,5 +1,5 @@
 export default interface ICart {
-  id: string;
+  id: number;
   creationDate: Date,
   isOpen: number
 }

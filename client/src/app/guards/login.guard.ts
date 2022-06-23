@@ -2,6 +2,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UsersService } from '../services/users.service';
 
 
 
@@ -9,9 +10,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  private role: string;
+  private role: string ='guest';
 
-  public constructor(private router: Router) {
+  public constructor(
+    private router: Router,
+    ) {
 
   }
 
@@ -24,7 +27,10 @@ export class LoginGuard implements CanActivate {
       let decoded = helper.decodeToken(currentUser.token);
       this.role = decoded.role;
     }
-    if(this.role){
+    else{
+      this.role ='guest';
+    }
+    if(this.role && this.role != 'guest' ){
       return true;
     }
     this.router.navigate(['/']);

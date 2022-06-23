@@ -10,6 +10,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { RegisterStepOneComponent } from './components/register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './components/register-step-two/register-step-two.component';
 import { BeforeShoppingComponent } from './components/before-shopping/before-shopping.component';
+import { StoreComponent } from './components/store/store.component';
 
 const routes: Routes = [
   {
@@ -21,14 +22,14 @@ const routes: Routes = [
         {path: '', redirectTo: 'step-one', pathMatch: 'full'}
 
       ]},
-      { path: "before-shopping", component: BeforeShoppingComponent },
+      { path: "before-shopping",canActivate:[LoginGuard], component: BeforeShoppingComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full', }
     ],
   },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "add-new-product", canActivate: [LoginGuard], component: AddNewProductComponent },
-  { path: "shopping", canActivate: [LoginGuard], component: ProductsContainerComponent },
+  { path: "store", canActivate: [LoginGuard], component: StoreComponent },
   { path: "", redirectTo: "/landing-page/login", pathMatch: "full" },
   { path: "**", component: Page404Component },
 ];

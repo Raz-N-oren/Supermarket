@@ -1,9 +1,10 @@
 .product-card {
-  border:  1px solid black;
+  border-radius: 4px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 72%);
   box-sizing: border-box;
-  min-height: 70px;
+  height: 200px;
   width: 185px;
-  padding: 2px;
+  padding: 4px;
   margin: 10px;
   overflow: auto;
   display: inline-block;

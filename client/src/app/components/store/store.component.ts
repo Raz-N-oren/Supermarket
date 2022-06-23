@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoreComponent implements OnInit {
 
+  hide:boolean = true
+
   constructor() { }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { UsersService } from './../../services/users.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 
 @Component({
@@ -18,11 +18,11 @@ export class RegisterStepOneComponent implements OnInit {
     verifiedPassword: "",
   }
 
-  userRegisterForm: FormGroup;
+  userRegisterForm: UntypedFormGroup;
   isUserNotRegistered: boolean = true;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private _usersService: UsersService,
     private router: Router
   ) { }
