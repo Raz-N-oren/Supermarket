@@ -60,7 +60,8 @@ export class LoginComponent implements OnInit {
           "lastName": response.lastName,
           "city": response.city,
           "street": response.street,
-          "role": decoded.role
+          "role": decoded.role,
+          "userCart": response.userCart
         }
         console.log("Test Role:", loggedInUser);
 

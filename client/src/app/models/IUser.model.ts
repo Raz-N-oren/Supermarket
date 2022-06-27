@@ -4,5 +4,6 @@ export default interface IUser{
   lastName: string,
   city: string,
   street: string,
-  role: string
+  role: string,
+  userCart: object
 }

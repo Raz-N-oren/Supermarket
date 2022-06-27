@@ -36,11 +36,11 @@ export class CartsService {
 
   public openCart(): void {
     this._http.post<ICart>(this.baseUrl, {})
-      .subscribe((cartId) => {
+      .subscribe((cartResponse) => {
         this.cart = {
-          id: +cartId,
-          creationDate: new Date(),
-          isOpen: true
+          id: cartResponse.id,
+          creationDate: cartResponse.creationDate,
+          isOpen: cartResponse.isOpen
         }
         this.currentCartSubject.next(this.cart);
       },

@@ -12,11 +12,6 @@ import { UsersService } from './users.service';
 })
 export class StateService {
 
-  public firstName: string = 'Guest';
-  public lastName: string = '';
-  public city: string = '';
-  public street: string = '';
-  public role: string = 'guest';
   cart:ICart;
 
   constructor(
@@ -28,8 +23,7 @@ export class StateService {
   ) {
     this._usersService.followCurrentUser().subscribe((newUser)=>{
       console.log("NEWUSER IN STATE", newUser);
-      if(newUser)
-      {
+      if(newUser){
         this._cartsService.getLastCart();
         this._ordersService.getLastPurchaseDate();
       }

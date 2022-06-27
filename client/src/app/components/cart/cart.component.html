@@ -1,34 +1,52 @@
-<p-dataView
-  #dv
-  [value]="_cartItemsService.cartItemsArray"
-  filterBy="productName"
->
-  <ng-template pTemplate="header">
-    <input
-      class="search"
-      type="search"
-      pInputText
-      placeholder="Search by Product Name"
-      (input)="dv.filter($any($event.target).value)"
-    />
-  </ng-template>
-  <ng-template let-ICartItems pTemplate="listItem">
-    <div class="col-12">
-      <div class="product-list-item">
-        <img
-          [src]="'/assets/images/Grocery.png'"
-          [alt]="ICartItems.productName"
-        />
-        <div class="product-list-detail">
-          <div class="product-name">{{ ICartItems.productName }}</div>
-          <div class="product-quantity">Amount:{{ ICartItems.quantity }}</div>
-        </div>
-        <div class="product-list-action">
-          <span class="product-price">${{ ICartItems.productPrice }}</span>
-          <button (click)="onDeleteCartItemFromCartClicked(ICartItems.id)" class="delete-button">✖️</button>
-        </div>
+<div class="cart-container">
+  <p-dataView
+    #dv
+    [value]="_cartItemsService.cartItemsArray"
+    filterBy="productName"
+  >
+    <ng-template pTemplate="header">
+      <h4>My Cart</h4>
+      <input
+        class="search"
+        type="search"
+        pInputText
+        placeholder="Search by Product Name"
+        (input)="dv.filter($any($event.target).value)"
+      />
+    </ng-template>
+    <ng-template let-ICartItems pTemplate="listItem">
+      <div class="col-12">
+        <div class="product-list-item">
+          <img
+            [src]="ICartItems.productImage"
+            [alt]="ICartItems.productName"
+          />
+          <div class="product-list-detail">
+            <div class="product-name">{{ ICartItems.productName }}</div>
+            <div class="product-quantity">Amount:{{ ICartItems.quantity }}</div>
+          </div>
+          <div class="product-list-action">
+            <span class="product-price">{{
+              (ICartItems.productPrice*ICartItems.quantity)| currency: "ILS"
+            }}</span>
+            <button
+              (click)="onDeleteCartItemFromCartClicked(ICartItems.id)"
+              class="delete-button"
+            >
+              ✖️
+            </button>
 
+          </div>
+        </div>
       </div>
-    </div>
-  </ng-template>
-</p-dataView>
+    </ng-template>
+  </p-dataView>
+  <span class="p-buttonset cart-buttons-set">
+    <button pButton pRipple label="Clear Cart" class="footer-button" (click)="onClearCartItemsClicked()"
+        [disabled]="_cartItemsService.cartItemsArray.length == 0"></button>
+    <button pButton pRipple label="Payment" class="footer-button" (click)="onPaymentClicked()"
+        [disabled]="_cartItemsService.cartItemsArray.length == 0"></button>
+    <a>Total Amount: </a>
+
+</span>
+</div>

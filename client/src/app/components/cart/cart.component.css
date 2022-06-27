@@ -1,3 +1,9 @@
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .search {
   width: 100%;
 }
@@ -57,4 +63,23 @@ img {
   margin: 0;
   top: 50%;
   transform: translateY(-30%);
+}
+
+.cart-button {
+  align-self: flex-end;
+  padding: 5px;
+  margin: 0;
+  font-size: 0.6rem;
+  width: 2rem;
+}
+
+.cart-buttons-set {
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-button {
+  width: 50%;
 }

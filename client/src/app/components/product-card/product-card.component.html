@@ -2,10 +2,13 @@
   <span class="delete-product">
     <button (click)="_products.deleteProduct(product.id)">✖️</button>
   </span>
+  <div>
+    <br>
+    <img class="img" [src]="product.imgUrl" [alt]="product.name" />
+  </div>
 
   <div class="details">
-    <br /><br />
     <h3>{{ product.name }}</h3>
-    <h5>{{ product.price | currency: "ILS"}}</h5>
+    <h5>{{ product.price | currency: "ILS" }}</h5>
   </div>
 </div>

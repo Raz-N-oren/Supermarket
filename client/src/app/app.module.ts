@@ -39,6 +39,7 @@ import { CartComponent } from './components/cart/cart.component';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {DataViewModule} from 'primeng/dataview';
 import { MatGridListModule, MatTabsModule } from '@angular/material';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { MatGridListModule, MatTabsModule } from '@angular/material';
     DataViewModule,
     MatTabsModule,
     MatGridListModule,
+    InputNumberModule
 
 
   ],

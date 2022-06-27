@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import IProduct from 'src/app/models/IProduct.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -13,7 +14,11 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsContainerComponent implements OnInit {
   @Input() hide!: boolean;
 
-  public selectedCategoryId: string= '';
+  productToAdd: IProduct;
+  amountToAdd: number = 0;
+  isModalOpen = false
+
+  public selectedCategoryId: string = '';
   constructor(
     public _products: ProductsService,
     public _categories: CategoriesService,
@@ -24,6 +29,11 @@ export class ProductsContainerComponent implements OnInit {
   ngOnInit(): void {
     this._products.getAllProducts();
     this._categories.getAllCategories();
+  }
+
+  onAddToCartClicked = (productToAdd: IProduct) => {
+    this.isModalOpen = true;
+    this.productToAdd = productToAdd
   }
 
 }

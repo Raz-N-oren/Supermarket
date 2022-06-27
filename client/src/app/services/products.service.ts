@@ -56,7 +56,12 @@ export class ProductsService {
 
     public getProductsBySearchString(searchInputString: string): void {
       this._http.get<IProduct[]>(this.baseUrl + `search/`+searchInputString)
-        .subscribe((products) => { this.productsArray = products },
+        .subscribe((products) => {
+           this.productsArray = products
+          if(!searchInputString){
+            this.getAllProducts();
+          }
+          },
           err => {
             console.log(err);
             alert("Cannot get products. ")

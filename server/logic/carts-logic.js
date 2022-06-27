@@ -1,7 +1,6 @@
  const cartsDal = require('../dal/carts-dal');
 
 async function getLastCart(userId) {
-    // let userId = userInfo.userId;
     let lastCart = await cartsDal.getLastCart(userId);
     if(lastCart){
         lastCart.isOpen = !!lastCart.isOpen;

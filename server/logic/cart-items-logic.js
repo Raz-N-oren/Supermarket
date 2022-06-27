@@ -44,7 +44,7 @@ async function removeFromCart(cartItemId, userInfo) {
 
 async function removeAllCartItems(cartId, userInfo) {
     let userId = userInfo.userId;
-    let isCartVerified = await cartsLogic.validateCartForUser(cartId, userId);
+    let isCartVerified = await cartLogic.validateCartForUser(cartId, userId);
     if (isCartVerified) {
         await cartItemsDal.removeAllCartItems(cartId);
     }

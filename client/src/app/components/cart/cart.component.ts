@@ -17,9 +17,19 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClearCartItemsClicked = () => {
+    let cartId = this._cartsService.getCart().id;
+    this._cartItemsService.removeAllCartItems(cartId);
+  }
+
   onDeleteCartItemFromCartClicked = (cartItemId: number) => {
     let cardId = this._cartsService.getCart().id;
-    this._cartItemsService.removeFromCart(cartItemId,cardId);
+    this._cartItemsService.removeFromCart(cartItemId, cardId);
+  }
+
+  onPaymentClicked = () => {
+    console.log("Payment Clicked");
+
   }
 
 }
