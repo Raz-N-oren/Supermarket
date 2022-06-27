@@ -27,17 +27,19 @@ export class StateService {
     public _cartItemsService: CartItemsService,
   ) {
     this._usersService.followCurrentUser().subscribe((newUser)=>{
-      if(newUser){
+      console.log("NEWUSER IN STATE", newUser);
+      if(newUser)
+      {
         this._cartsService.getLastCart();
         this._ordersService.getLastPurchaseDate();
       }
       else{
-        // this._cartsService.getLastCart(null);
-        this._ordersService.lastPurchaseDate = null
+        this._cartsService.setCurrentCart(null);
+        this._ordersService.lastPurchaseDate = null;
       }
     })
     let userData: string = sessionStorage.getItem("userData");
-    console.log(userData);
+    console.log("BLABLA",userData);
 
     if(userData){
       let currentUser = JSON.parse(userData);
@@ -45,6 +47,8 @@ export class StateService {
     }
 
     this._cartsService.followCurrentCart().subscribe((newCart)=>{
+      console.log("NEWCART IN STATE",newCart);
+
       if(newCart){
         this._cartItemsService.getCartItemsByCartId(newCart.id)
       }

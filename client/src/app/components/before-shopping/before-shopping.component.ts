@@ -4,6 +4,8 @@ import { CartItemsService } from 'src/app/services/cart-items.service';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UsersService } from 'src/app/services/users.service';
 import { CartsService } from 'src/app/services/carts.service';
+import ICart from 'src/app/models/ICarts.model';
+import IUser from 'src/app/models/IUser.model';
 
 @Component({
   selector: 'app-before-shopping',
@@ -12,7 +14,9 @@ import { CartsService } from 'src/app/services/carts.service';
 })
 export class BeforeShoppingComponent implements OnInit {
 
-  // storeButtonLabel: string = "Start Shopping";
+  cart: ICart;
+  currentUser: IUser;
+  isLogin: boolean = true;
 
   constructor(
     public _usersService: UsersService,
@@ -23,6 +27,13 @@ export class BeforeShoppingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._usersService.followCurrentUser().subscribe((newUser) => {
+      this.currentUser = newUser;
+    })
+
+    this._cartsService.followCurrentCart().subscribe((newCart) => {
+      this.cart = newCart;
+    })
   }
 
   onResumeShoppingClicked =() =>{

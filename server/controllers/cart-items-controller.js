@@ -33,18 +33,6 @@ router.get("/:id", async (request, response) => {
     }
 });
 
-router.delete("/:id", async (request, response) => {
-    try {
-        let cartItemId = request.params.id;
-        await cartItemsLogic.removeFromCart(cartItemId);
-        response.json(cartItemId);
-    }
-    catch (e) {
-        console.error(e);
-        response.status(600).send(e.message);
-    }
-});
-
 router.put("/", async (request, response) => {
     try {
         let cartItem = request.body;
@@ -57,11 +45,27 @@ router.put("/", async (request, response) => {
     }
 });
 
+router.delete("/:id", async (request, response) => {
+    try {
+        let cartItemId = request.params.id;
+        let userInfo = tokenDecoder.decodeTokenFromRequest(request);
+        await cartItemsLogic.removeFromCart(cartItemId,userInfo);
+
+        response.json();
+    }
+    catch (e) {
+        console.error(e);
+        response.status(600).send(e.message);
+    }
+});
+
 router.delete("/remove_all/:id", async (request, response) => {
     try {
         let cartId = request.params.id;
-        await cartItemsLogic.removeAllCartItems(cartId);
-        response.json(cartId);
+        let userInfo = tokenDecoder.decodeTokenFromRequest(request);
+        await cartItemsLogic.removeAllCartItems(cartId,userInfo);
+
+        response.json();
     }
     catch (e) {
         console.error(e);

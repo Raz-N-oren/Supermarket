@@ -16,33 +16,37 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginUserData: UserLoginData = {userEmail: "", password: ""};
+  loginUserData: UserLoginData = { userEmail: "", password: "" };
   isLoginFail: boolean = false;
   userLoginForm: UntypedFormGroup;
+  currentUser: IUser;
 
 
   constructor(
     private _usersService: UsersService,
     private router: Router,
-    private stateService: StateService,
     private formBuilder: UntypedFormBuilder,
     private _cartService: CartsService
 
 
-     ) { }
+  ) { }
 
-     ngOnInit(): void {
-      this.userLoginForm =this.formBuilder.group({
-        userEmail: [this.loginUserData.userEmail, [Validators.required, Validators.email, Validators.maxLength(50)]],
-        password: [this.loginUserData.password, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]]
-      })
+  ngOnInit(): void {
+    this.userLoginForm = this.formBuilder.group({
+      userEmail: [this.loginUserData.userEmail, [Validators.required, Validators.email, Validators.maxLength(50)]],
+      password: [this.loginUserData.password, [Validators.required, Validators.minLength(6), Validators.maxLength(10)]]
+    })
 
-      combineLatest(this.userLoginForm.get('userEmail').valueChanges, this.userLoginForm.get('password').valueChanges)
-      .subscribe(p=>this.isLoginFail = false);
+    combineLatest(this.userLoginForm.get('userEmail').valueChanges, this.userLoginForm.get('password').valueChanges)
+      .subscribe(p => this.isLoginFail = false);
 
-    }
+    this._usersService.followCurrentUser().subscribe((newUser) => {
+      this.currentUser = newUser;
+    })
 
-  onLoginClicked(): void {
+  }
+
+  onLoginClicked = () => {
     this.loginUserData = this.userLoginForm.value;
     console.log(this.loginUserData);
     const observable = this._usersService.login(this.loginUserData);
@@ -62,30 +66,20 @@ export class LoginComponent implements OnInit {
 
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
         this._usersService.setCurrentUser(loggedInUser);
-        // this._usersService.currentUser = loggedInUser;
-        // this.stateService.firstName = response.firstName;
-        // this.stateService.lastName = response.lastName;
-        // this.stateService.city = response.city;
-        // this.stateService.street = response.street;
-        // this.stateService.role = response.role ;
 
-
-        // let userDataAsString = sessionStorage.getItem("userData");
-        // let userData = JSON.parse(userDataAsString);
-        // console.log(userData);
-        this._cartService.cart = response.cart;
-        console.log(this._cartService.cart)
+        this._cartService.setCurrentCart(response.userCart);
+        console.log("CART IN LOGIN",this._cartService.getCart());
         console.log("login response", response);
 
         this.router.navigate(['/landing-page/before-shopping']);
       },
-       error =>{
-         alert("Password is incorrect or user name doesn't exists");
-         console.log("Login Error", error);
+      error => {
+        alert("Password is incorrect or user name doesn't exists");
+        console.log("Login Error", error);
 
-         this.isLoginFail = true;
+        this.isLoginFail = true;
 
-       }
+      }
     )
   }
 

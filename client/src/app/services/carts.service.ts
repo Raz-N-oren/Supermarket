@@ -8,15 +8,26 @@ import ICart from '../models/ICarts.model';
 })
 export class CartsService {
 
-  public cart: ICart;
+  private cart: ICart;
   public baseUrl: string = 'http://localhost:3001/carts/';
   private currentCartSubject = new BehaviorSubject<ICart>(null);
 
   constructor(private _http: HttpClient) { }
 
-  public getLastCart(): void {
+  public getLastCart = async (): Promise<void> => {
     this._http.get<ICart>(this.baseUrl)
-      .subscribe((cart) => { this.cart = cart},
+      .subscribe((cart) => {
+        if (cart) {
+          console.log("cart", cart);
+
+          this.cart = {
+            id: cart.id,
+            creationDate: cart.creationDate,
+            isOpen: cart.isOpen
+          };
+          this.currentCartSubject.next(this.cart);
+        }
+      },
         err => {
           console.log(err);
           alert("Cannot get carts. ")
@@ -25,8 +36,13 @@ export class CartsService {
 
   public openCart(): void {
     this._http.post<ICart>(this.baseUrl, {})
-      .subscribe((cart) => {
-        console.log("Cart has been Opened. ");
+      .subscribe((cartId) => {
+        this.cart = {
+          id: +cartId,
+          creationDate: new Date(),
+          isOpen: true
+        }
+        this.currentCartSubject.next(this.cart);
       },
         err => {
           console.log(err);
@@ -35,12 +51,17 @@ export class CartsService {
       )
   }
 
-  followCurrentCart = (): Observable<ICart> =>{
+  followCurrentCart = (): Observable<ICart> => {
     return this.currentCartSubject.asObservable();
   }
 
   setCurrentCart = (newCart: ICart) => {
-    this.cart = newCart;
     this.currentCartSubject.next(newCart);
   }
+
+  getCart = (): ICart => {
+    return this.currentCartSubject.value;
+  }
+
+
 }

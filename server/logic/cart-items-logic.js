@@ -18,23 +18,44 @@ async function getCartItemsByCartId(cartId) {
     return cartItems;
 }
 
-async function removeFromCart(cartItemId) {
-    await cartItemsDal.removeFromCart(cartItemId);
-}
 
 async function updateQuantity(cartItemDetails, userInfo) {
     let userId = userInfo.userId;
     let isCartVerified = await cartLogic.validateCartForUser(cartItem.cartId, userId);
     if (isCartVerified) {
-        await cartItemsDal.updateQuantity(cartItemDetails);    }
+        await cartItemsDal.updateQuantity(cartItemDetails);
+    }
     else {
         throw new Error("Illegal request.")
     }
 
 };
 
-async function removeAllCartItems(cartId) {
-    await cartItemsDal.removeAllCartItems(cartId);
+async function removeFromCart(cartItemId, userInfo) {
+    let userId = userInfo.userId;
+    let isCartItemVerified = await validateCartItemForUser(cartItemId, userId);
+    if (isCartItemVerified) {
+        await cartItemsDal.removeFromCart(cartItemId, userId);
+    }
+    else {
+        throw new Error("Invalid delete request.")
+    }
+}
+
+async function removeAllCartItems(cartId, userInfo) {
+    let userId = userInfo.userId;
+    let isCartVerified = await cartsLogic.validateCartForUser(cartId, userId);
+    if (isCartVerified) {
+        await cartItemsDal.removeAllCartItems(cartId);
+    }
+    else {
+        throw new Error("Invalid delete request.")
+    }
+}
+
+async function validateCartItemForUser(cartItemId, userId) {
+    let isCartItemVerified = await cartItemsDal.validateCartItemForUser(cartItemId, userId);
+    return isCartItemVerified;
 }
 
 module.exports = {

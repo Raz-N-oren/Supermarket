@@ -38,6 +38,7 @@ import { StoreComponent } from './components/store/store.component';
 import { CartComponent } from './components/cart/cart.component';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {DataViewModule} from 'primeng/dataview';
+import { MatGridListModule, MatTabsModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,9 @@ import {DataViewModule} from 'primeng/dataview';
     DialogModule,
     TabMenuModule,
     DataViewModule,
+    MatTabsModule,
+    MatGridListModule,
+
 
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],

@@ -18,6 +18,9 @@
       <h6>Your last order was at:</h6>
       <h6>{{ _orders.lastPurchaseDate | date: "fullDate" }}</h6>
     </div>
+    <div *ngIf="cart?.isOpen && _cartItems.cartItemsArray.length > 0">You have an opened cart
+      from
+      {{cart.creationDate | date: 'fullDate'}}</div>
 
   </div>
 </div>

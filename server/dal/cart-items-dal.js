@@ -2,7 +2,7 @@ let connection = require("./connection-wrapper");
 
 async function getCartItemsByCartId(cartId) {
     let sql = `SELECT ci.id, ci.product_id as productId, ci.quantity,
-    p.name as productName, p.price as productPrice, p.img_url as productImage
+    p.name as productName, p.price as productPrice, p.img_url as productImage, ci.cart_id as cartId
     FROM supermarket.cart_items ci join products p
     on ci.product_id = p.id 
     where ci.cart_id = ?;`;
@@ -28,9 +28,9 @@ async function updateQuantity(cartItemDetails) {
     return cartItemData;
 }
 
-async function removeFromCart(cartItemId){
+async function removeFromCart(userId){
     sql = 'DELETE FROM cart_items WHERE id = ?;';
-    parameters = [cartItemId];
+    parameters = [userId];
     await connection.executeWithParameters(sql, parameters);
 }
 
@@ -41,11 +41,22 @@ async function removeFromCart(cartItemId){
     await connection.executeWithParameters(sql, parameters);
 }
 
+async function validateCartItemForUser(cartItemId, userId) {
+    let sql = `select ci.id 
+    from carts c join cart_items ci 
+    on c.id = ci.cart_id 
+    where ci.id = ? and c.user_id = ?;`;
+    let parameters = [cartItemId, userId];
+    let response = await connection.executeWithParameters(sql, parameters);
+    return response.length > 0;
+}
+
 
 module.exports = {
     addToCart,
     getCartItemsByCartId,
     removeFromCart,
     updateQuantity,
-    removeAllCartItems
+    removeAllCartItems,
+    validateCartItemForUser
 }

@@ -14,9 +14,10 @@ app-cart{
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
   display: inline-flex;
   flex-direction: column;
-  width: 30%;
+  min-width: 25%;
   padding: 10px;
   height: 100%;
+  overflow-y: auto;
 }
 
 app-products-container{
@@ -24,6 +25,7 @@ app-products-container{
   display: inline-flex;
   min-width: 69%;
   height: 100%;
+  overflow-y: auto;
 }
 
 .hide {

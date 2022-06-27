@@ -10,20 +10,18 @@
     *ngIf="
       !_ordersService.lastPurchaseDate &&
       _cartItemsService.cartItemsArray &&
-      !_cartItemsService.cartItemsArray.length
-    "
+      !_cartItemsService.cartItemsArray.length &&
+      !cart"
   >
     Welcome to your first purchase
   </h3>
   <h3
-    *ngIf="
-      _ordersService.lastPurchaseDate
-    "
+    *ngIf="currentUser?.role == 'user' && cart"
   >
    Welcome Back!
   </h3>
 
-  <p-button (click)="onResumeShoppingClicked()" *ngIf="_cartItemsService.cartItemsArray && _cartItemsService.cartItemsArray.length">Resume Shopping</p-button>
-  <p-button (click)="onStartShoppingClicked()" *ngIf="_cartItemsService.cartItemsArray && !_cartItemsService.cartItemsArray.length">Start Shopping</p-button>
+  <p-button (click)="onResumeShoppingClicked()" *ngIf="cart">Resume Shopping</p-button>
+  <p-button (click)="onStartShoppingClicked()" *ngIf="!cart">Start Shopping</p-button>
 </form>
 

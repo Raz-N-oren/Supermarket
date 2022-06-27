@@ -1,8 +1,11 @@
  const cartsDal = require('../dal/carts-dal');
 
-async function getLastCart(userInfo) {
-    let userId = userInfo.userId;
+async function getLastCart(userId) {
+    // let userId = userInfo.userId;
     let lastCart = await cartsDal.getLastCart(userId);
+    if(lastCart){
+        lastCart.isOpen = !!lastCart.isOpen;
+    }
     return lastCart;
 }
 
@@ -17,7 +20,12 @@ async function openCart(userInfo) {
         creationDate: new Date()
     }
     let cartId = await cartsDal.openCart(newCart);
-    return cartId;
+    let openedCart = {
+        id: cartId,
+        isOpen: true,
+        creationDate: newCart.creationDate
+    }
+    return openedCart;
 }
 
 async function validateCartForUser(cartId, userId) {

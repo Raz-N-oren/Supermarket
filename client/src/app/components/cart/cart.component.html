@@ -1,20 +1,34 @@
-<p-dataView #dv [value]="_cartItemsService.cartItemsArray" filterBy="productName">
+<p-dataView
+  #dv
+  [value]="_cartItemsService.cartItemsArray"
+  filterBy="productName"
+>
   <ng-template pTemplate="header">
-      <input class="search" type="search" pInputText placeholder="Search by Product Name" (input)="dv.filter($any($event.target).value)">
+    <input
+      class="search"
+      type="search"
+      pInputText
+      placeholder="Search by Product Name"
+      (input)="dv.filter($any($event.target).value)"
+    />
   </ng-template>
   <ng-template let-ICartItems pTemplate="listItem">
-      <div class="col-12">
-        <div class="product-list-item">
-            <img [src]="'/assets/images/Grocery.png'" [alt]="ICartItems.productName"/>
-            <div class="product-list-detail">
-                <div class="product-name">{{ICartItems.productName}}</div>
-            </div>
-            <div class="product-list-action">
-                <span class="product-price">${{ICartItems.productPrice}}</span>
-                <p-button icon="pi pi-shopping-cart" label="Add to Cart"></p-button>
-            </div>
+    <div class="col-12">
+      <div class="product-list-item">
+        <img
+          [src]="'/assets/images/Grocery.png'"
+          [alt]="ICartItems.productName"
+        />
+        <div class="product-list-detail">
+          <div class="product-name">{{ ICartItems.productName }}</div>
+          <div class="product-quantity">Amount:{{ ICartItems.quantity }}</div>
         </div>
+        <div class="product-list-action">
+          <span class="product-price">${{ ICartItems.productPrice }}</span>
+          <button (click)="onDeleteCartItemFromCartClicked(ICartItems.id)" class="delete-button">✖️</button>
+        </div>
+
+      </div>
     </div>
   </ng-template>
 </p-dataView>
-

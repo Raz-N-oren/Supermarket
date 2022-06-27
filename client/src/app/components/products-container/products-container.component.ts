@@ -4,6 +4,7 @@ import { CartsService } from 'src/app/services/carts.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 
+
 @Component({
   selector: 'app-products-container',
   templateUrl: './products-container.component.html',
@@ -11,7 +12,6 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductsContainerComponent implements OnInit {
   @Input() hide!: boolean;
-
 
   public selectedCategoryId: string= '';
   constructor(
@@ -24,8 +24,6 @@ export class ProductsContainerComponent implements OnInit {
   ngOnInit(): void {
     this._products.getAllProducts();
     this._categories.getAllCategories();
-    this._carts.getLastCart();
-    this._cartItems.getCartItemsByCartId(1);
   }
 
 }

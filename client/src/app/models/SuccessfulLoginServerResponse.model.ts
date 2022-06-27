@@ -7,5 +7,5 @@ export default interface SuccessfulLoginServerResponse{
   city: string,
   street: string,
   role: string,
-  cart: ICart
+  userCart: ICart
 }

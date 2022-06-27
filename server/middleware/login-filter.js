@@ -16,6 +16,7 @@ function authenticateJwtRequestToken() {
             return true;
         };
 
+
         if (request.method == 'POST' && request.url.endsWith('/users/login')) {
             console.log("Returned true")
             return true;
