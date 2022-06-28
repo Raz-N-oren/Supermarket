@@ -40,6 +40,7 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import {DataViewModule} from 'primeng/dataview';
 import { MatGridListModule, MatTabsModule } from '@angular/material';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AddOrEditCartItemModalComponent } from './components/add-or-edit-cart-item-modal/add-or-edit-cart-item-modal.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     BeforeShoppingComponent,
     StoreComponent,
     CartComponent,
+    AddOrEditCartItemModalComponent
 
   ],
   imports: [

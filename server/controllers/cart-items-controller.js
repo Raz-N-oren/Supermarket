@@ -35,8 +35,9 @@ router.get("/:id", async (request, response) => {
 
 router.put("/", async (request, response) => {
     try {
+        let userInfo = tokenDecoder.decodeTokenFromRequest(request);
         let cartItem = request.body;
-        let id = await cartItemsLogic.updateQuantity(cartItem);
+        let id = await cartItemsLogic.updateQuantity(cartItem,userInfo);
         response.json(id);
     }
     catch (e) {

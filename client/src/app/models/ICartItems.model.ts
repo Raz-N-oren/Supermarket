@@ -4,6 +4,5 @@ export default interface ICartItems {
   productName : string;
   productPrice: number;
   quantity: number;
-  cartId: number;
   productImage: string
 }

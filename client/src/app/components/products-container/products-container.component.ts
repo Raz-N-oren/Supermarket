@@ -14,10 +14,6 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductsContainerComponent implements OnInit {
   @Input() hide!: boolean;
 
-  productToAdd: IProduct;
-  amountToAdd: number = 0;
-  isModalOpen = false
-
   public selectedCategoryId: string = '';
   constructor(
     public _products: ProductsService,
@@ -31,9 +27,5 @@ export class ProductsContainerComponent implements OnInit {
     this._categories.getAllCategories();
   }
 
-  onAddToCartClicked = (productToAdd: IProduct) => {
-    this.isModalOpen = true;
-    this.productToAdd = productToAdd
-  }
 
 }

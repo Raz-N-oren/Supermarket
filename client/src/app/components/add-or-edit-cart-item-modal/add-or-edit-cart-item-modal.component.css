@@ -1,0 +1,41 @@
+.plus-or-minus-button {
+  width: 20px;
+  margin: 0 2px;
+  padding: 0;
+  display: inline-block;
+  text-align: center;
+}
+.product-amount-input {
+  width: 50px;
+}
+.amount-input-container {
+  display: flex;
+  justify-content: center;
+}
+
+.amount-error {
+  color: red;
+  margin-top: 10px;
+}
+
+.no-products {
+  margin-top: 25px;
+  color: red;
+}
+
+.img {
+  height: 125px;
+  width: 125px;
+  border-radius: 4px;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 72%);
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.total-price{
+  position: relative;
+  margin: 0;
+  top: 50%;
+  transform: translateY(50%);
+}

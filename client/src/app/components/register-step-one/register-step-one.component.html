@@ -58,9 +58,8 @@
       <label for="float-input">Confirm Password *</label>
     </span>
     <div class="errors-div">
-       <div *ngIf="userRegisterForm.controls['password'].valid && userRegisterForm.controls['password'].value!=userRegisterForm.controls['verifiedPassword'].value">
-          The password does not match.
-      </div>
+      <small *ngIf="userRegisterForm.hasError('passwordMatchValidator') && userRegisterForm.get('verifiedPassword').touched"
+      id="verify-password-help" class="p-error block">Password doesn't match.</small>
     </div>
     <div class="errors-div" *ngIf="userRegisterForm.controls['isUserNotRegistered'].invalid">
       ID or Email are already registered.

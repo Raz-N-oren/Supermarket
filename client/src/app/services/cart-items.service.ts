@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import ICartItems from '../models/ICartItems.model';
+import { IServerCartItem } from '../models/IServerCartItem.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import ICartItems from '../models/ICartItems.model';
 export class CartItemsService {
 
   public cartItemsArray: ICartItems[] = [];
+  public cartItemsTotalPrice: number;
   public baseUrl: string = 'http://localhost:3001/cart-items/';
 
   constructor(private _http: HttpClient) { }
@@ -15,10 +17,11 @@ export class CartItemsService {
   public getCartItemsByCartId(cartId: number): void {
     this._http.get<ICartItems[]>(this.baseUrl + cartId)
       .subscribe((cartItems) => {
-        this.cartItemsArray = cartItems,
-        console.log("cartId", cartId),
-         console.log("Items", cartItems);
-        ;
+        this.cartItemsArray = cartItems;
+        this.cartItemsTotalPrice = null;
+        for (let cartItem of cartItems) {
+          this.cartItemsTotalPrice += cartItem.productPrice* cartItem.quantity;
+        }
 
       },
         err => {
@@ -27,10 +30,11 @@ export class CartItemsService {
         });
   };
 
-  public addCartItem(cartItem: ICartItems): void {
+  public addCartItem(cartItem: IServerCartItem): void {
     this._http.post<ICartItems>(this.baseUrl, cartItem)
-      .subscribe((cartItem) => {
-        console.log("Cart item has been added. ", cartItem);
+      .subscribe((cartItemResponse) => {
+        console.log("Cart item has been added. ", cartItemResponse),
+        this.getCartItemsByCartId(cartItem.cartId)
       },
         err => {
           console.log(err);
@@ -41,6 +45,7 @@ export class CartItemsService {
 
   public updateCartItemQuantity = (cartItem) => {
     this._http.put(this.baseUrl, cartItem).subscribe((cartItemsResponse) => {
+      console.log(cartItemsResponse);
       this.getCartItemsByCartId(cartItem.cartId);
     }, (e) => {
       alert("Cannot update cart item.");

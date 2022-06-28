@@ -1,27 +1,57 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand">🏪 Supermarket</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  <a *ngIf="currentUser" class="welcome">
+    Welcome {{ currentUser.firstName }} {{ currentUser.lastName }}
+  </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li *ngIf="currentUser" class="nav-item">
-        <a class="welcome"  > Welcome {{  currentUser.firstName }} {{  currentUser.lastName }} </a>
-        </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="store" routerLinkActive="active-link">Shopping</a>
+        <a
+          class="nav-link"
+          *ngIf="currentUser == 'admin'"
+          routerLink="store"
+          routerLinkActive="active-link"
+          >Store</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="add-new-product" routerLinkActive="active-link">Add New Product</a>
+        <a
+          *ngIf="currentUser == 'admin'"
+          class="nav-link"
+          routerLink="add-new-product"
+          routerLinkActive="active-link"
+          >Add New Product</a
+        >
       </li>
     </ul>
 
     <form *ngIf="currentUser" class="form-inline my-2 my-lg-0">
-      <button class="log-out-button" (click)="onLogOutClicked()">Log out</button>
-      <input [(ngModel)]="searchedInput" (ngModelChange)="onSearchInputChanged($event)" name="searchedInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      <button class="log-out-button" (click)="onLogOutClicked()">
+        Log out
+      </button>
+      <input
+        [(ngModel)]="searchedInput"
+        (ngModelChange)="onSearchInputChanged($event)"
+        name="searchedInput"
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+        Search
+      </button>
     </form>
   </div>
 </nav>
-

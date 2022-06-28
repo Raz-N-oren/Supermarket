@@ -1,0 +1,55 @@
+<p-dialog
+  [header]="cartItemInModal?.productName"
+  [(visible)]="isModalOpen"
+  [breakpoints]="{ '960px': '75vw' }"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onHideModalClicked()"
+>
+  <div class="product-in-modal">
+    <div>
+      <br />
+      <img
+        class="img"
+        [src]="cartItemInModal?.productImage"
+        [alt]="cartItemInModal?.productName"
+      />
+    </div>
+  </div>
+  <div class="amount-input-container">
+    <button
+      class="plus-or-minus-button"
+      pButton
+      (click)="onMinusButtonClicked()"
+    >
+      -
+    </button>
+    <input
+      class="product-amount-input"
+      [(ngModel)]="amountToAdd"
+      type="number"
+      min="0"
+      max="10"
+    />
+    <button
+      class="plus-or-minus-button"
+      pButton
+      (click)="onPlusButtonClicked()"
+    >
+      +
+    </button>
+  </div>
+  <p class="amount-error" *ngIf="amountToAdd < 0 || amountToAdd > 20">
+    Error: the amount of product must be between 1-20
+  </p>
+  <div *ngIf="amountToAdd != 0" class="total-price">Total price: {{cartItemInModal?.productPrice * amountToAdd | currency:"ILS":"symbol"}} </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="onAddToCartClicked()"
+      label="Ok"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+</p-dialog>

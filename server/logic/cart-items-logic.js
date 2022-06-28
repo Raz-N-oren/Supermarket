@@ -19,9 +19,10 @@ async function getCartItemsByCartId(cartId) {
 }
 
 
-async function updateQuantity(cartItemDetails, userInfo) {
+async function updateQuantity(cartItemDetails,userInfo) {
     let userId = userInfo.userId;
-    let isCartVerified = await cartLogic.validateCartForUser(cartItem.cartId, userId);
+    console.log("cartItemDetails",cartItemDetails);
+    let isCartVerified = await cartLogic.validateCartForUser(cartItemDetails.cartId,userId);
     if (isCartVerified) {
         await cartItemsDal.updateQuantity(cartItemDetails);
     }

@@ -37,7 +37,7 @@
 }
 
 img {
-  width: 35%;
+  width: 25%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin: 2rem 0;
 }
@@ -62,7 +62,12 @@ img {
   position: relative;
   margin: 0;
   top: 50%;
-  transform: translateY(-30%);
+  transform: translateY(-35%);
+}
+
+.cart-card-buttons{
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .cart-button {
@@ -71,6 +76,13 @@ img {
   margin: 0;
   font-size: 0.6rem;
   width: 2rem;
+}
+
+.edit-button{
+  position: relative;
+  margin: 0;
+  top: 50%;
+  transform: translateY(-170%);
 }
 
 .cart-buttons-set {
@@ -83,3 +95,12 @@ img {
 .footer-button {
   width: 50%;
 }
+
+.total-amount{
+  text-align: left;
+  position: relative;
+  margin: 0;
+  top: 50%;
+  transform: translateY(50%);
+}
+

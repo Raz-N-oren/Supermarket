@@ -1,5 +1,5 @@
 <div class="store">
   <app-cart #cart *ngIf="hide"></app-cart>
-  <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded" #openClose (click)="hide = !hide"></button>
+  <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded cart-button" #openClose (click)="hide = !hide"></button>
   <app-products-container [hide]="hide"></app-products-container>
 </div>

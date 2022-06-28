@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import IProduct from 'src/app/models/IProduct.model';
+
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -9,14 +11,22 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductCardComponent implements OnInit {
 
+  isModalOpen = false;
+  productToAdd:IProduct;
+
   constructor(
-    public _products: ProductsService
+    public _products: ProductsService,
   ) { }
 
   @Input()
   public product: IProduct;
 
   ngOnInit(): void {
+  }
+
+  onAddToCartClicked=(productToAdd: IProduct) =>{
+    this.isModalOpen =true;
+    this.productToAdd = productToAdd;
   }
 
 }

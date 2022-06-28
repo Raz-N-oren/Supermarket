@@ -32,6 +32,10 @@ app-products-container{
   display: none;
 }
 
+.cart-button{
+  min-width: 50px;
+}
+
 
 
 
