@@ -1,3 +1,4 @@
+import { CategoriesService } from 'src/app/services/categories.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -21,26 +22,27 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {InputTextModule} from 'primeng/inputtext';
-import {ButtonModule} from 'primeng/button';
-import {PasswordModule} from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CardModule } from 'primeng/card';
-import {StepsModule} from 'primeng/steps';
+import { StepsModule } from 'primeng/steps';
 import { RegisterStepOneComponent } from './components/register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './components/register-step-two/register-step-two.component';
-import {DropdownModule} from 'primeng/dropdown';
-import {DialogModule} from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
 import { BeforeShoppingComponent } from './components/before-shopping/before-shopping.component';
 import { StoreComponent } from './components/store/store.component';
 import { CartComponent } from './components/cart/cart.component';
-import {TabMenuModule} from 'primeng/tabmenu';
-import {DataViewModule} from 'primeng/dataview';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { DataViewModule } from 'primeng/dataview';
 import { MatGridListModule, MatTabsModule } from '@angular/material';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { AddOrEditCartItemModalComponent } from './components/add-or-edit-cart-item-modal/add-or-edit-cart-item-modal.component';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -88,11 +90,11 @@ import { AddOrEditCartItemModalComponent } from './components/add-or-edit-cart-i
     DataViewModule,
     MatTabsModule,
     MatGridListModule,
-    InputNumberModule
-
+    InputNumberModule,
+    TabViewModule
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true  },CategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,11 +1,29 @@
-
 <div class="products">
-  <div class="menu-bar"></div>
   <div>
-    <app-product-card
-      *ngFor="let product of _products.productsArray"
-      [product]="product"
-    >
-    </app-product-card>
+    <div class="navbar">
+      <p-tabView
+        class="nav-bar"
+        [scrollable]="true"
+        *ngIf="categoriesArray.length != 0"
+      >
+        <p-tabPanel
+          *ngFor="let category of categoriesArray"
+          [header]="category?.name"
+        >
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+    <div class="product-cards-container">
+      <app-product-card
+        *ngFor="let product of _products.productsArray"
+        [product]="product"
+      >
+      </app-product-card>
+    </div>
   </div>
 </div>
+
+<!-- <p-tabView>
+  <p-tabPanel [header]="category.name" *ngFor="let category of _categories.categoriesArray">
+  </p-tabPanel>
+</p-tabView> -->

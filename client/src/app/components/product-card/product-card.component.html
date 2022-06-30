@@ -1,14 +1,14 @@
 <div class="product-card">
   <div>
     <br />
-    <img class="img" [src]="product.imgUrl" [alt]="product.name" />
+    <img class="img" [src]="product?.imgUrl" [alt]="product?.name" />
   </div>
 
   <div class="details">
     <div class="name">
-      <h4>{{ product.name }}</h4>
+      <h4>{{ product?.name }}</h4>
       <span class="price">
-        <h5>{{ product.price | currency: "ILS" }}</h5>
+        <h5>{{ product?.price | currency: "ILS" }}</h5>
       </span>
     </div>
     <span class="add-to-cart">

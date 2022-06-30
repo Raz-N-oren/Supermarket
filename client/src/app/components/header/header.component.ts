@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import IUser from 'src/app/models/IUser.model';
 import { ProductsService } from 'src/app/services/products.service';
-import { StateService } from 'src/app/services/state.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private _usersService: UsersService,
-    private _productsService: ProductsService
+    private _productsService: ProductsService,
   ) {
     this._usersService.followCurrentUser().subscribe((currentUser) => {
       this.currentUser = currentUser;

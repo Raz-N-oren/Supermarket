@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import ICart from '../models/ICarts.model';
 import { CartItemsService } from './cart-items.service';
 import { CartsService } from './carts.service';
+import { CategoriesService } from './categories.service';
 import { OrdersService } from './orders.service';
 import { ProductsService } from './products.service';
 import { UsersService } from './users.service';
@@ -20,8 +21,15 @@ export class StateService {
     public _usersService: UsersService,
     public _cartsService: CartsService,
     public _cartItemsService: CartItemsService,
+    private _categoriesService: CategoriesService
   ) {
+    this._productsService.getAllProducts();
+    this._ordersService.getAmountOfOrders();
+    this._categoriesService.getAllCategories();
+
+
     this._usersService.followCurrentUser().subscribe((newUser)=>{
+
       console.log("NEWUSER IN STATE", newUser);
       if(newUser){
         this._cartsService.getLastCart();

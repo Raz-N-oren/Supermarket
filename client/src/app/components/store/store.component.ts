@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-store',
@@ -7,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoreComponent implements OnInit {
 
-  hide:boolean = true
+  hide: boolean = true;
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

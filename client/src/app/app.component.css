@@ -16,7 +16,7 @@ header {
 main {
   grid-column: span 12;
   border: 2px solid black;
-  overflow: auto;
+  overflow-y: auto;
   padding: 2px;
   margin-top: 12px;
 }

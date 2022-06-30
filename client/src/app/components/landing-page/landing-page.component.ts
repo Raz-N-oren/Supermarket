@@ -34,8 +34,6 @@ export class LandingPageComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this._products.getAllProducts();
-    this._orders.getAmountOfOrders();
   }
 
     handleStoreButton = () => {

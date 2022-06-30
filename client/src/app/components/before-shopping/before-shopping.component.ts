@@ -6,6 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { CartsService } from 'src/app/services/carts.service';
 import ICart from 'src/app/models/ICarts.model';
 import IUser from 'src/app/models/IUser.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-before-shopping',
@@ -27,6 +28,9 @@ export class BeforeShoppingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+
+
     this._usersService.followCurrentUser().subscribe((newUser) => {
       this.currentUser = newUser;
     })

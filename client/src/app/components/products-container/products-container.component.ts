@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import IProduct from 'src/app/models/IProduct.model';
+import ICategories from 'src/app/models/ICategories.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -12,19 +12,26 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./products-container.component.css']
 })
 export class ProductsContainerComponent implements OnInit {
-  @Input() hide!: boolean;
 
-  public selectedCategoryId: string = '';
+  @Input() hide!: boolean;
+  categoriesArray: ICategories[];
+
+
   constructor(
-    public _products: ProductsService,
-    public _categories: CategoriesService,
-    public _carts: CartsService,
-    public _cartItems: CartItemsService
+    private _products: ProductsService,
+    private _categoriesService: CategoriesService,
   ) { }
 
   ngOnInit(): void {
-    this._products.getAllProducts();
-    this._categories.getAllCategories();
+    this._categoriesService.getAllCategories();
+
+    this._categoriesService.followCategoriesArray().subscribe((categoriesArray)=>{
+      this.categoriesArray = categoriesArray;
+      console.log("Categories in products",this.categoriesArray);
+    });
+
+
+
   }
 
 
