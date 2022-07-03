@@ -4,6 +4,5 @@ export interface IOrder {
   city: string;
   street: string;
   shippingDate: Date;
-  orderDate: Date;
   paymentLastDigits: string;
 }

@@ -3,7 +3,7 @@
   <div class="container">
   <div>
   <span class="p-float-label">
-  <p-dropdown [options]="cities" formControlName="city" placeholder="Select a City *"
+  <p-dropdown [options]="_stateService.cities" formControlName="city" placeholder="Select a City *"
     [showClear]="true"></p-dropdown>
   </span>
    <div class="errors-div" *ngIf="userRegisterForm.controls['city'].invalid && (userRegisterForm.controls['city'].dirty || userRegisterForm.controls['city'].touched)">

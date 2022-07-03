@@ -14,6 +14,7 @@ export class UsersService {
   private currentUser?: IUser;
   private currentUserSubject = new BehaviorSubject<IUser>(null);
 
+
   userRegisterData: INewRegisteredUser = {
     userId: "",
     userEmail: "",
@@ -69,5 +70,9 @@ export class UsersService {
   setCurrentUser = (newUser: IUser) => {
     this.currentUser = newUser;
     this.currentUserSubject.next(newUser);
+  }
+
+  getUser = (): IUser =>{
+    return this.currentUserSubject.value;
   }
 }

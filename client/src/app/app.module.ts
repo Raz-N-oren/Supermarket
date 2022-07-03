@@ -43,6 +43,13 @@ import { MatGridListModule, MatTabsModule } from '@angular/material';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { AddOrEditCartItemModalComponent } from './components/add-or-edit-cart-item-modal/add-or-edit-cart-item-modal.component';
 import { TabViewModule } from 'primeng/tabview';
+import { OrderComponent } from './components/order/order.component';
+import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
+
+
 
 @NgModule({
   declarations: [
@@ -61,7 +68,8 @@ import { TabViewModule } from 'primeng/tabview';
     BeforeShoppingComponent,
     StoreComponent,
     CartComponent,
-    AddOrEditCartItemModalComponent
+    AddOrEditCartItemModalComponent,
+    OrderComponent
 
   ],
   imports: [
@@ -91,10 +99,13 @@ import { TabViewModule } from 'primeng/tabview';
     MatTabsModule,
     MatGridListModule,
     InputNumberModule,
-    TabViewModule
-
+    TabViewModule,
+    CalendarModule,
+    InputMaskModule,
+    MessagesModule,
+    ToastModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true  },CategoriesService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }, CategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,12 @@
 <div class="products">
   <div>
     <div class="navbar">
+
       <p-tabView
         class="nav-bar"
         [scrollable]="true"
+        [(activeIndex)]="_categoriesService.selectedCategory"
+        (onChange)="onSelectedCategoryClicked($event)"
         *ngIf="categoriesArray.length != 0"
       >
         <p-tabPanel
@@ -23,7 +26,4 @@
   </div>
 </div>
 
-<!-- <p-tabView>
-  <p-tabPanel [header]="category.name" *ngFor="let category of _categories.categoriesArray">
-  </p-tabPanel>
-</p-tabView> -->
+

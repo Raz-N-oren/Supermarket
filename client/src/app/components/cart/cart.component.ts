@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import ICartItems from 'src/app/models/ICartItems.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
@@ -11,12 +12,15 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CartComponent implements OnInit {
 
+  @Input() isOrder: boolean;
+
   isModalOpen = false;
   cartItemToEdit: ICartItems;
 
   constructor(
     public _cartItemsService: CartItemsService,
-    public _cartsService: CartsService
+    public _cartsService: CartsService,
+    private router: Router
 
   ) { }
 
@@ -34,12 +38,16 @@ export class CartComponent implements OnInit {
   }
 
   onPaymentClicked = () => {
-    console.log("Payment Clicked");
+    this.router.navigate(['/order'])
   }
 
   onEditCartItemQuantityClicked = (cartItem: ICartItems) => {
     this.isModalOpen = true;
     this.cartItemToEdit = cartItem
+  }
+
+  onBackToStoreClicked = () => {
+    this.router.navigate(['/store'])
   }
 
 }

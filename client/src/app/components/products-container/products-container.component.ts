@@ -23,14 +23,25 @@ export class ProductsContainerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._categoriesService.getAllCategories();
 
-    this._categoriesService.followCategoriesArray().subscribe((categoriesArray)=>{
+    this._categoriesService.followCategoriesArray().subscribe((categoriesArray) => {
       this.categoriesArray = categoriesArray;
-      console.log("Categories in products",this.categoriesArray);
+      console.log("Categories in products", this.categoriesArray);
     });
+  }
 
-
+  onSelectedCategoryClicked = (event: any) => {
+    let selectedCategoryValue = event.originalEvent.target.innerText;
+    console.log(selectedCategoryValue);
+    let selectedCategory = this.categoriesArray.find((category)=> {
+      return category.name == selectedCategoryValue
+    })
+    if(selectedCategory.name =="All"){
+      this._products.getAllProducts();
+    }
+    else{
+      this._products.getProductsByCategory(selectedCategory.id)
+    }
 
   }
 

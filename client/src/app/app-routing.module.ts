@@ -1,3 +1,4 @@
+import { OrderComponent } from './components/order/order.component';
 import { ProductsContainerComponent } from './components/products-container/products-container.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "add-new-product", canActivate: [LoginGuard], component: AddNewProductComponent },
   { path: "store", canActivate: [LoginGuard], component: StoreComponent },
+  { path: "order", canActivate: [LoginGuard], component: OrderComponent },
   { path: "", redirectTo: "/landing-page/login", pathMatch: "full" },
   { path: "**", component: Page404Component },
 ];

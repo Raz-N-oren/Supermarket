@@ -33,24 +33,23 @@
               ICartItems.productPrice * ICartItems.quantity | currency: "ILS"
             }}</span>
             <span class="cart-card-buttons">
-            <button
-            pButton
-            pRipple
-            (click)="onDeleteCartItemFromCartClicked(ICartItems.id)"
-            class="delete-button p-button-text"
-            icon="pi pi-trash"
-
-            >
-
-            </button>
-            <button
-              pButton
-              pRipple
-              class="cart-button p-button-text edit-button"
-              icon="pi pi-pencil"
-              (click)="onEditCartItemQuantityClicked(ICartItems)"
-            ></button>
-          </span>
+              <button
+                pButton
+                pRipple
+                *ngIf="!isOrder"
+                (click)="onDeleteCartItemFromCartClicked(ICartItems.id)"
+                class="delete-button p-button-text"
+                icon="pi pi-trash"
+              ></button>
+              <button
+                pButton
+                pRipple
+                *ngIf="!isOrder"
+                class="cart-button p-button-text edit-button"
+                icon="pi pi-pencil"
+                (click)="onEditCartItemQuantityClicked(ICartItems)"
+              ></button>
+            </span>
           </div>
         </div>
       </div>
@@ -60,6 +59,7 @@
     <button
       pButton
       pRipple
+      *ngIf="!isOrder"
       label="Clear Cart"
       class="footer-button"
       (click)="onClearCartItemsClicked()"
@@ -69,11 +69,23 @@
       pButton
       pRipple
       label="Payment"
+      *ngIf="!isOrder"
       class="footer-button"
       (click)="onPaymentClicked()"
       [disabled]="_cartItemsService.cartItemsArray.length == 0"
     ></button>
   </span>
+  <span class="p-buttonset cart-buttons-set">
+    <button
+      pButton
+      pRipple
+      *ngIf="isOrder"
+      label="Back to store"
+      class="footer-button"
+      (click)="onBackToStoreClicked()"
+    ></button>
+  </span>
+
 </div>
 
 <app-add-or-edit-cart-item-modal

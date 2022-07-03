@@ -8,9 +8,10 @@ import ICategories from '../models/ICategories.model';
 })
 export class CategoriesService {
 
-  private categoriesArray: ICategories[] = [];
+  private categoriesArray: ICategories[] = [{id:0,name:"All"}];
   private categoriesSubject = new BehaviorSubject(this.categoriesArray);
   public baseUrl: string = 'http://localhost:3001/categories/';
+  selectedCategory: number = 0;
 
   constructor(
     private _http: HttpClient
@@ -19,7 +20,9 @@ export class CategoriesService {
   getAllCategories(): void {
     this._http.get<ICategories[]>(this.baseUrl)
       .subscribe((categories) => {
-        this.categoriesArray = categories;
+       categories.forEach((category) => {
+        this.categoriesArray.push(category);
+        });
         this.categoriesSubject.next(this.categoriesArray);
       },
         err => {

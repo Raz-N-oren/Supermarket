@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import IUser from 'src/app/models/IUser.model';
+import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -17,6 +18,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private _usersService: UsersService,
     private _productsService: ProductsService,
+    private _categoriesService: CategoriesService
+
   ) {
     this._usersService.followCurrentUser().subscribe((currentUser) => {
       this.currentUser = currentUser;
@@ -32,6 +35,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/landing-page/login']);
   }
 
-  onSearchInputChanged = (searchedInput: string) =>
+  onSearchInputChanged = (searchedInput: string) =>{
     this._productsService.getProductsBySearchString(searchedInput);
+    this._categoriesService.selectedCategory = 0;
+  }
 }

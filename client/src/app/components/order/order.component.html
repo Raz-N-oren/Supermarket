@@ -1,0 +1,129 @@
+<div class="order-container">
+  <div class="cart">
+    <app-cart [isOrder]="true"></app-cart>
+  </div>
+  <div class="order-form">
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmitClicked()">
+      <h3 class="title">Shipping Details</h3>
+      <div class="shipping-city">
+        <p>Please choose your city:</p>
+        <p-dropdown
+          class="order-form-input city"
+          formControlName="city"
+          [options]="_stateService.cities"
+          placeholder="Select a city"
+        ></p-dropdown
+        ><br />
+        <small
+          *ngIf="
+            orderForm.get('city').hasError('required') &&
+            orderForm.get('city').touched
+          "
+          class="p-error block"
+          >City is required</small
+        >
+      </div>
+      <br />
+      <div class="shipping-address">
+        <p>Please choose your street address:</p>
+        <span class="p-float-label order-form-input">
+          <input
+            type="text"
+            name="street"
+            pInputText
+            id="streetInput"
+            formControlName="street"
+            (dblclick)="onStreetInputDoubleClicked()"
+          />
+          <label for="streetInput">Street Address</label>
+        </span>
+        <small
+          *ngIf="
+            orderForm.get('street').hasError('required') &&
+            orderForm.get('street').touched
+          "
+          class="p-error block"
+          >Street address is required.</small
+        >
+        <small
+          *ngIf="
+            orderForm.controls['street'].hasError('maxlength') &&
+            orderForm.controls['street'].dirty
+          "
+          class="p-error block"
+          >Street Address is too long.</small
+        >
+      </div>
+      <br />
+
+      <div class="shipping-date">
+        <p>Please choose shipping date:</p>
+        <p-calendar
+          class="order-form-input"
+          formControlName="shippingDate"
+          dateFormat="dd.mm.yy"
+          [showIcon]="true"
+          [disabledDates]="_orderService.busyDays"
+          [minDate]="currentDate"
+          [baseZIndex]="1"
+        >
+        </p-calendar>
+        <small
+          *ngIf="
+            orderForm.get('shippingDate').hasError('required') &&
+            orderForm.get('shippingDate').touched
+          "
+          class="p-error block"
+          >Shipping date is required.</small
+        >
+      </div>
+      <h3 class="title">Payment Details</h3>
+      <div class="payment">
+        <p>Please enter credit card number</p>
+        <span class="order-form-input">
+          <p-inputMask
+            class="order-form-input"
+            name="creditCard"
+            id="creditCardInput"
+            placeholder="0000-0000-0000-0000"
+            mask="9999-9999-9999-9999"
+            formControlName="creditCard"
+          ></p-inputMask>
+          <small
+            *ngIf="
+              orderForm.get('creditCard').hasError('required') &&
+              orderForm.get('creditCard').touched
+            "
+            class="p-error block"
+            >Credit card is required.</small
+          >
+          <small
+            *ngIf="
+              orderForm.get('creditCard').hasError('patten') &&
+              orderForm.get('creditCard').touched
+            "
+            class="p-error block"
+            >Invalid credit card.</small
+          >
+        </span>
+      </div>
+      <br>
+      <p-button type="submit" [disabled]="orderForm.invalid">Submit</p-button>
+      <small>*Required fields.</small>
+    </form>
+  </div>
+  <p-toast position="center" key="c" (onClose)="onCloseToastClicked()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}
+                    <button type="button" pButton pRipple (click)="onGetReceiptClicked()" label="Click here"
+                        class="p-button-text toast-button" ></button>
+                </p>
+            </div>
+
+        </div>
+    </ng-template>
+</p-toast>
+</div>

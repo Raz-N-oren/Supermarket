@@ -1,3 +1,4 @@
+import { StateService } from 'src/app/services/state.service';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,10 +19,10 @@ export class RegisterStepTwoComponent implements OnInit {
 
   userRegisterForm: UntypedFormGroup;
   displayModal: boolean = false;
-  cities: string[];
 
   constructor(
     private _usersService: UsersService,
+    private _stateService: StateService,
     private formBuilder: UntypedFormBuilder,
     public router: Router
   ) { }
@@ -33,64 +34,6 @@ export class RegisterStepTwoComponent implements OnInit {
       firstName: [this.registerUserData.firstName, [Validators.required, Validators.maxLength(12)]],
       lastName: [this.registerUserData.lastName, [Validators.required, Validators.maxLength(12)]]
     })
-
-    this.cities = [
-      'Akko',
-      'Afula',
-      'Al Buţayḩah',
-      'Al Khushnīyah',
-      'Ashdod',
-      'Ashqelon',
-      'Bat Yam',
-      'Beersheba',
-      'Bené Beraq',
-      'Bet Shemesh',
-      'Dimona',
-      'Eilat',
-      'El‘ad',
-      'Eṭ Ṭaiyiba',
-      'Fīq',
-      'Givatayim',
-      'Hadera',
-      'Haifa',
-      'Herẕliyya',
-      'Hod HaSharon',
-      'Holon',
-      'Jerusalem',
-      'Karmiel',
-      'Kefar Sava',
-      'Lod',
-      'Ma‘alot Tarshīḥā',
-      'Modi‘in Makkabbim Re‘ut',
-      'Nahariyya',
-      'Nazareth',
-      'Nes Ẕiyyona',
-      'Netanya',
-      'Netivot',
-      'Or Yehuda',
-      'Petaẖ Tiqwa',
-      'Qiryat Ata',
-      'Qiryat Bialik',
-      'Qiryat Gat',
-      'Qiryat Moẕqin',
-      'Qiryat Ono',
-      'Qiryat Yam',
-      'Ra‘ananna',
-      'Rahat',
-      'Ramat Gan',
-      'Ramat HaSharon',
-      'Ramla',
-      'Reẖovot',
-      'Rishon LeẔiyyon',
-      'Rosh Ha‘Ayin',
-      'Sakhnīn',
-      'Tamra',
-      'Tel Aviv-Yafo',
-      'Tiberias',
-      'Umm el Faḥm',
-      'Yehud',
-      'Ẕefat'
-    ]
   }
 
   addNewUser(): void {
