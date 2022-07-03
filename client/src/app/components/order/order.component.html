@@ -107,23 +107,36 @@
           >
         </span>
       </div>
-      <br>
-      <p-button type="submit" [disabled]="orderForm.invalid">Submit</p-button>
-      <small>*Required fields.</small>
+      <br />
+      <div class="submit-button">
+        <p-button type="submit" [disabled]="orderForm.invalid">Submit</p-button>
+        <small>*Required fields.</small>
+      </div>
     </form>
   </div>
-  <p-toast position="center" key="c" (onClose)="onCloseToastClicked()" [baseZIndex]="5000">
+  <p-toast
+    position="center"
+    key="c"
+    (onClose)="onCloseToastClicked()"
+    [baseZIndex]="5000"
+  >
     <ng-template let-message pTemplate="message">
-        <div class="flex flex-column" style="flex: 1">
-            <div class="text-center">
-                <h4>{{message.summary}}</h4>
-                <p>{{message.detail}}
-                    <button type="button" pButton pRipple (click)="onGetReceiptClicked()" label="Click here"
-                        class="p-button-text toast-button" ></button>
-                </p>
-            </div>
-
+      <div class="flex flex-column" style="flex: 1">
+        <div class="text-center">
+          <h4>{{ message.summary }}</h4>
+          <p>
+            {{ message.detail }}
+            <button
+              type="button"
+              pButton
+              pRipple
+              (click)="onGetReceiptClicked()"
+              label="Click here"
+              class="p-button-text toast-button"
+            ></button>
+          </p>
         </div>
+      </div>
     </ng-template>
-</p-toast>
+  </p-toast>
 </div>

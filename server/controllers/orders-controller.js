@@ -1,6 +1,7 @@
 const { request, response } = require("express");
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 
 const tokenDecoder = require("../utils/token-decoder");
 const ordersLogic = require('../logic/orders-logic');
@@ -22,6 +23,7 @@ router.post("/", async (request, response) => {
         response.status(600).send(e.message);
     }
 });
+
 
 router.get("/busy_days", async (request, response) => {
     try {
@@ -66,7 +68,7 @@ router.get("/receipt/:cartId", async (request, response) => {
         let userId = tokenDecoder.decodeTokenFromRequest(request).userId;
         let receipt = await ordersLogic.getReceipt(cartId, userId);
 
-        response.json(receipt);
+        response.sendFile(path.resolve(__dirname + '../receipts/' + receipt));
     }
     catch (e) {
         console.error(e);

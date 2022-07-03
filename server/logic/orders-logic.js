@@ -1,9 +1,13 @@
 const ordersDal = require('../dal/orders-dal');
 const cartsLogic = require('./carts-logic');
+const cartItemsLogic = require('./cart-items-logic');
+
 
 async function addNewOrder(order) {
     await validateOrder(order);
     let id = await ordersDal.addNewOrder(order);
+    await cartsLogic.closeCart(order.cartId);
+    await createReceipt(order);
     order.id = id;
     return id;
 };
@@ -11,11 +15,11 @@ async function addNewOrder(order) {
 async function getReceipt(cartId, userId) {
     let isCartBelongToUser = await cartsLogic.validateCartForUser(cartId, userId);
     if (isCartBelongToUser) {
-        let receipt = await ordersDal.getReceipt(cartId);
-        return receipt;
+        let receiptName = cartId + '.txt';
+        return receiptName;
     }
     else {
-        throw new Error("Invalid receipt request.");
+        throw new Error("Cannot get receipt.");
     }
 }
 
@@ -68,6 +72,23 @@ async function validateOrder(order) {
     if (order.paymentLastDigits.length != 4) {
         throw new Error("Invalid last payment digits.");
     }
+}
+
+async function createReceipt(orderRequest) {
+    cartId = orderRequest.cartId;
+    let receipt = 'Receipt No. ' + cartId;
+    let cartItemsArray = await cartItemsLogic.getCartItemsByCartId(orderRequest.cartId);
+    for (let cartItem of cartItemsArray) {
+        receipt += `
+    ${cartItem.productName} X ${cartItem.quantity}
+_______________________________________________`
+    }
+    receipt += `
+Total: ${orderRequest.finalPrice}
+Payment: ${orderRequest.paymentLastDigits}`
+
+    await fs.writeFile('./receipts/' + cartId + '.txt', receipt);
+
 }
 
 module.exports = {

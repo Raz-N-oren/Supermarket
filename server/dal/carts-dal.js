@@ -24,8 +24,15 @@ async function validateCartForUser(cartId, userId) {
     return response.length > 0;
 }
 
+async function closeCart(cartId) {
+    let sql = "UPDATE carts SET is_open = '0' WHERE (id=?);";
+    let parameters = [cartId];
+    await connection.executeWithParameters(sql, parameters);
+}
+
 module.exports = {
     getLastCart,
     openCart,
-    validateCartForUser
+    validateCartForUser,
+    closeCart
 }

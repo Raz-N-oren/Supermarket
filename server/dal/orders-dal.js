@@ -12,10 +12,6 @@ async function addNewOrder(order) {
 
 }
 
-async function getReceipt(cartId, userId) {
-    return ("FIX THIS!");
-}
-
 async function getBusyDays() {
     let sql = `SELECT shipping_date as busyDays 
     FROM supermarket.orders 
@@ -45,6 +41,5 @@ module.exports = {
     addNewOrder,
     getBusyDays,
     getAmountOfOrders,
-    getLastPurchaseDate,
-    getReceipt
+    getLastPurchaseDate
 }

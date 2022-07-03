@@ -22,8 +22,6 @@ export class OrdersService {
 
         if(orderResponse.orderDate !== null){
         this.lastPurchaseDate = new Date(orderResponse.orderDate);
-        console.log("lastPurchase",this.lastPurchaseDate);
-
       }},
         err => {
           console.log(err);
@@ -45,7 +43,6 @@ export class OrdersService {
     })
   }
 
-
   public getAmountOfOrders(): void {
     this._http.get<number>(this.baseUrl + 'amount_of_orders').subscribe((amountOfOrdersResponse) =>
     { this.amountOfOrders = amountOfOrdersResponse },
@@ -55,7 +52,7 @@ export class OrdersService {
       })
   }
 
-  public addNewOrder(order: object): void {
+  public addNewOrder(order: IOrder): void {
     this._http.post<IOrder>(this.baseUrl, order)
       .subscribe((order) => {
         console.log("order has been added. ", order);
@@ -67,14 +64,8 @@ export class OrdersService {
       )
   }
 
-  public getReceipt():void {
-    this._http.get(this.baseUrl).subscribe((ordersResponse) => {
-
-    }, (e) => {
-      alert("Cannot get receipt.");
-      console.log(e);
-
-    })
+  getReceipt = (cartId) => {
+    return this._http.get(this.baseUrl + cartId, { responseType: "blob" });
   }
 
 }

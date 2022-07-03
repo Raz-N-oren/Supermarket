@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders.service';
 import { UsersService } from 'src/app/services/users.service';
 import { MessageService } from 'primeng/api';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-order',
@@ -73,6 +74,10 @@ export class OrderComponent implements OnInit {
   }
 
   onGetReceiptClicked =()=>{
-    console.log("Get Receipt clicked");
+    let cartId = this._cartService.getCart().id;
+    this._orderService.getReceipt(cartId).subscribe(blob => {
+      saveAs(blob, cartId + '.txt');
   }
 }
+
+
