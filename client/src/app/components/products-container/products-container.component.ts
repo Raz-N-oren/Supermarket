@@ -26,13 +26,11 @@ export class ProductsContainerComponent implements OnInit {
 
     this._categoriesService.followCategoriesArray().subscribe((categoriesArray) => {
       this.categoriesArray = categoriesArray;
-      console.log("Categories in products", this.categoriesArray);
     });
   }
 
   onSelectedCategoryClicked = (event: any) => {
     let selectedCategoryValue = event.originalEvent.target.innerText;
-    console.log(selectedCategoryValue);
     let selectedCategory = this.categoriesArray.find((category)=> {
       return category.name == selectedCategoryValue
     })

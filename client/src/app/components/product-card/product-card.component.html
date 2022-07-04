@@ -11,12 +11,20 @@
         <h5>{{ product?.price | currency: "ILS" }}</h5>
       </span>
     </div>
-    <span class="add-to-cart">
+    <span class="add-to-cart" *ngIf="currentUser.role =='user'">
       <button
         pButton
         pRipple
         icon="pi pi-shopping-cart"
         (click)="onAddToCartClicked(product)"
+      ></button>
+    </span>
+    <span class="edit-product" *ngIf='currentUser.role=="admin"'>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-pencil"
+        (click)="onEditProductClicked(product)"
       ></button>
     </span>
   </div>

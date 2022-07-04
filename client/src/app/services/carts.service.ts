@@ -18,8 +18,6 @@ export class CartsService {
     this._http.get<ICart>(this.baseUrl)
       .subscribe((cart) => {
         if (cart) {
-          console.log("cart", cart);
-
           this.cart = {
             id: cart.id,
             creationDate: cart.creationDate,

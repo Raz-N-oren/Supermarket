@@ -5,6 +5,29 @@
   <div class="order-form">
     <form [formGroup]="orderForm" (ngSubmit)="onSubmitClicked()">
       <h3 class="title">Shipping Details</h3>
+
+      <div class="shipping-date">
+        <p>Please choose shipping date:</p>
+        <p-calendar
+          class="order-form-input"
+          formControlName="shippingDate"
+          dateFormat="dd.mm.yy"
+          [showIcon]="true"
+          [disabledDates]="_orderService.busyDays"
+          [minDate]="currentDate"
+          [baseZIndex]="1"
+        >
+        </p-calendar>
+        <small
+          *ngIf="
+            orderForm.get('shippingDate').hasError('required') &&
+            orderForm.get('shippingDate').touched
+          "
+          class="p-error block"
+          >Shipping date is required.</small
+        >
+      </div>
+      <br />
       <div class="shipping-city">
         <p>Please choose your city:</p>
         <p-dropdown
@@ -54,29 +77,6 @@
           >Street Address is too long.</small
         >
       </div>
-      <br />
-
-      <div class="shipping-date">
-        <p>Please choose shipping date:</p>
-        <p-calendar
-          class="order-form-input"
-          formControlName="shippingDate"
-          dateFormat="dd.mm.yy"
-          [showIcon]="true"
-          [disabledDates]="_orderService.busyDays"
-          [minDate]="currentDate"
-          [baseZIndex]="1"
-        >
-        </p-calendar>
-        <small
-          *ngIf="
-            orderForm.get('shippingDate').hasError('required') &&
-            orderForm.get('shippingDate').touched
-          "
-          class="p-error block"
-          >Shipping date is required.</small
-        >
-      </div>
       <h3 class="title">Payment Details</h3>
       <div class="payment">
         <p>Please enter credit card number</p>
@@ -110,7 +110,7 @@
       <br />
       <div class="submit-button">
         <p-button type="submit" [disabled]="orderForm.invalid">Submit</p-button>
-        <small>*Required fields.</small>
+        <small *ngIf="orderForm.invalid">*Required fields.</small>
       </div>
     </form>
   </div>

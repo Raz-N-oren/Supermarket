@@ -27,11 +27,9 @@ async function loginUser(userLoginData) {
   console.log("Hashed password : " + userLoginData.password);
 
   let userData = await usersDal.loginUser(userLoginData)
-  console.log();
   if (!userData) {
     throw new Error("Invalid E-mail or password");
   }
-  console.log("userData", userData);
   let userId = userData.userId;
   let userCart = await cartLogic.getLastCart(userId);
   let tokenInfo = { userId: userData.userId, role: userData.role }
@@ -49,7 +47,6 @@ function hashPassword(password) {
 }
 
 function validateUserData(userRegistrationData) {
-  console.log("test", userRegistrationData);
   let format = /[^a-zA-Z]/g;
   if (!userRegistrationData.userEmail) {
     throw new Error("Invalid user name or password");

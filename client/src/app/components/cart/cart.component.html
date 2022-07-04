@@ -13,7 +13,7 @@
         placeholder="Search by Product Name"
         (input)="dv.filter($any($event.target).value)"
       />
-      <div class="total-amount">
+      <div class="total-amount" *ngIf="_cartItemsService.cartItemsTotalPrice">
         <p>
           Total cart amount:
           {{ _cartItemsService.cartItemsTotalPrice | currency: "ILS" }}

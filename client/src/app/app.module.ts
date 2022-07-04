@@ -48,6 +48,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
+import { AddOrEditProductComponent } from './components/add-or-edit-product/add-or-edit-product.component';
 
 
 
@@ -69,7 +70,8 @@ import { ToastModule } from 'primeng/toast';
     StoreComponent,
     CartComponent,
     AddOrEditCartItemModalComponent,
-    OrderComponent
+    OrderComponent,
+    AddOrEditProductComponent
 
   ],
   imports: [

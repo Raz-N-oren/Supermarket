@@ -6,7 +6,6 @@ import { combineLatest } from 'rxjs';
 import IUser from 'src/app/models/IUser.model';
 import UserLoginData from 'src/app/models/UserLoginData.model';
 import { CartsService } from 'src/app/services/carts.service';
-import { StateService } from 'src/app/services/state.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -27,8 +26,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: UntypedFormBuilder,
     private _cartService: CartsService
-
-
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +45,6 @@ export class LoginComponent implements OnInit {
 
   onLoginClicked = () => {
     this.loginUserData = this.userLoginForm.value;
-    console.log(this.loginUserData);
     const observable = this._usersService.login(this.loginUserData);
     observable.subscribe(
       response => {
@@ -63,14 +59,11 @@ export class LoginComponent implements OnInit {
           "role": decoded.role,
           "userCart": response.userCart
         }
-        console.log("Test Role:", loggedInUser);
 
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
         this._usersService.setCurrentUser(loggedInUser);
 
         this._cartService.setCurrentCart(response.userCart);
-        console.log("CART IN LOGIN",this._cartService.getCart());
-        console.log("login response", response);
 
         this.router.navigate(['/landing-page/before-shopping']);
       },

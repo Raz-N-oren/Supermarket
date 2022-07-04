@@ -54,7 +54,7 @@ export class OrderComponent implements OnInit {
 
   onSubmitClicked = () => {
     let creditCard: string = this.orderForm.controls['creditCard'].value;
-    let lastFourCreditCardDigits = creditCard.slice(creditCard.length -4,creditCard.length);
+    let lastFourCreditCardDigits = creditCard.slice(creditCard.length - 4, creditCard.length);
     let orderRequest: IOrder = {
       cartId: this._cartService.getCart().id,
       finalPrice: this._cartItemsService.cartItemsTotalPrice,
@@ -73,11 +73,14 @@ export class OrderComponent implements OnInit {
     this.router.navigate(['/landing-page/before-shopping']);
   }
 
-  onGetReceiptClicked =()=>{
+  onGetReceiptClicked = () => {
     let cartId = this._cartService.getCart().id;
     this._orderService.getReceipt(cartId).subscribe(blob => {
       saveAs(blob, cartId + '.txt');
+    })
   }
 }
+
+
 
 

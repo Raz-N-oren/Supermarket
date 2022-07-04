@@ -33,7 +33,6 @@ export class CartItemsService {
   public addCartItem(cartItem: IServerCartItem): void {
     this._http.post<ICartItems>(this.baseUrl, cartItem)
       .subscribe((cartItemResponse) => {
-        console.log("Cart item has been added. ", cartItemResponse),
         this.getCartItemsByCartId(cartItem.cartId)
       },
         err => {
@@ -45,7 +44,6 @@ export class CartItemsService {
 
   public updateCartItemQuantity = (cartItem) => {
     this._http.put(this.baseUrl, cartItem).subscribe((cartItemsResponse) => {
-      console.log(cartItemsResponse);
       this.getCartItemsByCartId(cartItem.cartId);
     }, (e) => {
       alert("Cannot update cart item.");
@@ -56,7 +54,6 @@ export class CartItemsService {
   public removeFromCart(cartItemId, cartId): void {
     this._http.delete(this.baseUrl + cartItemId)
       .subscribe((cartItem) => {
-        console.log(cartItem);
         this.getCartItemsByCartId(cartId)
       },
         err => {
@@ -68,7 +65,6 @@ export class CartItemsService {
   public removeAllCartItems(cartId: number): void {
     this._http.delete<ICartItems>(this.baseUrl + `remove_all/` + cartId)
       .subscribe((cartItem) => {
-        console.log(cartItem);
         this.getCartItemsByCartId(cartId);
       },
         err => {

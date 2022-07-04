@@ -12,7 +12,6 @@ async function getLastCart(userId) {
 async function openCart(newCart) {
     let sql = "insert into carts (user_id, is_open, creation_date) value(?, ?, ?)";
     let parameters = [newCart.userId, newCart.isOpen, newCart.creationDate];
-    console.log(newCart);
     let response = await connection.executeWithParameters(sql, parameters);
     return response.insertId;
 }

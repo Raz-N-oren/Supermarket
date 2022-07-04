@@ -98,7 +98,6 @@ export class StateService {
       }
     })
     let userData: string = sessionStorage.getItem("userData");
-    console.log("BLABLA",userData);
 
     if(userData){
       let currentUser = JSON.parse(userData);

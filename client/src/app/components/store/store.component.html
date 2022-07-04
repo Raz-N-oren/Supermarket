@@ -1,5 +1,7 @@
 <div class="store">
-  <app-cart #cart *ngIf="hide"></app-cart>
-  <button pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded cart-button" #openClose (click)="hide = !hide"></button>
+  <app-cart #cart *ngIf="hide && currentUser.role == 'user' "></app-cart>
+  <app-add-or-edit-product  *ngIf="hide && currentUser.role == 'admin'"></app-add-or-edit-product>
+  <button *ngIf="currentUser.role == 'user'" pButton pRipple type="button" icon="pi pi-shopping-cart" class="p-button-rounded cart-button" #openClose (click)="hide = !hide"></button>
+  <button *ngIf="currentUser.role == 'admin'" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded cart-button" #openClose (click)="hide = !hide"></button>
   <app-products-container [hide]="hide"></app-products-container>
 </div>

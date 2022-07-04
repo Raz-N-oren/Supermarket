@@ -62,13 +62,13 @@ router.get("/last_purchase", async (request, response) => {
     }
 });
 
-router.get("/receipt/:cartId", async (request, response) => {
+router.get("/:cartId", async (request, response) => {
     try {
         let cartId = request.params.cartId;
         let userId = tokenDecoder.decodeTokenFromRequest(request).userId;
         let receipt = await ordersLogic.getReceipt(cartId, userId);
 
-        response.sendFile(path.resolve(__dirname + '../receipts/' + receipt));
+        response.sendFile(path.resolve(__dirname , '../receipts/' , receipt));
     }
     catch (e) {
         console.error(e);

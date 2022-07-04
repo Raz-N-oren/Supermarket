@@ -1,6 +1,7 @@
 const ordersDal = require('../dal/orders-dal');
 const cartsLogic = require('./carts-logic');
 const cartItemsLogic = require('./cart-items-logic');
+const fs = require('fs/promises');
 
 
 async function addNewOrder(order) {

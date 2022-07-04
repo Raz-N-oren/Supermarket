@@ -38,7 +38,6 @@ export class RegisterStepTwoComponent implements OnInit {
 
   addNewUser(): void {
     this.registerUserData = this.userRegisterForm.value;
-    console.log(this.registerUserData);
 
     this._usersService.userRegisterData.city = this.registerUserData.city;
     this._usersService.userRegisterData.street = this.registerUserData.street;
@@ -47,7 +46,6 @@ export class RegisterStepTwoComponent implements OnInit {
 
     this._usersService.addNewUser(this._usersService.userRegisterData);
     this.displayModal = true;
-    console.log(this._usersService.userRegisterData);
   }
 
   goBackToStepOne(): void {

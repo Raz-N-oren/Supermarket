@@ -18,8 +18,6 @@ export class OrdersService {
   public getLastPurchaseDate(): void {
     this._http.get<any>(this.baseUrl + 'last_purchase')
       .subscribe((orderResponse) => {
-        console.log(orderResponse);
-
         if(orderResponse.orderDate !== null){
         this.lastPurchaseDate = new Date(orderResponse.orderDate);
       }},
@@ -34,7 +32,6 @@ export class OrdersService {
       ordersResponse.forEach((busyDay) => {
         this.busyDays.push(new Date(busyDay));
       });
-      console.log(this.busyDays);
 
     }, (e) => {
       alert("Cannot get busy days. ")
@@ -55,7 +52,6 @@ export class OrdersService {
   public addNewOrder(order: IOrder): void {
     this._http.post<IOrder>(this.baseUrl, order)
       .subscribe((order) => {
-        console.log("order has been added. ", order);
       },
         err => {
           console.log(err);

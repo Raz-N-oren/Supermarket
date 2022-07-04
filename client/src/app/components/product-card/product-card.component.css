@@ -12,7 +12,6 @@
   background-color: transparent;
 }
 
-
 .details {
   margin-left: 10px;
   margin: auto;
@@ -36,6 +35,10 @@
     0 1px 3px 0 rgb(0 0 0 / 72%);
   box-sizing: border-box;
   margin-bottom: 20px;
+}
+
+.edit-product button{
+  border-radius: 30vh;
 }
 
 

@@ -21,7 +21,6 @@ router.get("/", async (request, response) => {
 router.post("/", async (request, response) => {
     try {
         let userInfo = tokenDecoder.decodeTokenFromRequest(request);
-        console.log("controller", userInfo);
         let cartId = await cartLogic.openCart(userInfo);
 
         response.json(cartId);
