@@ -1,1 +1,128 @@
-<app-add-new-product></app-add-new-product>
+<div class="add-or-edit-container">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmitClicked()">
+      <h3 class="title" *ngIf="isEdit">Product Editor</h3>
+      <h3 class="title" *ngIf="!isEdit">Add new Product</h3>
+      <div class="product-cetegory input">
+        <p>Please choose category:</p>
+        <p-dropdown
+        *ngIf="categoriesArray.length > 0"
+          class="product-form-input category"
+          formControlName="categoryId"
+          [options]="categoriesArray"
+          placeholder="Select a category"
+          optionLabel="name"
+          optionValue="id"
+        ></p-dropdown
+        ><br />
+        <small
+          *ngIf="
+            productForm.get('categoryId').hasError('required') &&
+            productForm.get('categoryId').touched
+          "
+          class="p-error block"
+          >Category is required</small
+        >
+      </div>
+      <br>
+      <div class="product-name input">
+        <p>Product name:</p>
+        <span class="p-float-label product-form-input">
+          <input
+            type="text"
+            name="name"
+            pInputText
+            id="nameInput"
+            formControlName="name"
+          />
+          <label for="nameInput">Product name</label>
+        </span>
+        <small
+          *ngIf="
+            productForm.get('name').hasError('required') &&
+            productForm.get('name').touched
+          "
+          class="p-error block"
+          >Product name is required.</small
+        >
+        <small
+          *ngIf="
+            productForm.controls['name'].hasError('maxlength') &&
+            productForm.controls['name'].dirty
+          "
+          class="p-error block"
+          >Product name is too long.</small
+        >
+      </div>
+      <br>
+      <div class="product-price input">
+        <p>Product price:</p>
+        <span class="p-float-label product-form-input">
+          <input
+            type="number"
+            name="price"
+            pInputText
+            id="priceInput"
+            formControlName="price"
+          />
+          <label for="priceInput">Product price</label>
+        </span>
+        <small
+          *ngIf="
+            productForm.get('price').hasError('required') &&
+            productForm.get('price').touched
+          "
+          class="p-error block"
+          >Product name is required.</small>
+        <small
+          *ngIf="
+            productForm.controls['price'].hasError('max') &&
+            productForm.controls['price'].dirty
+          "
+          class="p-error block"
+          >Product price is limited to 10,000.</small>
+        <small
+          *ngIf="
+            productForm.controls['price'].hasError('min') &&
+            productForm.controls['price'].dirty
+          "
+          class="p-error block"
+          >Product price cannot be negative number.</small>
+      </div>
+      <br>
+      <div class="product-imgUrl input">
+        <p>Product image URL:</p>
+        <span class="p-float-label product-form-input">
+          <input
+            type="text"
+            name="imgUrl"
+            pInputText
+            id="imgUrlInput"
+            formControlName="imgUrl"
+          />
+          <label for="imgUrlInput">Product image</label>
+        </span>
+        <small
+          *ngIf="
+            productForm.get('imgUrl').hasError('required') &&
+            productForm.get('imgUrl').touched
+          "
+          class="p-error block"
+          >Product image URL is required.</small>
+        <small
+          *ngIf="
+            productForm.controls['imgUrl'].hasError('maxlength') &&
+            productForm.controls['imgUrl'].dirty
+          "
+          class="p-error block"
+          >Product img URL is too long.</small>
+
+      </div>
+      <br>
+      <div class="submit-button">
+        <p-button type="submit" *ngIf="!isEdit" [disabled]="productForm.invalid">Save new product</p-button>
+        <p-button type="submit" *ngIf="isEdit" [disabled]="productForm.invalid || productForm.pristine">Save product</p-button>
+        <p-button (onClick)="onResetFormClicked()" class="reset-button" >Reset</p-button>
+      </div>
+      <small class="form-error" *ngIf="productForm.invalid">*Required fields.</small>
+    </form>
+  </div>

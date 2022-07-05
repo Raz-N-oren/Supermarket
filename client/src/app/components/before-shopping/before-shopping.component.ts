@@ -19,6 +19,7 @@ export class BeforeShoppingComponent implements OnInit {
   currentUser: IUser;
   isLogin: boolean = true;
 
+
   constructor(
     public _usersService: UsersService,
     public _ordersService: OrdersService,
@@ -46,6 +47,10 @@ export class BeforeShoppingComponent implements OnInit {
 
   onStartShoppingClicked =() =>{
     this._cartsService.openCart();
+    this.router.navigate(['/store']);
+  }
+
+  onGoToStoreClicked =()=>{
     this.router.navigate(['/store']);
   }
 

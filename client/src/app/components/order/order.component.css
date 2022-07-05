@@ -34,12 +34,8 @@ form{
 
 .title{
   text-align: center;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid #e0e0e0;
 
-}
-
-.order-form-input{
-  width: 30%;
 }
 
 .p-float-label {

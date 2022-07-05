@@ -23,7 +23,7 @@ export class AddNewProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._categories.getAllCategories();
+    // this._categories.getAllCategories();
   }
 
   public addNewProduct(): void {

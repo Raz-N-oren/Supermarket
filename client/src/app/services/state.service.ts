@@ -84,7 +84,6 @@ export class StateService {
     this._ordersService.getAmountOfOrders();
     this._categoriesService.getAllCategories();
 
-
     this._usersService.followCurrentUser().subscribe((newUser)=>{
 
       console.log("NEWUSER IN STATE", newUser);

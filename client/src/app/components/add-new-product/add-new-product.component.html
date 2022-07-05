@@ -15,7 +15,7 @@
     >
       <option value="">Select your Category</option>
       <option
-        *ngFor="let category of _categories.categoriesArray"
+        *ngFor="let category of _categories.categoriesArray.slice(1)"
         value="{{ category.id }}"
       >
         {{ category.name }}

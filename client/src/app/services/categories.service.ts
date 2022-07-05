@@ -35,5 +35,4 @@ export class CategoriesService {
     return this.categoriesSubject.asObservable();
   }
 
-
 }

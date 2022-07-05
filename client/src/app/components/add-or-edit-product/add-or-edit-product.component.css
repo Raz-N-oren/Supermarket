@@ -1,0 +1,38 @@
+.add-or-edit-container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.input{
+  text-align: left;
+}
+
+form{
+  width: 100%;
+}
+
+.title{
+  text-align: center;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.p-float-label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.submit-button{
+  border-top: 2px solid #e0e0e0;
+  padding-top: 15px;
+  justify-content: space-around;
+  display: flex;
+}
+
+.form-error{
+  text-align: left;
+  padding-left: 28px;
+}
+
+

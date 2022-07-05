@@ -37,4 +37,8 @@ export class ProductCardComponent implements OnInit {
     this.productToAdd = productToAdd;
   }
 
+  onEditProductClicked=(productToEdit: IProduct)=>{
+    this._products.setCurrentProduct(productToEdit);
+  }
+
 }

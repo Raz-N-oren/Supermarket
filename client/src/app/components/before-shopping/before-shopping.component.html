@@ -1,27 +1,36 @@
 <div>
-<form>
-  <!-- <p-button
+  <form>
+    <!-- <p-button
     (click)="handleStoreButton()"
     [label]="storeButtonLabel"
     *ngIf="_usersService.currentUser"
   ></p-button> -->
 
-  <h3
-    *ngIf="
-      !_ordersService.lastPurchaseDate &&
-      _cartItemsService.cartItemsArray &&
-      !_cartItemsService.cartItemsArray.length &&
-      !cart"
-  >
-    Welcome to your first purchase
-  </h3>
-  <h3
-    *ngIf="currentUser?.role == 'user' && cart"
-  >
-   Welcome Back!
-  </h3>
+    <h3
+      *ngIf="
+        !_ordersService.lastPurchaseDate &&
+        _cartItemsService.cartItemsArray &&
+        !_cartItemsService.cartItemsArray.length &&
+        !cart
+        && currentUser.role == 'user'"
+      
+    >
+      Welcome to your first purchase
+    </h3>
+    <h3 *ngIf="currentUser?.role == 'user' && cart">Welcome Back!</h3>
 
-  <p-button (click)="onResumeShoppingClicked()" *ngIf="cart">Resume Shopping</p-button>
-  <p-button (click)="onStartShoppingClicked()" *ngIf="!cart">Start Shopping</p-button>
-</form>
-
+    <p-button
+      (click)="onResumeShoppingClicked()"
+      *ngIf="cart && currentUser.role == 'user'"
+      >Resume Shopping</p-button
+    >
+    <p-button
+      (click)="onStartShoppingClicked()"
+      *ngIf="!cart && currentUser.role == 'user'"
+      >Start Shopping</p-button
+    >
+    <p-button (click)="onGoToStoreClicked()" *ngIf="currentUser.role == 'admin'"
+      >Go To Store</p-button
+    >
+  </form>
+</div>
