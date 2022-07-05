@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import ICategories from 'src/app/models/ICategories.model';
 import IProduct from 'src/app/models/IProduct.model';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -15,6 +16,8 @@ export class AddOrEditProductComponent implements OnInit {
   isEdit: boolean;
   categoriesArray: ICategories[];
   productForm: UntypedFormGroup;
+  subscription: Subscription;
+
 
   constructor(
     private _productsService: ProductsService,
@@ -35,7 +38,7 @@ export class AddOrEditProductComponent implements OnInit {
       price: [null, [Validators.required, Validators.max(10000), Validators.min(0)]],
       imgUrl: [null, [Validators.required, Validators.maxLength(350)]],
     })
-    this._productsService.followCurrentProduct().subscribe(newProduct => {
+    this.subscription = this._productsService.followCurrentProduct().subscribe(newProduct => {
       this.productForm.reset();
       this.currentProduct = newProduct;
       this.isEdit = true;
@@ -48,6 +51,10 @@ export class AddOrEditProductComponent implements OnInit {
       })
     }
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onSubmitClicked = () => {
