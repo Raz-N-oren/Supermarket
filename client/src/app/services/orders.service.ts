@@ -1,6 +1,7 @@
 import { IOrder } from './../models/IOrder.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class OrdersService {
 
   public baseUrl: string = 'http://localhost:3001/orders/';
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient,
+    private _messageService: MessageService
+    ) { }
 
   public getLastPurchaseDate(): void {
     this._http.get<any>(this.baseUrl + 'last_purchase')
@@ -23,7 +27,8 @@ export class OrdersService {
       }},
         err => {
           console.log(err);
-          alert("Cannot get last purchase. ")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get last purchase.' });
+
         });
   };
 
@@ -34,7 +39,7 @@ export class OrdersService {
       });
 
     }, (e) => {
-      alert("Cannot get busy days. ")
+      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get busy days.' });
       console.log(e);
 
     })
@@ -45,7 +50,8 @@ export class OrdersService {
     { this.amountOfOrders = amountOfOrdersResponse },
       err => {
         console.log(err);
-        alert("Cannot get amount of orders")
+        this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get amount of orders' });
+
       })
   }
 
@@ -55,7 +61,7 @@ export class OrdersService {
       },
         err => {
           console.log(err);
-          alert("Cannot Add New order")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to add new order.' });
         }
       )
   }

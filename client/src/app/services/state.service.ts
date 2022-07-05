@@ -87,8 +87,6 @@ export class StateService {
     this._categoriesService.getAllCategories();
 
     this._usersService.followCurrentUser().subscribe((newUser)=>{
-
-      console.log("NEWUSER IN STATE", newUser);
       if(newUser){
         this._cartsService.getLastCart();
         this._ordersService.getLastPurchaseDate();
@@ -98,6 +96,7 @@ export class StateService {
         this._ordersService.lastPurchaseDate = null;
       }
     })
+    
     let userData: string = sessionStorage.getItem("userData");
 
     if(userData){
@@ -106,8 +105,6 @@ export class StateService {
     }
 
     this._cartsService.followCurrentCart().subscribe((newCart)=>{
-      console.log("NEWCART IN STATE",newCart);
-
       if(newCart){
         this._cartItemsService.getCartItemsByCartId(newCart.id)
       }

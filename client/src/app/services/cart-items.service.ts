@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import ICartItems from '../models/ICartItems.model';
 import { IServerCartItem } from '../models/IServerCartItem.model';
 
@@ -12,7 +13,10 @@ export class CartItemsService {
   public cartItemsTotalPrice: number;
   public baseUrl: string = 'http://localhost:3001/cart-items/';
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient,
+    private _messageService: MessageService
+    ) { }
 
   public getCartItemsByCartId(cartId: number): void {
     this._http.get<ICartItems[]>(this.baseUrl + cartId)
@@ -22,22 +26,23 @@ export class CartItemsService {
         for (let cartItem of cartItems) {
           this.cartItemsTotalPrice += cartItem.productPrice* cartItem.quantity;
         }
-
       },
         err => {
           console.log(err);
-          alert("Cannot get cart items. ")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get cart items.' });
         });
   };
 
   public addCartItem(cartItem: IServerCartItem): void {
     this._http.post<ICartItems>(this.baseUrl, cartItem)
       .subscribe((cartItemResponse) => {
-        this.getCartItemsByCartId(cartItem.cartId)
+        this.getCartItemsByCartId(cartItem.cartId);
+        this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: 'The Product has been added to cart.' });
       },
         err => {
           console.log(err);
-          alert("Cannot Add Cart item")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to add product to cart.' });
+
         }
       )
   }
@@ -45,8 +50,10 @@ export class CartItemsService {
   public updateCartItemQuantity = (cartItem) => {
     this._http.put(this.baseUrl, cartItem).subscribe((cartItemsResponse) => {
       this.getCartItemsByCartId(cartItem.cartId);
+      this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: "The Product's quantity has been updated." });
     }, (e) => {
-      alert("Cannot update cart item.");
+      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot update cart item quantity.' });
+
       console.log(e);
     })
   }
@@ -54,11 +61,12 @@ export class CartItemsService {
   public removeFromCart(cartItemId, cartId): void {
     this._http.delete(this.baseUrl + cartItemId)
       .subscribe((cartItem) => {
-        this.getCartItemsByCartId(cartId)
+        this.getCartItemsByCartId(cartId);
+        this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: "The Product has been deleted." });
       },
         err => {
           console.log(err);
-          alert("Cannot Delete cart item.");
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot Delete product from cart.' });
         })
   }
 
@@ -66,10 +74,12 @@ export class CartItemsService {
     this._http.delete<ICartItems>(this.baseUrl + `remove_all/` + cartId)
       .subscribe((cartItem) => {
         this.getCartItemsByCartId(cartId);
+        this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: "Your cart has been cleared." });
       },
         err => {
           console.log(err);
-          alert("Cannot Delete all cart items.");
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Your Cart Cannot be cleared.' });
+
         })
   }
 }

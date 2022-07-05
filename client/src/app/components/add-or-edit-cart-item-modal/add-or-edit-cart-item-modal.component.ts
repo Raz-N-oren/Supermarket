@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import ICartItems from 'src/app/models/ICartItems.model';
 import ICart from 'src/app/models/ICarts.model';
 import IProduct from 'src/app/models/IProduct.model';
@@ -26,7 +27,8 @@ export class AddOrEditCartItemModalComponent implements OnInit {
 
   constructor(
     public _cartItemsService: CartItemsService,
-    public _CartsService: CartsService
+    public _CartsService: CartsService,
+    private _messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +74,8 @@ export class AddOrEditCartItemModalComponent implements OnInit {
     }
     else{
       if(this.serverCartItem.quantity == 0){
-        alert("No amount was chosen");
+        this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'No amount was chosen.' });
+
       }
       else{
         this._cartItemsService.addCartItem(this.serverCartItem);

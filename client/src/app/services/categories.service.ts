@@ -2,6 +2,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import ICategories from '../models/ICategories.model';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class CategoriesService {
   selectedCategory: number = 0;
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private _messageService: MessageService
   ) {  }
 
   getAllCategories(): void {
@@ -27,7 +29,8 @@ export class CategoriesService {
       },
         err => {
           console.log(err);
-          alert("Cannot get categories")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get categories' });
+
         })
   }
 

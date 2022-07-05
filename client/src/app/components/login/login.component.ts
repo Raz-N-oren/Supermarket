@@ -70,7 +70,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/landing-page/before-shopping']);
       },
       error => {
-        alert("Password is incorrect or user name doesn't exists");
+        this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Invalid user data', detail: "Password is incorrect or user name doesn't exists" });
+
         console.log("Login Error", error);
 
         this.isLoginFail = true;

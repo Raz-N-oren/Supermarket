@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import ICart from '../models/ICarts.model';
 
@@ -12,7 +13,10 @@ export class CartsService {
   public baseUrl: string = 'http://localhost:3001/carts/';
   private currentCartSubject = new BehaviorSubject<ICart>(null);
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient,
+    private _messageService: MessageService
+    ) { }
 
   public getLastCart = async (): Promise<void> => {
     this._http.get<ICart>(this.baseUrl)
@@ -28,7 +32,7 @@ export class CartsService {
       },
         err => {
           console.log(err);
-          alert("Cannot get carts. ")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get cart' });
         });
   };
 
@@ -44,7 +48,8 @@ export class CartsService {
       },
         err => {
           console.log(err);
-          alert("Cannot Open New Cart")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot Open New Cart' });
+
         }
       )
   }

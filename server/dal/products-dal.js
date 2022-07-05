@@ -15,7 +15,7 @@ async function getProductsByCategory(categoryId) {
     FROM products p join categories c 
     on p.category_id = c.id 
     where c.id = ? ORDER BY p.name ASC`;
-    parameters = [categoryId]
+    let parameters = [categoryId]
 
     let products = await connection.executeWithParameters(sql, parameters);
 

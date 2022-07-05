@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import IProduct from '../models/IProduct.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { MessageService } from 'primeng/api';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,10 @@ export class ProductsService {
   amountOfProducts: number;
 
 
-  constructor(private _http: HttpClient) { }
+  constructor(
+    private _http: HttpClient,
+    private _messageService: MessageService
+    ) { }
 
   public getAllProducts(): void {
     this._http.get<IProduct[]>(this.baseUrl)
@@ -27,7 +32,7 @@ export class ProductsService {
       },
         err => {
           console.log(err);
-          alert("Cannot get products")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to get products.' });
         })
   }
 
@@ -36,19 +41,21 @@ export class ProductsService {
       .subscribe((products) => { this.productsArray = products },
         err => {
           console.log(err);
-          alert("Cannot get products. ")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to get products.' });
         });
   };
 
   public addNewProduct(product: object): void {
     this._http.post<IProduct>(this.baseUrl, product)
       .subscribe((product) => {
-        console.log("Product has been added. ", product);
+        this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: 'The Product has been added.' });
+
         this.getAllProducts();
       },
         err => {
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'New product upload has been failed.' });
           console.log(err);
-          alert("Cannot Add New product")
+
         }
       )
   }
@@ -56,12 +63,12 @@ export class ProductsService {
   public deleteProduct(id: string): void {
     this._http.delete<IProduct>(this.baseUrl + id)
       .subscribe((product) => {
-        console.log(product);
+        this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: 'The Product has been deleted.' });
         this.getAllProducts();
       },
         err => {
           console.log(err);
-          alert("Cannot Delete product.");
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to delete product.' });
         })
   }
 
@@ -75,17 +82,18 @@ export class ProductsService {
       },
         err => {
           console.log(err);
-          alert("Cannot get products. ")
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to get products.' });
         });
   };
 
   editProduct = (productToEdit: object) => {
     this._http.put(this.baseUrl, productToEdit).subscribe((product) => {
+      this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: 'The Product has been edited.' });
       this.getAllProducts();
     },
       (e) => {
         console.log(e);
-        alert("Cannot edit product.");
+        this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to edit product.' });
       }
     )
   }

@@ -66,7 +66,7 @@ export class UsersService {
       isExist = response;
     }).catch(error => {
       console.log(error);
-      alert('User already registered.');
+      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'User already registered.' });
     }
     )
     return isExist;
