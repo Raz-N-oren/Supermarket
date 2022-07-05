@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private _usersService: UsersService,
     private router: Router,
     private formBuilder: UntypedFormBuilder,
-    private _cartService: CartsService
+    private _cartService: CartsService,
+    private _messageService: MessageService
   ) { }
 
   ngOnInit(): void {

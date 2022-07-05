@@ -13,7 +13,7 @@
       <br />
       <img
         class="img"
-        [src]="cartItemInModal?.productImage"
+        [src]="'/assets/images/' + cartItemInModal?.productImage"
         [alt]="cartItemInModal?.productName"
       />
     </div>
@@ -44,7 +44,10 @@
   <p class="amount-error" *ngIf="amountToAdd < 0 || amountToAdd > 20">
     Error: the amount of product must be between 1-20
   </p>
-  <div *ngIf="amountToAdd != 0" class="total-price">Total price: {{cartItemInModal?.productPrice * amountToAdd | currency:"ILS":"symbol"}} </div>
+  <div *ngIf="amountToAdd != 0" class="total-price">
+    Total price:
+    {{ cartItemInModal?.productPrice * amountToAdd | currency: "ILS":"symbol" }}
+  </div>
   <ng-template pTemplate="footer">
     <p-button
       (click)="onAddToCartClicked()"

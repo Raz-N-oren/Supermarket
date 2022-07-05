@@ -1,3 +1,4 @@
+import { StateService } from 'src/app/services/state.service';
 import { Component, OnInit } from '@angular/core';
 import IUser from 'src/app/models/IUser.model';
 import { CategoriesService } from 'src/app/services/categories.service';
@@ -14,7 +15,8 @@ export class StoreComponent implements OnInit {
   currentUser: IUser;
 
   constructor(
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _stateService: StateService
   ) {
     this._usersService.followCurrentUser().subscribe((currentUser) => {
       this.currentUser = currentUser;
@@ -22,7 +24,12 @@ export class StoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._stateService.isStore = true;
 
+  }
+
+  ngOnDestroy(): void {
+    this._stateService.isStore = false;
   }
 
 }

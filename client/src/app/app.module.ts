@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -107,7 +108,7 @@ import { AddOrEditProductComponent } from './components/add-or-edit-product/add-
     MessagesModule,
     ToastModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }, CategoriesService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }, CategoriesService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

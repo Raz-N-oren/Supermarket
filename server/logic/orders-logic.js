@@ -28,7 +28,7 @@ async function getBusyDays() {
     let busyDays = await ordersDal.getBusyDays();
     let busyDaysArray = [];
     for (let day of busyDays) {
-        busyDaysArray.push(day.busyDay)
+        busyDaysArray.push(day.busyDays)
     }
     return busyDaysArray;
 }

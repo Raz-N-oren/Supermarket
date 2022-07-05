@@ -13,6 +13,8 @@ import { UsersService } from './users.service';
 })
 export class StateService {
 
+  isStore: boolean;
+
   cart:ICart;
   cities: string[] =[
     'Akko',

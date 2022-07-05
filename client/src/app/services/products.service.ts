@@ -12,14 +12,19 @@ export class ProductsService {
   public productsArray: IProduct[] = [];
   public baseUrl: string = 'http://localhost:3001/products/';
   private currentProductSubject = new BehaviorSubject<IProduct>(null);
+
   productToEdit: IProduct;
+  amountOfProducts: number;
 
 
   constructor(private _http: HttpClient) { }
 
   public getAllProducts(): void {
     this._http.get<IProduct[]>(this.baseUrl)
-      .subscribe((products) => { this.productsArray = products },
+      .subscribe((products) => {
+        this.productsArray = products,
+          this.amountOfProducts = products.length
+      },
         err => {
           console.log(err);
           alert("Cannot get products")

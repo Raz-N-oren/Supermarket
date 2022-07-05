@@ -40,7 +40,7 @@
       <button class="log-out-button" (click)="onLogOutClicked()">
         Log out
       </button>
-      <input
+      <input *ngIf="_stateService.isStore"
         [(ngModel)]="searchedInput"
         (ngModelChange)="onSearchInputChanged($event)"
         name="searchedInput"
@@ -49,7 +49,7 @@
         placeholder="Search"
         aria-label="Search"
       />
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" *ngIf="_stateService.isStore">
         Search
       </button>
     </form>

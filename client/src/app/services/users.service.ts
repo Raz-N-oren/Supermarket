@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import INewRegisteredUser from '../models/INewRegisteredUser.model';
 import IUser from '../models/IUser.model';
@@ -26,7 +28,13 @@ export class UsersService {
   }
 
 
-  constructor(private _http: HttpClient) {
+  constructor(
+    private _http: HttpClient,
+    private _messageService: MessageService,
+    private router: Router
+
+
+    ) {
     let userJson = sessionStorage.getItem("userData");
     if (userJson) {
       this.currentUser = JSON.parse(userJson);
@@ -40,11 +48,12 @@ export class UsersService {
   addNewUser(user: object): void {
     this._http.post<INewRegisteredUser>(this.baseUrl, user)
       .subscribe((user) => {
-        console.log("User has been added. ", user);
+        this._messageService.add({ key: 'appToast', severity: 'success', summary: 'Registration Success', detail: 'Your Registration has been successfully completed.' });
+        this.router.navigate(['/landing-page/before-shopping']);
       },
-        err => {
-          console.log(err);
-          alert("Cannot Add New user")
+      err => {
+        console.log(err);
+        this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Registration has failed.' });
         }
       )
   }

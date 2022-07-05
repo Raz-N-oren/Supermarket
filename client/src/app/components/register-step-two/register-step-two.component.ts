@@ -18,7 +18,6 @@ export class RegisterStepTwoComponent implements OnInit {
   };
 
   userRegisterForm: UntypedFormGroup;
-  displayModal: boolean = false;
 
   constructor(
     private _usersService: UsersService,
@@ -45,7 +44,6 @@ export class RegisterStepTwoComponent implements OnInit {
     this._usersService.userRegisterData.lastName = this.registerUserData.lastName;
 
     this._usersService.addNewUser(this._usersService.userRegisterData);
-    this.displayModal = true;
   }
 
   goBackToStepOne(): void {

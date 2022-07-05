@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { StateService } from './services/state.service';
 
 @Component({
@@ -11,7 +11,8 @@ export class AppComponent implements OnInit{
 
   constructor(
     private primeNgConfig: PrimeNGConfig,
-    private _stateService: StateService
+    private _stateService: StateService,
+    private _messageService: MessageService
     ) {}
 
   ngOnInit(): void {
