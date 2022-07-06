@@ -15,7 +15,6 @@ import { ProductsContainerComponent } from './components/products-container/prod
 import { AuthenticationInterceptor } from './interceptors/AuthenticationInterceptor';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AddNewProductComponent } from './components/add-new-product/add-new-product.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -63,7 +62,6 @@ import { AddOrEditProductComponent } from './components/add-or-edit-product/add-
     ProductsContainerComponent,
     LoginComponent,
     RegisterComponent,
-    AddNewProductComponent,
     LandingPageComponent,
     RegisterStepOneComponent,
     RegisterStepTwoComponent,

@@ -14,21 +14,20 @@ export class ProductsService {
   public productsArray: IProduct[] = [];
   public baseUrl: string = 'http://localhost:3001/products/';
   private currentProductSubject = new BehaviorSubject<IProduct>(null);
-
-  productToEdit: IProduct;
   amountOfProducts: number;
-
 
   constructor(
     private _http: HttpClient,
-    private _messageService: MessageService
-    ) { }
+    private _messageService: MessageService,
+    private _categoriesService: CategoriesService
+  ) { }
 
   public getAllProducts(): void {
     this._http.get<IProduct[]>(this.baseUrl)
       .subscribe((products) => {
         this.productsArray = products,
-          this.amountOfProducts = products.length
+          this.amountOfProducts = products.length,
+          this._categoriesService.selectedCategory = 0;
       },
         err => {
           console.log(err);
@@ -103,7 +102,6 @@ export class ProductsService {
   }
 
   setCurrentProduct = (newProduct: IProduct) => {
-    this.productToEdit = newProduct;
     this.currentProductSubject.next(newProduct);
   }
 

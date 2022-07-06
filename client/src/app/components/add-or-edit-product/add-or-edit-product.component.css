@@ -28,11 +28,13 @@ form{
   padding-top: 15px;
   justify-content: space-around;
   display: flex;
+  padding-bottom: 8px;
 }
 
 .form-error{
   text-align: left;
   padding-left: 28px;
+  padding-bottom: 8px;
 }
 
 

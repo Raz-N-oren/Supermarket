@@ -20,7 +20,7 @@ app-cart{
   margin-left: 20px;
   text-align: left;
   display: inline-flex;
-  min-width: 69%;
+  width: 100%;
   height: 85vh;
   overflow: auto;
   padding: 20px;

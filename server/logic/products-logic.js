@@ -42,7 +42,7 @@ const validateProduct = (product) => {
     throw new Error("Please enter a product's name.");
   }
 
-  if (product.name.length > 15) {
+  if (product.name.length > 18) {
     throw new Error("Name is limited to 15 characters.");
   }
 

@@ -6,7 +6,6 @@ import { Page404Component } from './components/page404/page404.component';
 import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AddNewProductComponent } from './components/add-new-product/add-new-product.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { RegisterStepOneComponent } from './components/register-step-one/register-step-one.component';
 import { RegisterStepTwoComponent } from './components/register-step-two/register-step-two.component';
@@ -29,7 +28,6 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "add-new-product", canActivate: [LoginGuard], component: AddNewProductComponent },
   { path: "store", canActivate: [LoginGuard], component: StoreComponent },
   { path: "order", canActivate: [LoginGuard], component: OrderComponent },
   { path: "", redirectTo: "/landing-page/login", pathMatch: "full" },

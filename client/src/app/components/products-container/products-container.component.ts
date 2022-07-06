@@ -30,9 +30,9 @@ export class ProductsContainerComponent implements OnInit {
   }
 
   onSelectedCategoryClicked = (event: any) => {
-    let selectedCategoryValue = event.originalEvent.target.innerText;
+    let selectedCategoryName = event.originalEvent.target.innerText;
     let selectedCategory = this.categoriesArray.find((category)=> {
-      return category.name == selectedCategoryValue
+      return category.name == selectedCategoryName
     })
     if(selectedCategory.name =="All"){
       this._products.getAllProducts();
