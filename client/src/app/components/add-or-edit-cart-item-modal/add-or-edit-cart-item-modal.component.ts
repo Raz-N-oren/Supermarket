@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import ICartItems from 'src/app/models/ICartItems.model';
 import ICart from 'src/app/models/ICarts.model';
 import IProduct from 'src/app/models/IProduct.model';
@@ -18,6 +19,8 @@ export class AddOrEditCartItemModalComponent implements OnInit {
   private currentCart: ICart;
   private isEdit: boolean = false;
   private serverCartItem: IServerCartItem;
+  subscription: Subscription;
+
 
   @Input() isModalOpen: boolean = false;
   @Output() isModalOpenChange = new EventEmitter()
@@ -32,7 +35,7 @@ export class AddOrEditCartItemModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._CartsService.followCurrentCart().subscribe(newCart=>{
+    this.subscription = this._CartsService.followCurrentCart().subscribe(newCart=>{
       this.currentCart = newCart
     })
 
@@ -50,6 +53,9 @@ export class AddOrEditCartItemModalComponent implements OnInit {
         this.isEdit = true;
       }
     }
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onHideModalClicked(){

@@ -7,6 +7,7 @@ import { CartsService } from 'src/app/services/carts.service';
 import ICart from 'src/app/models/ICarts.model';
 import IUser from 'src/app/models/IUser.model';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-before-shopping',
@@ -19,6 +20,7 @@ export class BeforeShoppingComponent implements OnInit {
   currentUser: IUser;
   isLogin: boolean = true;
 
+  subscriptionArray: Subscription[] = [];
 
   constructor(
     public _usersService: UsersService,
@@ -30,27 +32,33 @@ export class BeforeShoppingComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
-    this._usersService.followCurrentUser().subscribe((newUser) => {
+    let userSubscription = this._usersService.followCurrentUser().subscribe((newUser) => {
       this.currentUser = newUser;
     })
 
-    this._cartsService.followCurrentCart().subscribe((newCart) => {
+    let cartSubscription = this._cartsService.followCurrentCart().subscribe((newCart) => {
       this.cart = newCart;
     })
+
+    this.subscriptionArray.push(userSubscription, cartSubscription)
   }
 
-  onResumeShoppingClicked =() =>{
+  ngOnDestroy() {
+    this.subscriptionArray.forEach((sub) => {
+      sub.unsubscribe();
+    });
+  }
+
+  onResumeShoppingClicked = () => {
     this.router.navigate(['/store']);
   }
 
-  onStartShoppingClicked =() =>{
+  onStartShoppingClicked = () => {
     this._cartsService.openCart();
     this.router.navigate(['/store']);
   }
 
-  onGoToStoreClicked =()=>{
+  onGoToStoreClicked = () => {
     this.router.navigate(['/store']);
   }
 

@@ -12,11 +12,7 @@ import { UsersService } from '../services/users.service';
 export class LoginGuard implements CanActivate {
   private role: string ='guest';
 
-  public constructor(
-    private router: Router,
-    ) {
-
-  }
+  public constructor( private router: Router) { }
 
   canActivate(): boolean{
     let helper = new JwtHelperService();

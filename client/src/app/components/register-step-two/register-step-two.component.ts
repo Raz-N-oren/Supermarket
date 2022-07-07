@@ -13,7 +13,8 @@ export class RegisterStepTwoComponent implements OnInit {
 
   registerUserData: any = {
     firstName: "",
-    lastName: "", city: "",
+    lastName: "",
+    city: "",
     street: ""
   };
 
@@ -27,6 +28,7 @@ export class RegisterStepTwoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getRegisterDataFromSessionStorage();
     this.userRegisterForm = this.formBuilder.group({
       city: [this.registerUserData.city, [Validators.required]],
       street: [this.registerUserData.street, [Validators.required, Validators.maxLength(40)]],
@@ -48,6 +50,13 @@ export class RegisterStepTwoComponent implements OnInit {
 
   goBackToStepOne(): void {
     this.router.navigate(['/landing-page/register/step-one']);
+  }
+
+  getRegisterDataFromSessionStorage = () => {
+    let lastSavedRegister = sessionStorage.getItem("register");
+    if (lastSavedRegister) {
+      this._usersService.userRegisterData = JSON.parse(lastSavedRegister);
+    }
   }
 
 }

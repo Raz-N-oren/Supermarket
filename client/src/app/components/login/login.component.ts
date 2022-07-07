@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import IUser from 'src/app/models/IUser.model';
 import UserLoginData from 'src/app/models/UserLoginData.model';
 import { CartsService } from 'src/app/services/carts.service';
@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   isLoginFail: boolean = false;
   userLoginForm: UntypedFormGroup;
   currentUser: IUser;
+  subscription: Subscription;
+
 
 
   constructor(
@@ -39,10 +41,14 @@ export class LoginComponent implements OnInit {
     combineLatest(this.userLoginForm.get('userEmail').valueChanges, this.userLoginForm.get('password').valueChanges)
       .subscribe(p => this.isLoginFail = false);
 
-    this._usersService.followCurrentUser().subscribe((newUser) => {
+      this.subscription = this._usersService.followCurrentUser().subscribe((newUser) => {
       this.currentUser = newUser;
     })
 
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onLoginClicked = () => {

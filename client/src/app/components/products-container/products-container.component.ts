@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import ICategories from 'src/app/models/ICategories.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
@@ -15,6 +16,7 @@ export class ProductsContainerComponent implements OnInit {
 
   @Input() hide!: boolean;
   categoriesArray: ICategories[];
+  subscription: Subscription;
 
 
   constructor(
@@ -24,9 +26,13 @@ export class ProductsContainerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._categoriesService.followCategoriesArray().subscribe((categoriesArray) => {
+    this.subscription =  this._categoriesService.followCategoriesArray().subscribe((categoriesArray) => {
       this.categoriesArray = categoriesArray;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onSelectedCategoryClicked = (event: any) => {

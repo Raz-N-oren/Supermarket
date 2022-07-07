@@ -10,9 +10,7 @@ export class RegisterComponent implements OnInit {
 
   items: MenuItem[];
 
-  constructor(
-
-  ) { }
+  constructor( ) { }
 
   ngOnInit(): void {
 

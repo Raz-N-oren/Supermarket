@@ -5,6 +5,7 @@ import IUser from 'src/app/models/IUser.model';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { UsersService } from 'src/app/services/users.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,10 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
   currentUser: IUser;
   searchedInput: string;
+  subscription: Subscription;
 
   constructor(
     private router: Router,
@@ -23,12 +26,16 @@ export class HeaderComponent implements OnInit {
     private _stateService: StateService
 
   ) {
-    this._usersService.followCurrentUser().subscribe((currentUser) => {
+  }
+
+  ngOnInit(): void {
+    this.subscription = this._usersService.followCurrentUser().subscribe((currentUser) => {
       this.currentUser = currentUser;
     })
   }
 
-  ngOnInit(): void {
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onLogOutClicked(): void {
@@ -37,7 +44,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/landing-page/login']);
   }
 
-  onSearchInputChanged = (searchedInput: string) =>{
+  onSearchInputChanged = (searchedInput: string) => {
     this._productsService.getProductsBySearchString(searchedInput);
     this._categoriesService.selectedCategory = 0;
   }

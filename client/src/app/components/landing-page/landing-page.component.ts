@@ -6,6 +6,7 @@ import { CartsService } from 'src/app/services/carts.service';
 import IUser from 'src/app/models/IUser.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import ICart from 'src/app/models/ICarts.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-landing-page',
@@ -17,27 +18,34 @@ export class LandingPageComponent implements OnInit {
     currentUser: IUser;
     cart: ICart;
 
+    subscriptionArray: Subscription[] = [];
+
+
   constructor(
     public _products: ProductsService,
     public _orders: OrdersService,
     public _users: UsersService,
     public _carts: CartsService,
     public _cartItems: CartItemsService
-    ) {
-      this._users.followCurrentUser().subscribe((currentUser)=>{
-        this.currentUser = currentUser;
-      })
+    ) { }
 
-      this._carts.followCurrentCart().subscribe((newCart) => {
-        this.cart = newCart;
-      })
-    }
+    ngOnInit(): void {
+    let userSubscription = this._users.followCurrentUser().subscribe((currentUser)=>{
+      this.currentUser = currentUser;
+    })
 
-  ngOnInit(): void {
+    let cartSubscription = this._carts.followCurrentCart().subscribe((newCart) => {
+      this.cart = newCart;
+    })
+
+    this.subscriptionArray.push(userSubscription, cartSubscription)  }
+
+  ngOnDestroy() {
+    this.subscriptionArray.forEach((sub) => {
+      sub.unsubscribe();
+    });
   }
 
-    handleStoreButton = () => {
 
-    }
 
 }
