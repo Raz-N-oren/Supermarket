@@ -1,4 +1,4 @@
-export interface IServerCartItem{
+export interface IServerCartItem {
   id?: number;
   cartId: number;
   quantity: number;

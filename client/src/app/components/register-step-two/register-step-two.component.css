@@ -1,13 +1,13 @@
-.errors-div{
+.errors-div {
   color: red;
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-content: space-between;
 }
 
-.container{
+.container {
   display: flex;
   justify-content: center;
 }

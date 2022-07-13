@@ -16,7 +16,7 @@ export class CartsService {
   constructor(
     private _http: HttpClient,
     private _messageService: MessageService
-    ) { }
+  ) { }
 
   public getLastCart = async (): Promise<void> => {
     this._http.get<ICart>(this.baseUrl)
@@ -65,6 +65,4 @@ export class CartsService {
   getCart = (): ICart => {
     return this.currentCartSubject.value;
   }
-
-
 }

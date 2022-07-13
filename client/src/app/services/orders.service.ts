@@ -12,19 +12,20 @@ export class OrdersService {
   amountOfOrders: number;
   lastPurchaseDate: Date;
 
-  public baseUrl: string = 'http://localhost:3001/orders/';
+  baseUrl: string = 'http://localhost:3001/orders/';
 
   constructor(
     private _http: HttpClient,
     private _messageService: MessageService
-    ) { }
+  ) { }
 
   public getLastPurchaseDate(): void {
     this._http.get<any>(this.baseUrl + 'last_purchase')
       .subscribe((orderResponse) => {
-        if(orderResponse.orderDate !== null){
-        this.lastPurchaseDate = new Date(orderResponse.orderDate);
-      }},
+        if (orderResponse.orderDate !== null) {
+          this.lastPurchaseDate = new Date(orderResponse.orderDate);
+        }
+      },
         err => {
           console.log(err);
           this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get last purchase.' });
@@ -46,8 +47,7 @@ export class OrdersService {
   }
 
   public getAmountOfOrders(): void {
-    this._http.get<number>(this.baseUrl + 'amount_of_orders').subscribe((amountOfOrdersResponse) =>
-    { this.amountOfOrders = amountOfOrdersResponse },
+    this._http.get<number>(this.baseUrl + 'amount_of_orders').subscribe((amountOfOrdersResponse) => { this.amountOfOrders = amountOfOrdersResponse },
       err => {
         console.log(err);
         this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Cannot get amount of orders' });
@@ -66,7 +66,7 @@ export class OrdersService {
       )
   }
 
-  getReceipt = (cartId) => {
+  public getReceipt = (cartId) => {
     return this._http.get(this.baseUrl + cartId, { responseType: "blob" });
   }
 

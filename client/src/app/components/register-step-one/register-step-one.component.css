@@ -1,17 +1,16 @@
-.errors-div{
+.errors-div {
   color: red;
 }
 
-.next-button{
+.next-button {
   float: right;
 }
 
-
-.container{
+.container {
   display: flex;
   justify-content: center;
 }
 
-input{
+input {
   min-width: 300px;
 }

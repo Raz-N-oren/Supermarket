@@ -3,7 +3,6 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,8 +49,6 @@ import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { AddOrEditProductComponent } from './components/add-or-edit-product/add-or-edit-product.component';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +68,6 @@ import { AddOrEditProductComponent } from './components/add-or-edit-product/add-
     AddOrEditCartItemModalComponent,
     OrderComponent,
     AddOrEditProductComponent
-
   ],
   imports: [
     BrowserModule,

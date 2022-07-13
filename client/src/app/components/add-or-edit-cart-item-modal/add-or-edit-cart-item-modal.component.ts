@@ -16,11 +16,10 @@ import { CartsService } from 'src/app/services/carts.service';
 export class AddOrEditCartItemModalComponent implements OnInit {
 
   amountToAddError: boolean = false;
-  private currentCart: ICart;
-  private isEdit: boolean = false;
-  private serverCartItem: IServerCartItem;
+  currentCart: ICart;
+  isEdit: boolean = false;
+  serverCartItem: IServerCartItem;
   subscription: Subscription;
-
 
   @Input() isModalOpen: boolean = false;
   @Output() isModalOpenChange = new EventEmitter()
@@ -29,13 +28,13 @@ export class AddOrEditCartItemModalComponent implements OnInit {
   @Input() amountToAdd = 0;
 
   constructor(
-    public _cartItemsService: CartItemsService,
-    public _CartsService: CartsService,
+    private _cartItemsService: CartItemsService,
+    private _CartsService: CartsService,
     private _messageService: MessageService
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this._CartsService.followCurrentCart().subscribe(newCart=>{
+    this.subscription = this._CartsService.followCurrentCart().subscribe(newCart => {
       this.currentCart = newCart
     })
 
@@ -58,32 +57,32 @@ export class AddOrEditCartItemModalComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  onHideModalClicked(){
+  onHideModalClicked() {
     this.isModalOpen = false;
     this.isModalOpenChange.emit(this.isModalOpen)
   }
 
-  onAddToCartClicked(){
-    this.serverCartItem ={
+  onAddToCartClicked() {
+    this.serverCartItem = {
       id: this.cartItemInModal.id,
       cartId: this.currentCart.id,
       quantity: this.amountToAdd,
       productId: this.cartItemInModal.productId
     }
-    if(this.isEdit){
-      if(this.serverCartItem.quantity == 0){
-        this._cartItemsService.removeFromCart(this.serverCartItem.id,this.currentCart.id);
+    if (this.isEdit) {
+      if (this.serverCartItem.quantity == 0) {
+        this._cartItemsService.removeFromCart(this.serverCartItem.id, this.currentCart.id);
       }
-      else{
+      else {
         this._cartItemsService.updateCartItemQuantity(this.serverCartItem);
       }
     }
-    else{
-      if(this.serverCartItem.quantity == 0){
+    else {
+      if (this.serverCartItem.quantity == 0) {
         this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'No amount was chosen.' });
 
       }
-      else{
+      else {
         this._cartItemsService.addCartItem(this.serverCartItem);
       }
     }
@@ -91,26 +90,26 @@ export class AddOrEditCartItemModalComponent implements OnInit {
 
   }
 
-  onMinusButtonClicked(){
-    if(this.amountToAdd<=0){
+  onMinusButtonClicked() {
+    if (this.amountToAdd <= 0) {
       this.amountToAdd = 0;
     }
-    else if(this.amountToAdd>10){
+    else if (this.amountToAdd > 10) {
       this.amountToAdd = 10;
     }
-    else{
+    else {
       this.amountToAdd--;
     }
   }
 
-  onPlusButtonClicked(){
-    if(this.amountToAdd<0){
+  onPlusButtonClicked() {
+    if (this.amountToAdd < 0) {
       this.amountToAdd = 0;
     }
-    else if(this.amountToAdd>=10){
+    else if (this.amountToAdd >= 10) {
       this.amountToAdd = 10;
     }
-    else{
+    else {
       this.amountToAdd++;
     }
   }

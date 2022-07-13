@@ -17,13 +17,13 @@
   margin: auto;
 }
 
-.price{
+.price {
   float: left;
   margin-left: 35px;
   margin-top: 10px;
 }
 
-.add-to-cart button{
+.add-to-cart button {
   border-radius: 30vh;
 }
 
@@ -37,9 +37,6 @@
   margin-bottom: 20px;
 }
 
-.edit-product button{
+.edit-product button {
   border-radius: 30vh;
 }
-
-
-

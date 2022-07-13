@@ -12,10 +12,9 @@ import UserLoginData from '../models/UserLoginData.model';
   providedIn: 'root'
 })
 export class UsersService {
-  public baseUrl: string = "http://localhost:3001/users/";
-  private currentUser?: IUser;
-  private currentUserSubject = new BehaviorSubject<IUser>(null);
-
+  baseUrl: string = "http://localhost:3001/users/";
+  currentUser?: IUser;
+  currentUserSubject = new BehaviorSubject<IUser>(null);
 
   userRegisterData: INewRegisteredUser = {
     userId: "",
@@ -27,13 +26,10 @@ export class UsersService {
     street: ""
   }
 
-
   constructor(
     private _http: HttpClient,
     private _messageService: MessageService,
     private router: Router
-
-
     ) {
     let userJson = sessionStorage.getItem("userData");
     if (userJson) {

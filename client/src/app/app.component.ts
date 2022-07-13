@@ -8,13 +8,13 @@ import { StateService } from './services/state.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   constructor(
     private primeNgConfig: PrimeNGConfig,
     private _stateService: StateService,
     private _messageService: MessageService,
-    ) {}
+  ) { }
 
   ngOnInit(): void {
     this.primeNgConfig.ripple = true;

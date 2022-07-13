@@ -1,13 +1,14 @@
-.store{
+.store {
   width: 100%;
   height: 88vh;
   position: relative;
   display: flex;
 }
 
-app-cart{
+app-cart {
   border-radius: 4px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
   display: inline-flex;
   flex-direction: column;
   min-width: 25%;
@@ -16,9 +17,10 @@ app-cart{
   overflow-y: auto;
 }
 
-app-products-container{
+app-products-container {
   border-radius: 4px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
   display: inline-flex;
   min-width: 69%;
   height: 85vh;
@@ -27,7 +29,8 @@ app-products-container{
 
 app-add-or-edit-product {
   border-radius: 4px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
   display: inline-flex;
   flex-direction: column;
   min-width: 25%;
@@ -40,10 +43,6 @@ app-add-or-edit-product {
   display: none;
 }
 
-.cart-button{
+.cart-button {
   min-width: 50px;
 }
-
-
-
-

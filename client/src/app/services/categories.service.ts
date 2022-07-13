@@ -9,21 +9,21 @@ import { MessageService } from 'primeng/api';
 })
 export class CategoriesService {
 
-  private categoriesArray: ICategories[] = [{id:0,name:"All"}];
-  private categoriesSubject = new BehaviorSubject(this.categoriesArray);
-  public baseUrl: string = 'http://localhost:3001/categories/';
+  categoriesArray: ICategories[] = [{ id: 0, name: "All" }];
+  categoriesSubject = new BehaviorSubject(this.categoriesArray);
+  baseUrl: string = 'http://localhost:3001/categories/';
   selectedCategory: number = 0;
 
   constructor(
     private _http: HttpClient,
     private _messageService: MessageService
-  ) {  }
+  ) { }
 
-  getAllCategories(): void {
+  public getAllCategories(): void {
     this._http.get<ICategories[]>(this.baseUrl)
       .subscribe((categories) => {
-       categories.forEach((category) => {
-        this.categoriesArray.push(category);
+        categories.forEach((category) => {
+          this.categoriesArray.push(category);
         });
         this.categoriesSubject.next(this.categoriesArray);
       },
@@ -34,7 +34,7 @@ export class CategoriesService {
         })
   }
 
-  followCategoriesArray = (): Observable<ICategories[]> =>{
+  followCategoriesArray = (): Observable<ICategories[]> => {
     return this.categoriesSubject.asObservable();
   }
 

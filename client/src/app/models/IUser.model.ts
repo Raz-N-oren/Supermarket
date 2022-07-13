@@ -1,9 +1,9 @@
-export default interface IUser{
-  token: string,
-  firstName: string,
-  lastName: string,
-  city: string,
-  street: string,
-  role: string,
-  userCart: object
+export default interface IUser {
+  token: string;
+  firstName: string;
+  lastName: string;
+  city: string;
+  street: string;
+  role: string;
+  userCart: object;
 }

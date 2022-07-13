@@ -3,13 +3,17 @@
     <router-outlet></router-outlet>
   </div>
   <div class="about card">
-    <p> We have the best prices, products and service online!</p>
-    <img src="/assets/images/Grocery.png" alt="Grocery" height="400px" width="400px">
-
+    <p>We have the best prices, products and service online!</p>
+    <img
+      src="/assets/images/Grocery.png"
+      alt="Grocery"
+      height="400px"
+      width="400px"
+    />
   </div>
-  <div  class="general-info card">
+  <div class="general-info card">
     Amount of products: <br />
-    {{ _products.amountOfProducts}}
+    {{ _products.amountOfProducts }}
     <br />
     Amount of orders: <br />
     {{ _orders.amountOfOrders }} <br />
@@ -18,9 +22,8 @@
       <h6>Your last order was at:</h6>
       <h6>{{ _orders.lastPurchaseDate | date: "fullDate" }}</h6>
     </div>
-    <div *ngIf="cart?.isOpen && _cartItems.cartItemsArray.length > 0">You have an opened cart
-      from
-      {{cart.creationDate | date: 'fullDate'}}</div>
-
+    <div *ngIf="cart?.isOpen && _cartItems.cartItemsArray.length > 0">
+      You have an opened cart from {{ cart.creationDate | date: "fullDate" }}
+    </div>
   </div>
 </div>

@@ -15,22 +15,20 @@ import { Subscription } from 'rxjs';
 })
 export class LandingPageComponent implements OnInit {
 
-    currentUser: IUser;
-    cart: ICart;
-
-    subscriptionArray: Subscription[] = [];
-
+  currentUser: IUser;
+  cart: ICart;
+  subscriptionArray: Subscription[] = [];
 
   constructor(
-    public _products: ProductsService,
-    public _orders: OrdersService,
-    public _users: UsersService,
-    public _carts: CartsService,
-    public _cartItems: CartItemsService
-    ) { }
+    private _products: ProductsService,
+    private _orders: OrdersService,
+    private _users: UsersService,
+    private _carts: CartsService,
+    private _cartItems: CartItemsService
+  ) { }
 
-    ngOnInit(): void {
-    let userSubscription = this._users.followCurrentUser().subscribe((currentUser)=>{
+  ngOnInit(): void {
+    let userSubscription = this._users.followCurrentUser().subscribe((currentUser) => {
       this.currentUser = currentUser;
     })
 
@@ -38,7 +36,8 @@ export class LandingPageComponent implements OnInit {
       this.cart = newCart;
     })
 
-    this.subscriptionArray.push(userSubscription, cartSubscription)  }
+    this.subscriptionArray.push(userSubscription, cartSubscription)
+  }
 
   ngOnDestroy() {
     this.subscriptionArray.forEach((sub) => {

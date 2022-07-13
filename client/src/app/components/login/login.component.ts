@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
   currentUser: IUser;
   subscription: Subscription;
 
-
-
   constructor(
     private _usersService: UsersService,
     private router: Router,
@@ -41,7 +39,7 @@ export class LoginComponent implements OnInit {
     combineLatest(this.userLoginForm.get('userEmail').valueChanges, this.userLoginForm.get('password').valueChanges)
       .subscribe(p => this.isLoginFail = false);
 
-      this.subscription = this._usersService.followCurrentUser().subscribe((newUser) => {
+    this.subscription = this._usersService.followCurrentUser().subscribe((newUser) => {
       this.currentUser = newUser;
     })
 
@@ -85,5 +83,4 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-
 }

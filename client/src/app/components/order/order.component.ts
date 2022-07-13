@@ -18,17 +18,15 @@ import { saveAs } from 'file-saver';
 })
 export class OrderComponent implements OnInit {
 
-
-
   constructor(
-    public formBuilder: UntypedFormBuilder,
-    public router: Router,
-    public _stateService: StateService,
-    public _orderService: OrdersService,
-    public _cartItemsService: CartItemsService,
-    public _cartService: CartsService,
-    public _usersService: UsersService,
-    public _messageService: MessageService,
+    private formBuilder: UntypedFormBuilder,
+    private router: Router,
+    private _stateService: StateService,
+    private _orderService: OrdersService,
+    private _cartItemsService: CartItemsService,
+    private _cartService: CartsService,
+    private _usersService: UsersService,
+    private _messageService: MessageService,
   ) { }
 
   ngOnInit(): void {

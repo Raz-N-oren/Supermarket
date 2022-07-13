@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import ICart from '../models/ICarts.model';
 import { CartItemsService } from './cart-items.service';
@@ -15,8 +14,8 @@ export class StateService {
 
   isStore: boolean;
 
-  cart:ICart;
-  cities: string[] =[
+  cart: ICart;
+  cities: string[] = [
     'Akko',
     'Afula',
     'Al Buţayḩah',
@@ -75,41 +74,41 @@ export class StateService {
   ]
 
   constructor(
-    public _productsService: ProductsService,
-    public _ordersService: OrdersService,
-    public _usersService: UsersService,
-    public _cartsService: CartsService,
-    public _cartItemsService: CartItemsService,
+    private _productsService: ProductsService,
+    private _ordersService: OrdersService,
+    private _usersService: UsersService,
+    private _cartsService: CartsService,
+    private _cartItemsService: CartItemsService,
     private _categoriesService: CategoriesService
   ) {
     this._productsService.getAllProducts();
     this._ordersService.getAmountOfOrders();
     this._categoriesService.getAllCategories();
 
-    this._usersService.followCurrentUser().subscribe((newUser)=>{
-      if(newUser){
+    this._usersService.followCurrentUser().subscribe((newUser) => {
+      if (newUser) {
         this._cartsService.getLastCart();
         this._ordersService.getLastPurchaseDate();
       }
-      else{
+      else {
         this._cartsService.setCurrentCart(null);
         this._ordersService.lastPurchaseDate = null;
       }
     })
-    
+
     let userData: string = sessionStorage.getItem("userData");
 
-    if(userData){
+    if (userData) {
       let currentUser = JSON.parse(userData);
       this._usersService.setCurrentUser(currentUser);
     }
 
-    this._cartsService.followCurrentCart().subscribe((newCart)=>{
-      if(newCart){
+    this._cartsService.followCurrentCart().subscribe((newCart) => {
+      if (newCart) {
         this._cartItemsService.getCartItemsByCartId(newCart.id)
       }
-      else{
-        this._cartItemsService.cartItemsArray =[];
+      else {
+        this._cartItemsService.cartItemsArray = [];
       }
     })
   }

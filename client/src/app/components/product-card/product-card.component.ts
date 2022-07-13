@@ -19,9 +19,8 @@ export class ProductCardComponent implements OnInit {
   currentUser: IUser;
   subscription: Subscription;
 
-
   constructor(
-    public _products: ProductsService,
+    private _products: ProductsService,
     private _usersService: UsersService
   ) { }
 

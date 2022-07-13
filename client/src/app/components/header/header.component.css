@@ -1,18 +1,18 @@
-.navbar{
+.navbar {
   min-height: 100%;
   background-color: #e3f2fd;
 }
 
-.log-out-button{
+.log-out-button {
   margin-right: 20px;
-   background-color: transparent;
-   outline: none;
-   border: none;
-   cursor: pointer;
-   color: #71797e;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: #71797e;
 }
 
-.welcome{
+.welcome {
   top: 2%;
-  position:relative;
+  position: relative;
 }

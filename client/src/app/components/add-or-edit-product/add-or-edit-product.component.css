@@ -1,18 +1,18 @@
-.add-or-edit-container{
+.add-or-edit-container {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.input{
+.input {
   text-align: left;
 }
 
-form{
+form {
   width: 100%;
 }
 
-.title{
+.title {
   text-align: center;
   border-bottom: 2px solid #e0e0e0;
 }
@@ -23,7 +23,7 @@ form{
   width: 90%;
 }
 
-.submit-button{
+.submit-button {
   border-top: 2px solid #e0e0e0;
   padding-top: 15px;
   justify-content: space-around;
@@ -31,10 +31,8 @@ form{
   padding-bottom: 8px;
 }
 
-.form-error{
+.form-error {
   text-align: left;
   padding-left: 28px;
   padding-bottom: 8px;
 }
-
-

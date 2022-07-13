@@ -5,9 +5,11 @@
   display: inline-block;
   text-align: center;
 }
+
 .product-amount-input {
   width: 50px;
 }
+
 .amount-input-container {
   display: flex;
   justify-content: center;
@@ -33,7 +35,7 @@
   margin-bottom: 20px;
 }
 
-.total-price{
+.total-price {
   position: relative;
   margin: 0;
   top: 50%;

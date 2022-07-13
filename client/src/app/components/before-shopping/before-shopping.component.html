@@ -1,19 +1,13 @@
 <div>
   <form>
-    <!-- <p-button
-    (click)="handleStoreButton()"
-    [label]="storeButtonLabel"
-    *ngIf="_usersService.currentUser"
-  ></p-button> -->
-
     <h3
       *ngIf="
         !_ordersService.lastPurchaseDate &&
         _cartItemsService.cartItemsArray &&
         !_cartItemsService.cartItemsArray.length &&
-        !cart
-        && currentUser.role == 'user'"
-      
+        !cart &&
+        currentUser.role == 'user'
+      "
     >
       Welcome to your first purchase
     </h3>

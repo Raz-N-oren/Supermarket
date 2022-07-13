@@ -1,7 +1,11 @@
 <div class="product-card">
   <div>
     <br />
-    <img class="img" [src]="'/assets/images/' + product?.imgUrl" [alt]="product?.name" />
+    <img
+      class="img"
+      [src]="'/assets/images/' + product?.imgUrl"
+      [alt]="product?.name"
+    />
   </div>
 
   <div class="details">
@@ -11,7 +15,7 @@
         <h5>{{ product?.price | currency: "ILS" }}</h5>
       </span>
     </div>
-    <span class="add-to-cart" *ngIf="currentUser.role =='user'">
+    <span class="add-to-cart" *ngIf="currentUser.role == 'user'">
       <button
         pButton
         pRipple
@@ -19,7 +23,7 @@
         (click)="onAddToCartClicked(product)"
       ></button>
     </span>
-    <span class="edit-product" *ngIf='currentUser.role=="admin"'>
+    <span class="edit-product" *ngIf="currentUser.role == 'admin'">
       <button
         pButton
         pRipple
@@ -29,4 +33,8 @@
     </span>
   </div>
 </div>
-<app-add-or-edit-cart-item-modal *ngIf="isModalOpen" [(isModalOpen)]="isModalOpen" [productToAdd]="productToAdd" ></app-add-or-edit-cart-item-modal>
+<app-add-or-edit-cart-item-modal
+  *ngIf="isModalOpen"
+  [(isModalOpen)]="isModalOpen"
+  [productToAdd]="productToAdd"
+></app-add-or-edit-cart-item-modal>

@@ -16,7 +16,7 @@ export class CartItemsService {
   constructor(
     private _http: HttpClient,
     private _messageService: MessageService
-    ) { }
+  ) { }
 
   public getCartItemsByCartId(cartId: number): void {
     this._http.get<ICartItems[]>(this.baseUrl + cartId)
@@ -24,7 +24,7 @@ export class CartItemsService {
         this.cartItemsArray = cartItems;
         this.cartItemsTotalPrice = null;
         for (let cartItem of cartItems) {
-          this.cartItemsTotalPrice += cartItem.productPrice* cartItem.quantity;
+          this.cartItemsTotalPrice += cartItem.productPrice * cartItem.quantity;
         }
       },
         err => {
@@ -79,7 +79,6 @@ export class CartItemsService {
         err => {
           console.log(err);
           this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Your Cart Cannot be cleared.' });
-
         })
   }
 }

@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import ICartItems from 'src/app/models/ICartItems.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
-import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,10 +17,9 @@ export class CartComponent implements OnInit {
   cartItemToEdit: ICartItems;
 
   constructor(
-    public _cartItemsService: CartItemsService,
-    public _cartsService: CartsService,
+    private _cartItemsService: CartItemsService,
+    private _cartsService: CartsService,
     private router: Router
-
   ) { }
 
   ngOnInit(): void {

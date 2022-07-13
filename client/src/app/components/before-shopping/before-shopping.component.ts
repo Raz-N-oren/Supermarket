@@ -6,7 +6,6 @@ import { UsersService } from 'src/app/services/users.service';
 import { CartsService } from 'src/app/services/carts.service';
 import ICart from 'src/app/models/ICarts.model';
 import IUser from 'src/app/models/IUser.model';
-import { CategoriesService } from 'src/app/services/categories.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -23,11 +22,11 @@ export class BeforeShoppingComponent implements OnInit {
   subscriptionArray: Subscription[] = [];
 
   constructor(
-    public _usersService: UsersService,
-    public _ordersService: OrdersService,
-    public _cartItemsService: CartItemsService,
-    public _cartsService: CartsService,
-    public router: Router
+    private _usersService: UsersService,
+    private _ordersService: OrdersService,
+    private _cartItemsService: CartItemsService,
+    private _cartsService: CartsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

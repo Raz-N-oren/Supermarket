@@ -40,7 +40,6 @@ export class RegisterStepOneComponent implements OnInit {
 
     combineLatest(this.userRegisterForm.get('userId').valueChanges, this.userRegisterForm.get('userEmail').valueChanges)
       .subscribe(p => this.userRegisterForm.get('isUserNotRegistered').setValue(true));
-
   }
 
   async submit(){
@@ -73,7 +72,4 @@ export class RegisterStepOneComponent implements OnInit {
     }
     return null
   }
-
-
-
 }

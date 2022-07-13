@@ -18,7 +18,6 @@ export class ProductsContainerComponent implements OnInit {
   categoriesArray: ICategories[];
   subscription: Subscription;
 
-
   constructor(
     private _products: ProductsService,
     private _categoriesService: CategoriesService,
@@ -26,7 +25,7 @@ export class ProductsContainerComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.subscription =  this._categoriesService.followCategoriesArray().subscribe((categoriesArray) => {
+    this.subscription = this._categoriesService.followCategoriesArray().subscribe((categoriesArray) => {
       this.categoriesArray = categoriesArray;
     });
   }
@@ -37,17 +36,15 @@ export class ProductsContainerComponent implements OnInit {
 
   onSelectedCategoryClicked = (event: any) => {
     let selectedCategoryName = event.originalEvent.target.innerText;
-    let selectedCategory = this.categoriesArray.find((category)=> {
+    let selectedCategory = this.categoriesArray.find((category) => {
       return category.name == selectedCategoryName
     })
-    if(selectedCategory.name =="All"){
+    if (selectedCategory.name == "All") {
       this._products.getAllProducts();
     }
-    else{
+    else {
       this._products.getProductsByCategory(selectedCategory.id)
     }
 
   }
-
-
 }

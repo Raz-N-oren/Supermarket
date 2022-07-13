@@ -1,12 +1,13 @@
-.order-container{
+.order-container {
   width: 100%;
   height: 85vh;
   display: flex;
 }
 
-app-cart{
+app-cart {
   border-radius: 4px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
   display: inline-flex;
   flex-direction: column;
   width: 100%;
@@ -16,7 +17,7 @@ app-cart{
   margin-left: 10px;
 }
 
-.order-form{
+.order-form {
   margin-left: 20px;
   text-align: left;
   display: inline-flex;
@@ -25,17 +26,17 @@ app-cart{
   overflow: auto;
   padding: 20px;
   border-radius: 4px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
 }
 
-form{
+form {
   width: 100%;
 }
 
-.title{
+.title {
   text-align: center;
   border-bottom: 2px solid #e0e0e0;
-
 }
 
 .p-float-label {
@@ -44,14 +45,10 @@ form{
   width: 90%;
 }
 
-label{
+label {
   padding-left: 5px;
 }
 
 .toast-button {
   padding: 0;
 }
-
-
-
-

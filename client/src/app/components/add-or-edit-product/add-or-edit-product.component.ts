@@ -21,10 +21,8 @@ export class AddOrEditProductComponent implements OnInit {
   constructor(
     private _productsService: ProductsService,
     private _categoriesService: CategoriesService,
-    public formBuilder: UntypedFormBuilder,
-
-  ) {
-  }
+    private formBuilder: UntypedFormBuilder,
+  ) { }
 
   ngOnInit(): void {
 
@@ -51,7 +49,7 @@ export class AddOrEditProductComponent implements OnInit {
         })
       }
     })
-    this.subscriptionArray.push(categoriesSubscription,productsSubscription)
+    this.subscriptionArray.push(categoriesSubscription, productsSubscription)
   }
 
   ngOnDestroy() {
@@ -82,7 +80,5 @@ export class AddOrEditProductComponent implements OnInit {
     this.currentProduct = null;
     this.isEdit = false;
     this.productForm.reset();
-
   }
-
 }

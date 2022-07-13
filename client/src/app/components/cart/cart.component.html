@@ -23,10 +23,15 @@
     <ng-template let-ICartItems pTemplate="listItem">
       <div class="col-12">
         <div class="product-list-item">
-          <img [src]="'/assets/images/' + ICartItems.productImage" [alt]="ICartItems.productName" />
+          <img
+            [src]="'/assets/images/' + ICartItems.productImage"
+            [alt]="ICartItems.productName"
+          />
           <div class="product-list-detail">
             <div class="product-name">{{ ICartItems.productName }}</div>
-            <div class="product-quantity">Amount: {{ ICartItems.quantity }}</div>
+            <div class="product-quantity">
+              Amount: {{ ICartItems.quantity }}
+            </div>
           </div>
           <div class="product-list-action">
             <span class="product-price">{{
@@ -85,7 +90,6 @@
       (click)="onBackToStoreClicked()"
     ></button>
   </span>
-
 </div>
 
 <app-add-or-edit-cart-item-modal

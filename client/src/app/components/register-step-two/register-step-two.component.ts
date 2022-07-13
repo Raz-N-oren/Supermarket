@@ -24,7 +24,7 @@ export class RegisterStepTwoComponent implements OnInit {
     private _usersService: UsersService,
     private _stateService: StateService,
     private formBuilder: UntypedFormBuilder,
-    public router: Router
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +39,6 @@ export class RegisterStepTwoComponent implements OnInit {
 
   addNewUser(): void {
     this.registerUserData = this.userRegisterForm.value;
-
     this._usersService.userRegisterData.city = this.registerUserData.city;
     this._usersService.userRegisterData.street = this.registerUserData.street;
     this._usersService.userRegisterData.firstName = this.registerUserData.firstName;

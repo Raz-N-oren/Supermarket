@@ -66,7 +66,7 @@ img {
   transform: translateY(-35%);
 }
 
-.cart-card-buttons{
+.cart-card-buttons {
   display: flex;
   flex-direction: row-reverse;
 }
@@ -79,7 +79,7 @@ img {
   width: 2rem;
 }
 
-.edit-button{
+.edit-button {
   position: relative;
   margin: 0;
   top: 50%;
@@ -97,11 +97,10 @@ img {
   width: 50%;
 }
 
-.total-amount{
+.total-amount {
   text-align: left;
   position: relative;
   margin: 0;
   top: 50%;
   transform: translateY(50%);
 }
-

@@ -1,32 +1,28 @@
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UsersService } from '../services/users.service';
-
-
+import { CanActivate, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  private role: string ='guest';
+  private role: string = 'guest';
 
-  public constructor( private router: Router) { }
+  public constructor(private router: Router) { }
 
-  canActivate(): boolean{
+  canActivate(): boolean {
     let helper = new JwtHelperService();
     let userData: string = sessionStorage.getItem("userData");
     let currentUser = JSON.parse(userData);
 
-    if(currentUser){
+    if (currentUser) {
       let decoded = helper.decodeToken(currentUser.token);
       this.role = decoded.role;
     }
-    else{
-      this.role ='guest';
+    else {
+      this.role = 'guest';
     }
-    if(this.role && this.role != 'guest' ){
+    if (this.role && this.role != 'guest') {
       return true;
     }
     this.router.navigate(['/']);

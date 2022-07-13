@@ -5,15 +5,14 @@ import IProduct from '../models/IProduct.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  public productsArray: IProduct[] = [];
-  public baseUrl: string = 'http://localhost:3001/products/';
-  private currentProductSubject = new BehaviorSubject<IProduct>(null);
+  productsArray: IProduct[] = [];
+  baseUrl: string = 'http://localhost:3001/products/';
+  currentProductSubject = new BehaviorSubject<IProduct>(null);
   amountOfProducts: number;
 
   constructor(
@@ -52,7 +51,7 @@ export class ProductsService {
         this.getAllProducts();
       },
         err => {
-          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'New product upload has been failed.' });
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'The product upload has failed.' });
           console.log(err);
 
         }
@@ -85,7 +84,7 @@ export class ProductsService {
         });
   };
 
-  editProduct = (productToEdit: object) => {
+  public editProduct = (productToEdit: object) => {
     this._http.put(this.baseUrl, productToEdit).subscribe((product) => {
       this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: 'The Product has been edited.' });
       this.getAllProducts();
