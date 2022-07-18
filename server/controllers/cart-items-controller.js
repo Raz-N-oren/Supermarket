@@ -9,7 +9,7 @@ router.post("/", async (request, response) => {
     try {
         let userInfo = tokenDecoder.decodeTokenFromRequest(request);
         let cartItemsDetails = request.body;
-        let id = await cartItemsLogic.addToCart(cartItemsDetails,userInfo);
+        let id = await cartItemsLogic.addToCart(cartItemsDetails, userInfo);
 
         response.json(id);
     }
@@ -23,7 +23,7 @@ router.get("/:id", async (request, response) => {
     try {
         let userInfo = tokenDecoder.decodeTokenFromRequest(request);
         let cartId = request.params.id;
-        let cartItems = await cartItemsLogic.getCartItemsByCartId(cartId,userInfo)
+        let cartItems = await cartItemsLogic.getCartItemsByCartId(cartId, userInfo)
 
         response.json(cartItems);
     }
@@ -37,7 +37,7 @@ router.put("/", async (request, response) => {
     try {
         let userInfo = tokenDecoder.decodeTokenFromRequest(request);
         let cartItem = request.body;
-        let id = await cartItemsLogic.updateQuantity(cartItem,userInfo);
+        let id = await cartItemsLogic.updateQuantity(cartItem, userInfo);
         response.json(id);
     }
     catch (e) {
@@ -50,7 +50,7 @@ router.delete("/:id", async (request, response) => {
     try {
         let cartItemId = request.params.id;
         let userInfo = tokenDecoder.decodeTokenFromRequest(request);
-        await cartItemsLogic.removeFromCart(cartItemId,userInfo);
+        await cartItemsLogic.removeFromCart(cartItemId, userInfo);
 
         response.json();
     }
@@ -64,7 +64,7 @@ router.delete("/remove_all/:id", async (request, response) => {
     try {
         let cartId = request.params.id;
         let userInfo = tokenDecoder.decodeTokenFromRequest(request);
-        await cartItemsLogic.removeAllCartItems(cartId,userInfo);
+        await cartItemsLogic.removeAllCartItems(cartId, userInfo);
 
         response.json();
     }

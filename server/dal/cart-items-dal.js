@@ -13,13 +13,12 @@ async function getCartItemsByCartId(cartId) {
 
 async function addToCart(cartItem) {
     let sql = "INSERT INTO cart_items (product_id,quantity,cart_id)  values(?,?, ?)";
-    let parameters = [cartItem.productId, cartItem.quantity,cartItem.cartId];
+    let parameters = [cartItem.productId, cartItem.quantity, cartItem.cartId];
 
     let cartItemData = await connection.executeWithParameters(sql, parameters);
 
     return cartItemData.insertId;
 }
-
 
 async function updateQuantity(cartItemDetails) {
     let sql = "UPDATE cart_items SET quantity = ? WHERE id = ?;"
@@ -28,13 +27,13 @@ async function updateQuantity(cartItemDetails) {
     return cartItemData;
 }
 
-async function removeFromCart(userId){
+async function removeFromCart(userId) {
     sql = 'DELETE FROM cart_items WHERE id = ?;';
     parameters = [userId];
     await connection.executeWithParameters(sql, parameters);
 }
 
-  async function removeAllCartItems(cartId) {
+async function removeAllCartItems(cartId) {
     let sql = "DELETE FROM cart_items WHERE (`cart_id` = ?)";
     let parameters = [cartId];
 
@@ -50,7 +49,6 @@ async function validateCartItemForUser(cartItemId, userId) {
     let response = await connection.executeWithParameters(sql, parameters);
     return response.length > 0;
 }
-
 
 module.exports = {
     addToCart,

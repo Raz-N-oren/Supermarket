@@ -24,7 +24,6 @@ router.post("/", async (request, response) => {
     }
 });
 
-
 router.get("/busy_days", async (request, response) => {
     try {
         let busyDays = await ordersLogic.getBusyDays();
@@ -34,7 +33,6 @@ router.get("/busy_days", async (request, response) => {
         console.error(e);
         response.status(600).send(e.message);
     }
-
 });
 
 router.get("/amount_of_orders", async (request, response) => {
@@ -46,7 +44,6 @@ router.get("/amount_of_orders", async (request, response) => {
         console.error(e);
         response.status(600).send(e.message);
     }
-
 });
 
 router.get("/last_purchase", async (request, response) => {
@@ -68,7 +65,7 @@ router.get("/:cartId", async (request, response) => {
         let userId = tokenDecoder.decodeTokenFromRequest(request).userId;
         let receipt = await ordersLogic.getReceipt(cartId, userId);
 
-        response.sendFile(path.resolve(__dirname , '../receipts/' , receipt));
+        response.sendFile(path.resolve(__dirname, '../receipts/', receipt));
     }
     catch (e) {
         console.error(e);

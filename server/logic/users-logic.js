@@ -35,8 +35,9 @@ async function loginUser(userLoginData) {
   let tokenInfo = { userId: userData.userId, role: userData.role }
   console.log("tokenInfo",tokenInfo);
   const token = jwt.sign(tokenInfo, config.secret);
+  
   const successfulLogInResponse = { token: token, firstName: userData.firstName, lastName: userData.lastName, city: userData.city, street: userData.street, userCart };
-
+  console.log(token);
   
   return successfulLogInResponse;
 }
@@ -50,11 +51,11 @@ function validateUserData(userRegistrationData) {
   console.log("userRegistrationData",userRegistrationData);
   let format = /[^a-zA-Z]/g;
   if (!userRegistrationData.userEmail) {
-    throw new Error("Invalid user name or password");
+    throw new Error("Invalid email or password");
   }
 
   if (!userRegistrationData.password) {
-    throw new Error("Invalid user name or password");
+    throw new Error("Invalid email or password");
   }
 
   if (userRegistrationData.password.length < 6 || userRegistrationData.password.length > 12) {

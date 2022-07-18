@@ -37,6 +37,8 @@ export class LandingPageComponent implements OnInit {
     })
 
     this.subscriptionArray.push(userSubscription, cartSubscription)
+    console.log("Landing",this.cart);
+
   }
 
   ngOnDestroy() {

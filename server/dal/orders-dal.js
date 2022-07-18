@@ -9,7 +9,6 @@ async function addNewOrder(order) {
     let orderData = await connection.executeWithParameters(sql, parameters);
 
     return orderData.insertId;
-
 }
 
 async function getBusyDays() {
@@ -19,7 +18,6 @@ async function getBusyDays() {
 
     let busyDays = await connection.execute(sql);
     return busyDays;
-
 }
 
 async function getAmountOfOrders() {

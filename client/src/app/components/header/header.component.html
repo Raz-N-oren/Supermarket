@@ -16,27 +16,10 @@
   </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          *ngIf="currentUser == 'admin'"
-          routerLink="store"
-          routerLinkActive="active-link"
-          >Store</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          *ngIf="currentUser == 'admin'"
-          class="nav-link"
-          routerLink="add-new-product"
-          routerLinkActive="active-link"
-          >Add New Product</a
-        >
-      </li>
     </ul>
 
     <form *ngIf="currentUser" class="form-inline my-2 my-lg-0">
+      <button *ngIf="currentUser?.role == 'admin'" class="btn btn-outline-success my-2 my-sm-0" (click)="router.navigate(['/doc'])">Documentation</button>
       <button class="log-out-button" (click)="onLogOutClicked()">
         Log out
       </button>

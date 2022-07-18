@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger_output.json');
+
 const productsController = require('./controllers/products-controller');
 const usersController = require('./controllers/users-controller');
 const categoriesController = require('./controllers/categories-controller');
@@ -18,6 +21,9 @@ app.use(cors({origin: ["http://localhost:4200"]}));
 // app.use(loginFilter());
 // Extract the JSON from the body and create request.body object containing it:
 app.use(express.json());
+
+// Extract the JSON from the body and create documentation
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Every http request which starts with /vacations will be dealt inside "vacationsController"
 app.use("/products", productsController);

@@ -34,10 +34,10 @@ router.post("/is-exist", async (request, response) => {
         let userId = request.body.userId;
         let userEmail = request.body.userEmail;
         let loginResponse = await usersLogic.isUserExist(userId, userEmail);
-        
+
         response.json(loginResponse);
     }
-    catch(e) {
+    catch (e) {
         console.error(e);
         response.status(600).send(e.message);
     }

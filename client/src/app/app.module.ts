@@ -48,6 +48,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { AddOrEditProductComponent } from './components/add-or-edit-product/add-or-edit-product.component';
+import { DocumentationComponent } from './components/documentation/documentation.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { AddOrEditProductComponent } from './components/add-or-edit-product/add-
     CartComponent,
     AddOrEditCartItemModalComponent,
     OrderComponent,
-    AddOrEditProductComponent
+    AddOrEditProductComponent,
+    DocumentationComponent
   ],
   imports: [
     BrowserModule,

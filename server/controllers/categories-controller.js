@@ -12,7 +12,6 @@ router.get("/", async (request, response) => {
         console.error(e);
         response.status(600).send(e.message);
     }
-
 });
 
 module.exports = router;

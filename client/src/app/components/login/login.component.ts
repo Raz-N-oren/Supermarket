@@ -63,13 +63,13 @@ export class LoginComponent implements OnInit {
           "city": response.city,
           "street": response.street,
           "role": decoded.role,
-          "userCart": response.userCart
         }
 
         sessionStorage.setItem("userData", JSON.stringify(loggedInUser));
         this._usersService.setCurrentUser(loggedInUser);
-
+        if(response.userCart && response.userCart.isOpen){
         this._cartService.setCurrentCart(response.userCart);
+        }
 
         this.router.navigate(['/landing-page/before-shopping']);
       },

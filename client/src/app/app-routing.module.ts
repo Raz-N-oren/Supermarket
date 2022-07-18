@@ -11,6 +11,7 @@ import { RegisterStepOneComponent } from './components/register-step-one/registe
 import { RegisterStepTwoComponent } from './components/register-step-two/register-step-two.component';
 import { BeforeShoppingComponent } from './components/before-shopping/before-shopping.component';
 import { StoreComponent } from './components/store/store.component';
+import { DocumentationComponent } from './components/documentation/documentation.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,6 @@ const routes: Routes = [
           { path: 'step-one', component: RegisterStepOneComponent },
           { path: 'step-two', component: RegisterStepTwoComponent },
           { path: '', redirectTo: 'step-one', pathMatch: 'full' }
-
         ]
       },
       { path: "before-shopping", canActivate: [LoginGuard], component: BeforeShoppingComponent },
@@ -30,6 +30,7 @@ const routes: Routes = [
   },
   { path: "store", canActivate: [LoginGuard], component: StoreComponent },
   { path: "order", canActivate: [LoginGuard], component: OrderComponent },
+  { path: "doc", component: DocumentationComponent },
   { path: "", redirectTo: "/landing-page/login", pathMatch: "full" },
   { path: "**", component: Page404Component },
 ];

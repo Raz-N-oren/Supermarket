@@ -5,5 +5,4 @@ export default interface IUser {
   city: string;
   street: string;
   role: string;
-  userCart: object;
 }

@@ -1,7 +1,7 @@
-Receipt No. 6
-    Frozen corn seeds X 2
+Receipt No. 14
+    Alco-gel X 1
 _______________________________________________
-    Frozen bean X 2
+    Alcohol 70% X 1
 _______________________________________________
-Total: 78
-Payment: 5645
+Total: 14.399999618530273
+Payment: 8236

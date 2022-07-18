@@ -1,0 +1,553 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Supermarket REST API",
+    "contact": {
+      "email": "razoren2394@gmail.com"
+    },
+    "description": "All endpoints available for requests"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "tags": [
+    { "name": "users", "description": "Login / Register / is exist" },
+    { "name": "carts", "description": "Cart  operations" },
+    { "name": "products", "description": "Products operations" },
+    { "name": "categories", "description": "Groceries categories list." },
+    { "name": "cart-items", "description": "Cart items operations" },
+    { "name": "orders", "description": "Orders operations" }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "description": "Login",
+        "tags": ["users"],
+        "summary": "Log in to your account.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/User login data"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User verified and logged in.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "600": {
+            "description": "Invalid email or password."
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "description": "Register",
+        "tags": ["users"],
+        "summary": "Register as a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/User registration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "600": {
+            "description": "Bad Request. Missing one or more of the required values."
+          }
+        }
+      }
+    },
+    "/users/is-exist": {
+      "post": {
+        "description": "Check if email or id already exist in data base.",
+        "tags": ["users"],
+        "summary": "Check if email or id already exist in data base.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "312548794"
+                },
+                "userEmail": {
+                  "example": "user@gmail.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.\n'true' means that the user's id or user's email exist in the date base.\n 'false' means that parameters doesn't exist."
+          },
+          "600": {
+            "description": "Server error."
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": ["categories"],
+        "description": "Returns an array[] of categories available in the database.",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/Category"
+              }
+            }
+          },
+          "600": {
+            "description": "Server Error."
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": ["products"],
+        "summary": "Get all products available in data base.",
+        "description": "Returns an array[] with all the products from the database.",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          },
+          "600": {
+            "description": "Failed to get all products from data base."
+          }
+        }
+      },
+      "put": {
+        "tags": ["products"],
+        "summary": "Update product.",
+        "description": "Update an existing product's properties.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY1MzU2NjM5NH0.77-EQZZNCkuvylgDC_eq4xN5dPFxSiMh8MKFmR6loXw"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Product to update"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Product has been edited."
+          },
+          "401": {
+            "description": "Unauthorized, no valid admin token."
+          },
+          "600": {
+            "description": "Failed to edit product."
+          }
+        }
+      },
+      "post": {
+        "tags": ["products"],
+        "summary": "Add a new product.",
+        "description": "Add a new product to the data base.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY1MzU2NjM5NH0.77-EQZZNCkuvylgDC_eq4xN5dPFxSiMh8MKFmR6loXw"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Product to add"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Product has been added.."
+          },
+          "401": {
+            "description": "Unauthorized, no valid admin token."
+          },
+          "600": {
+            "description": "The product upload has failed."
+          }
+        }
+      }
+    },
+    "/products/{categoryId}": {
+      "get": {
+        "tags": ["products"],
+        "summary": "Get products by category.",
+        "description": "Get array of products fill by a specific category id number.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY1MzU2NjM5NH0.77-EQZZNCkuvylgDC_eq4xN5dPFxSiMh8MKFmR6loXw"
+          },
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "example": 7
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Failed to get products."
+          }
+        }
+      }
+    },
+    "/products/{productId}": {
+      "delete": {
+        "tags": ["products"],
+        "summary": "Delete product.",
+        "description": "Delete product by a specific product id number.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY1MzU2NjM5NH0.77-EQZZNCkuvylgDC_eq4xN5dPFxSiMh8MKFmR6loXw"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "example": 222
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Product has been deleted."
+          }
+        },
+        "401": {
+          "description": "Unauthorized, no valid token."
+        },
+        "600": {
+          "description": "Failed to delete product."
+        }
+      }
+    },
+    "/products/search/{searchString}": {
+      "get": {
+        "tags": ["products"],
+        "summary": "Search products.",
+        "description": "Search products by product's name, return an array of products.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidXNlciIsImlhdCI6MTY1MzU2NjM5NH0.77-EQZZNCkuvylgDC_eq4xN5dPFxSiMh8MKFmR6loXw"
+          },
+          {
+            "name": "searchString",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "example": "bamba"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Failed to get products."
+          }
+        }
+      }
+    },
+    "/carts": {
+      "get": {
+        "tags" :[
+          "carts"
+        ],
+        "summary": "Get last cart for the current user.",
+        "description": "Returns the last cart that belonged to current user.",
+        "parameters":[
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          }
+        ],
+        "responses":{
+          "200":{
+            "schema":{
+              "type":"object",
+              "$ref":"#/definitions/Cart"
+            } 
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600":{
+            "description": "Cannot get cart."
+          }
+        }
+      }
+    }
+
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1MzkwOTA4LCJyb2xlIjoidXNlciIsImlhdCI6MTY1MzU3NzcwNX0.5WHZ3-MtNqK2NF3VKKICE6w3nhBpQJVExRc85cbI9fU"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Raz"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Oren"
+        },
+        "city": {
+          "type": "string",
+          "example": "Tel Aviv-Yafo"
+        },
+        "street": {
+          "type": "string",
+          "example": "Dizengoff"
+        },
+        "userCart": {
+          "$ref": "#/definitions/Cart"
+        }
+      }
+    },
+    "User login data": {
+      "properties": {
+        "userEmail": {
+          "type": "string",
+          "example": "user@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "abc123"
+        }
+      }
+    },
+    "User registration": {
+      "type": "object",
+      "required": [
+        "id",
+        "email",
+        "firstName",
+        "lastName",
+        "password",
+        "city",
+        "street"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "312598647"
+        },
+        "userEmail": {
+          "type": "string",
+          "example": "user@gmail.com"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Raz"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Oren"
+        },
+        "password": {
+          "type": "string",
+          "example": "abc123"
+        },
+        "city": {
+          "type": "string",
+          "example": "Tel Aviv-Yafo"
+        },
+        "street": {
+          "type": "string",
+          "example": "Dizengoff"
+        }
+      }
+    },
+    "Cart": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": "12"
+        },
+        "isOpen": {
+          "type": "boolean",
+          "example": true
+        },
+        "creationDate": {
+          "type": "string",
+          "example": "2022-07-14T17:32:22.000Z"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "name": {
+          "type": "string",
+          "example": "Dairy"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 136
+        },
+        "name": {
+          "type": "string",
+          "example": "Bamba"
+        },
+        "categoryId": {
+          "type": "number",
+          "example": 7
+        },
+        "price": {
+          "type": "number",
+          "example": 4.5
+        },
+        "imgUrl": {
+          "type": "string",
+          "example": "bamba.png"
+        },
+        "categoryName": {
+          "type": "string",
+          "example": "Snacks"
+        }
+      }
+    },
+    "Product to update": {
+      "type": "object",
+      "required": ["id", "name", "price", "imgUrl", "categoryId"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 136
+        },
+        "name": {
+          "type": "string",
+          "example": "Bamba"
+        },
+        "price": {
+          "type": "number",
+          "example": 4.9
+        },
+        "imgUrl": {
+          "type": "string",
+          "example": "bamba.png"
+        },
+        "categoryId": {
+          "type": "integer",
+          "example": 7
+        }
+      }
+    },
+    "Product to add": {
+      "type": "object",
+      "required": ["name", "price", "imgUrl", "categoryId"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Arak Ashkelon"
+        },
+        "price": {
+          "type": "number",
+          "example": 50.0
+        },
+        "imgUrl": {
+          "type": "string",
+          "example": "ashkelon-arak.png"
+        },
+        "categoryId": {
+          "type": "integer",
+          "example": 9
+        }
+      }
+    }
+  }
+}

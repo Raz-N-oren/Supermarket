@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 import ICartItems from 'src/app/models/ICartItems.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
@@ -19,10 +20,25 @@ export class CartComponent implements OnInit {
   constructor(
     private _cartItemsService: CartItemsService,
     private _cartsService: CartsService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private messageService: MessageService
+      ) { }
 
   ngOnInit(): void {
+  }
+
+  onShowConfirmClicked() {
+    this.messageService.clear();
+    this.messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: 'Are you sure?', detail: 'Confirm to proceed' });
+  }
+
+  onConfirmClicked() {
+    this.messageService.clear('c');
+    this.onClearCartItemsClicked();
+  }
+
+  onRejectClicked() {
+    this.messageService.clear('c');
   }
 
   onClearCartItemsClicked = () => {

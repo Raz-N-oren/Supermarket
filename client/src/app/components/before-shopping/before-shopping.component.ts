@@ -36,10 +36,14 @@ export class BeforeShoppingComponent implements OnInit {
     })
 
     let cartSubscription = this._cartsService.followCurrentCart().subscribe((newCart) => {
+      if(newCart?.isOpen){
       this.cart = newCart;
+      }
+      console.log("before",this.cart);
     })
 
-    this.subscriptionArray.push(userSubscription, cartSubscription)
+    this.subscriptionArray.push(userSubscription, cartSubscription);
+
   }
 
   ngOnDestroy() {
