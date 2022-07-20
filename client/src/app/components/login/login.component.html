@@ -21,13 +21,13 @@
           userLoginForm.controls['userEmail'].touched)
       "
     >
-      <div *ngIf="userLoginForm.controls['userEmail'].errors.required">
+      <div *ngIf="userLoginForm.controls['userEmail'].hasError('required')">
         Please enter email
       </div>
-      <div *ngIf="userLoginForm.controls['userEmail'].errors.email">
+      <div *ngIf="userLoginForm.controls['userEmail'].hasError('email')">
         Please enter valid email
       </div>
-      <div *ngIf="userLoginForm.controls['userEmail'].errors.maxlength">
+      <div *ngIf="userLoginForm.controls['userEmail'].hasError('maxlength')">
         Maximum length is 50 characters
       </div>
     </div>
@@ -50,13 +50,13 @@
           userLoginForm.controls['password'].touched)
       "
     >
-      <div *ngIf="userLoginForm.controls['password'].errors.required">
+      <div *ngIf="userLoginForm.controls['password'].hasError('required')">
         Please enter password
       </div>
-      <div *ngIf="userLoginForm.controls['password'].errors.minlength">
+      <div *ngIf="userLoginForm.controls['password'].hasError('minlength')">
         Length should be at least 6 characters
       </div>
-      <div *ngIf="userLoginForm.controls['password'].errors.maxlength">
+      <div *ngIf="userLoginForm.controls['password'].hasError('maxlength')">
         Maximum length is 10 characters
       </div>
     </div>

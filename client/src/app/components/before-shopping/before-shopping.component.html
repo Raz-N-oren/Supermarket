@@ -3,8 +3,6 @@
     <h3
       *ngIf="
         !_ordersService.lastPurchaseDate &&
-        cartItemsArray &&
-        !cartItemsArray.length &&
         !cart &&
         currentUser.role == 'user'
       "

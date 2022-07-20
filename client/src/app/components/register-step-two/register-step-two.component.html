@@ -18,7 +18,7 @@
             userRegisterForm.controls['city'].touched)
         "
       >
-        <div *ngIf="userRegisterForm.controls['city'].errors.required">
+        <div *ngIf="userRegisterForm.controls['city'].hasError('required')">
           Please choose city
         </div>
       </div>
@@ -42,10 +42,10 @@
             userRegisterForm.controls['street'].touched)
         "
       >
-        <div *ngIf="userRegisterForm.controls['street'].errors.required">
+        <div *ngIf="userRegisterForm.controls['street'].hasError('required')">
           Please enter street
         </div>
-        <div *ngIf="userRegisterForm.controls['street'].errors.maxlength">
+        <div *ngIf="userRegisterForm.controls['street'].hasError('maxlength')">
           Maximum length is 40 characters
         </div>
       </div>
@@ -69,10 +69,10 @@
             userRegisterForm.controls['firstName'].touched)
         "
       >
-        <div *ngIf="userRegisterForm.controls['firstName'].errors.required">
+        <div *ngIf="userRegisterForm.controls['firstName'].hasError('required')">
           Please enter first name
         </div>
-        <div *ngIf="userRegisterForm.controls['firstName'].errors.maxlength">
+        <div *ngIf="userRegisterForm.controls['firstName'].hasError('maxlength')">
           Maximum length is 12 characters
         </div>
       </div>
@@ -96,10 +96,10 @@
             userRegisterForm.controls['lastName'].touched)
         "
       >
-        <div *ngIf="userRegisterForm.controls['lastName'].errors.required">
+        <div *ngIf="userRegisterForm.controls['lastName'].hasError('required')">
           Please enter last name
         </div>
-        <div *ngIf="userRegisterForm.controls['lastName'].errors.maxlength">
+        <div *ngIf="userRegisterForm.controls['lastName'].hasError('maxlength')">
           Maximum length is 12 characters
         </div>
       </div>

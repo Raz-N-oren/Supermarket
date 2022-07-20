@@ -21,18 +21,18 @@
             userRegisterForm.controls['userId'].touched)
         "
       >
-        <div *ngIf="userRegisterForm.controls['userId'].errors.required">
+        <div *ngIf="userRegisterForm.controls['userId'].hasError('required')">
           Please enter id.
         </div>
         <div
           *ngIf="
-            userRegisterForm.controls['userId'].errors.maxlength ||
-            userRegisterForm.controls['userId'].errors.minlength
+            userRegisterForm.controls['userId'].hasError('maxlength') ||
+            userRegisterForm.controls['userId'].hasError('minlength')
           "
         >
           id must contain 9 digits.
         </div>
-        <div *ngIf="userRegisterForm.controls['userId'].errors.pattern">
+        <div *ngIf="userRegisterForm.controls['userId'].hasError('pattern')">
           Please enter only numbers.
         </div>
       </div>
@@ -56,13 +56,13 @@
             userRegisterForm.controls['userEmail'].touched)
         "
       >
-        <div *ngIf="userRegisterForm.controls['userEmail'].errors.required">
+        <div *ngIf="userRegisterForm.controls['userEmail'].hasError('required')">
           Please enter Email.
         </div>
-        <div *ngIf="userRegisterForm.controls['userEmail'].errors.email">
+        <div *ngIf="userRegisterForm.controls['userEmail'].hasError('email')">
           Please enter valid email.
         </div>
-        <div *ngIf="userRegisterForm.controls['userEmail'].errors.maxlength">
+        <div *ngIf="userRegisterForm.controls['userEmail'].hasError('maxlength')">
           Maximum length is 40 characters.
         </div>
       </div>
@@ -85,13 +85,13 @@
             userRegisterForm.controls['password'].touched)
         "
       >
-        <div *ngIf="userRegisterForm.controls['password'].errors.required">
+        <div *ngIf="userRegisterForm.controls['password'].hasError('required')">
           Please enter password.
         </div>
-        <div *ngIf="userRegisterForm.controls['password'].errors.minlength">
+        <div *ngIf="userRegisterForm.controls['password'].hasError('minlength')">
           Length should be at least 6 characters
         </div>
-        <div *ngIf="userRegisterForm.controls['password'].errors.maxlength">
+        <div *ngIf="userRegisterForm.controls['password'].hasError('maxlength')">
           Maximum length is 30 characters
         </div>
       </div>

@@ -19,13 +19,11 @@ export class BeforeShoppingComponent implements OnInit {
   cart: ICart;
   currentUser: IUser;
   isLogin: boolean = true;
-  cartItemsArray: ICartItems[];
   subscriptionArray: Subscription[] = [];
 
   constructor(
     private _usersService: UsersService,
     public _ordersService: OrdersService,
-    public _cartItemsService: CartItemsService,
     private _cartsService: CartsService,
     private router: Router
   ) { }
@@ -36,17 +34,13 @@ export class BeforeShoppingComponent implements OnInit {
       this.currentUser = newUser;
     })
 
-    let cartItemSubscription= this._cartItemsService.followCartItemsSubject().subscribe((cartItems) => {
-      this.cartItemsArray = cartItems;
-    });
-
     let cartSubscription = this._cartsService.followCurrentCart().subscribe((newCart) => {
       if(newCart?.isOpen){
       this.cart = newCart;
       }
     })
 
-    this.subscriptionArray.push(userSubscription, cartSubscription,cartItemSubscription);
+    this.subscriptionArray.push(userSubscription, cartSubscription);
 
   }
 
