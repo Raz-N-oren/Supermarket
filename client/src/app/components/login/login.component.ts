@@ -75,11 +75,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Invalid user data', detail: "Password is incorrect or user name doesn't exists" });
-
-        console.log("Login Error", error);
-
         this.isLoginFail = true;
-
       }
     )
   }

@@ -20,11 +20,11 @@ export class LandingPageComponent implements OnInit {
   subscriptionArray: Subscription[] = [];
 
   constructor(
-    private _products: ProductsService,
-    private _orders: OrdersService,
+    public _products: ProductsService,
+    public _orders: OrdersService,
     private _users: UsersService,
     private _carts: CartsService,
-    private _cartItems: CartItemsService
+    public _cartItems: CartItemsService
   ) { }
 
   ngOnInit(): void {

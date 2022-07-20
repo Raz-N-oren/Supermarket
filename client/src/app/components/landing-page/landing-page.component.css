@@ -4,7 +4,6 @@
   justify-content: space-around;
   flex-wrap: wrap;
   height: 89vh;
-
 }
 
 .card {
@@ -27,7 +26,11 @@
 }
 
 .img{
-  width: 400px;
+  width: 30vw;
+}
+
+.amountOfProducts{
+  color: green;
 }
 
 @media screen and (max-width: 960px) {

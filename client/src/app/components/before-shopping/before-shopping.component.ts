@@ -23,8 +23,8 @@ export class BeforeShoppingComponent implements OnInit {
 
   constructor(
     private _usersService: UsersService,
-    private _ordersService: OrdersService,
-    private _cartItemsService: CartItemsService,
+    public _ordersService: OrdersService,
+    public _cartItemsService: CartItemsService,
     private _cartsService: CartsService,
     private router: Router
   ) { }
@@ -39,7 +39,6 @@ export class BeforeShoppingComponent implements OnInit {
       if(newCart?.isOpen){
       this.cart = newCart;
       }
-      console.log("before",this.cart);
     })
 
     this.subscriptionArray.push(userSubscription, cartSubscription);
