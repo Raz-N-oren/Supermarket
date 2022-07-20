@@ -7,6 +7,7 @@ import { CartsService } from 'src/app/services/carts.service';
 import ICart from 'src/app/models/ICarts.model';
 import IUser from 'src/app/models/IUser.model';
 import { Subscription } from 'rxjs';
+import ICartItems from 'src/app/models/ICartItems.model';
 
 @Component({
   selector: 'app-before-shopping',
@@ -18,7 +19,7 @@ export class BeforeShoppingComponent implements OnInit {
   cart: ICart;
   currentUser: IUser;
   isLogin: boolean = true;
-
+  cartItemsArray: ICartItems[];
   subscriptionArray: Subscription[] = [];
 
   constructor(
@@ -35,13 +36,17 @@ export class BeforeShoppingComponent implements OnInit {
       this.currentUser = newUser;
     })
 
+    let cartItemSubscription= this._cartItemsService.followCartItemsSubject().subscribe((cartItems) => {
+      this.cartItemsArray = cartItems;
+    });
+
     let cartSubscription = this._cartsService.followCurrentCart().subscribe((newCart) => {
       if(newCart?.isOpen){
       this.cart = newCart;
       }
     })
 
-    this.subscriptionArray.push(userSubscription, cartSubscription);
+    this.subscriptionArray.push(userSubscription, cartSubscription,cartItemSubscription);
 
   }
 
