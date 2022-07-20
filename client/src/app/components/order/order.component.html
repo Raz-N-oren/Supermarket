@@ -1,6 +1,22 @@
 <div class="order-container">
   <div class="cart">
-    <app-cart [isOrder]="true"></app-cart>
+    <app-cart
+      [isOrder]="true"
+      #cart
+      *ngIf="hide && currentUser.role == 'user'"
+    ></app-cart>
+  </div>
+  <div class="hide-button-div">
+    <button
+      *ngIf="currentUser.role == 'user'"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-shopping-cart"
+      class="p-button-rounded cart-button"
+      #openClose
+      (click)="hide = !hide"
+    ></button>
   </div>
   <div class="order-form">
     <form [formGroup]="orderForm" (ngSubmit)="onSubmitClicked()">

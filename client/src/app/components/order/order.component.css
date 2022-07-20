@@ -1,6 +1,7 @@
 .order-container {
   width: 100%;
   height: 89vh;
+  position: relative;
   display: flex;
 }
 
@@ -11,16 +12,14 @@ app-cart {
     0 1px 3px 0 rgb(0 0 0 / 12%);
   display: inline-flex;
   flex-direction: column;
-  width: 100%;
   padding: 10px;
   height: 87vh;
   overflow-y: auto;
-  margin-left: 10px;
+  min-width: 25%;
 }
 
 .order-form {
   margin-top: 10px;
-  margin-left: 20px;
   text-align: left;
   display: inline-flex;
   width: 100%;
@@ -55,6 +54,18 @@ label {
   padding: 0;
 }
 
+.hide {
+  display: none;
+}
+
+.cart-button {
+  min-width: 50px;
+}
+
+.hide-button-div{
+  margin: 10px 10px 0 10px;
+}
+
 @media screen and (max-width: 960px) {
   .order-container{
     flex-wrap: wrap;
@@ -65,7 +76,6 @@ label {
     width: 91vw;
     height: fit-content;
     max-height: 80vh;
-    margin-bottom: 10px;
   }
 
   .payment{
@@ -74,3 +84,5 @@ label {
 
 
 }
+
+

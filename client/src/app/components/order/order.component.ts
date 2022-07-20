@@ -9,6 +9,8 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { UsersService } from 'src/app/services/users.service';
 import { MessageService } from 'primeng/api';
 import { saveAs } from 'file-saver';
+import IUser from 'src/app/models/IUser.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -17,6 +19,10 @@ import { saveAs } from 'file-saver';
   providers: [MessageService]
 })
 export class OrderComponent implements OnInit {
+
+  hide: boolean = true;
+  currentUser: IUser;
+  subscription: Subscription;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -40,6 +46,14 @@ export class OrderComponent implements OnInit {
       creditCard: [0, [Validators.required, Validators.pattern("^[0-9\-]+$")]]
     });
 
+    this.subscription = this._usersService.followCurrentUser().subscribe((currentUser) => {
+      this.currentUser = currentUser;
+    })
+
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   orderForm: UntypedFormGroup;
