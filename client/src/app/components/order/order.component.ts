@@ -27,8 +27,8 @@ export class OrderComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
-    private _stateService: StateService,
-    private _orderService: OrdersService,
+    public _stateService: StateService,
+    public _orderService: OrdersService,
     private _cartItemsService: CartItemsService,
     private _cartService: CartsService,
     private _usersService: UsersService,

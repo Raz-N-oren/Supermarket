@@ -19,8 +19,8 @@ export class ProductsContainerComponent implements OnInit {
   subscription: Subscription;
 
   constructor(
-    private _products: ProductsService,
-    private _categoriesService: CategoriesService,
+    public _products: ProductsService,
+    public _categoriesService: CategoriesService,
   ) { }
 
   ngOnInit(): void {

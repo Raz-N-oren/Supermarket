@@ -22,7 +22,7 @@ export class RegisterStepTwoComponent implements OnInit {
 
   constructor(
     private _usersService: UsersService,
-    private _stateService: StateService,
+    public _stateService: StateService,
     private formBuilder: UntypedFormBuilder,
     private router: Router
   ) { }

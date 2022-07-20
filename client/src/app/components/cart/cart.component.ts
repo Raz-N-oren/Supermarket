@@ -24,7 +24,7 @@ export class CartComponent implements OnInit {
   @ViewChild("dv") dataView: DataView;
 
   constructor(
-    private _cartItemsService: CartItemsService,
+    public _cartItemsService: CartItemsService,
     private _cartsService: CartsService,
     private router: Router,
     private messageService: MessageService

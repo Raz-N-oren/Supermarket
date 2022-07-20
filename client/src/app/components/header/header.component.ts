@@ -18,11 +18,11 @@ export class HeaderComponent implements OnInit {
   subscription: Subscription;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private _usersService: UsersService,
     private _productsService: ProductsService,
     private _categoriesService: CategoriesService,
-    private _stateService: StateService
+    public _stateService: StateService
   ) { }
 
   ngOnInit(): void {
