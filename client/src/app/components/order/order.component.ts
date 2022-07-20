@@ -61,8 +61,14 @@ export class OrderComponent implements OnInit {
       shippingDate: this.orderForm.controls['shippingDate'].value,
       paymentLastDigits: lastFourCreditCardDigits,
     }
-    this._orderService.addNewOrder(orderRequest);
-    this._messageService.add({ key: 'c', sticky: true, severity: 'success', summary: 'Your order has been Confirmed', detail: 'Download receipt?' });
+    this._orderService.addNewOrder(orderRequest).subscribe((order) => {
+      this._messageService.add({ key: 'order-toast', sticky: true, severity: 'success', summary: 'Your order has been Confirmed', detail: 'Download receipt?' });
+    },
+      err => {
+        console.log(err);
+        this._messageService.add({ key: 'error-toast', severity: 'error', summary: 'Error', detail: 'Failed to add new order.' });
+      }
+    )
   }
 
   onCloseToastClicked = () => {

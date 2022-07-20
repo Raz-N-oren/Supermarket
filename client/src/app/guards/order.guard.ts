@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MessageService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
+import IUser from '../models/IUser.model';
 import { CartItemsService } from '../services/cart-items.service';
+import { UsersService } from '../services/users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,38 +16,37 @@ export class OrderGuard implements CanActivate {
   public constructor(
     private router: Router,
     public _cartItemsService: CartItemsService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _usersService: UsersService
 
   ) { }
+  canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    let currentUser: IUser;
+    this._usersService.followCurrentUser().subscribe((newUser) => {
+      currentUser = newUser;
+    })
 
-  canActivate(): boolean {
-    let helper = new JwtHelperService();
-    let userData: string = sessionStorage.getItem("userData");
-    let currentUser = JSON.parse(userData);
+    //Deny access to admins.
+    if (currentUser?.role == "admin") {
+      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Unauthorized', detail: 'Admins are not allowed in here.' })
+      this.router.navigate(['/landing-page/before-shopping']);
+      return false;
+    }
 
-    if (currentUser) {
-      let decoded = helper.decodeToken(currentUser.token);
-      this.role = decoded.role;
-    }
-    else {
-      this.role = 'guest';
-    }
-    if (this.role && this.role == 'user' && this._cartItemsService.cartItemsArray.length > 0) {
-      return true;
-    }
-    if (this.role && this.role != 'user') {
-      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Access denied', detail: 'Only customers can access order page.' });
-      return false
-    }
-    if (this.role && this.role == 'user' && this._cartItemsService.cartItemsArray.length == 0) {
-      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Access denied', detail: "Your cart is empty. Please add products before payment." });
-      return false
-    }
-    this.router.navigate(['/store']);
-    console.log("orderGuard");
+    //Deny access to users that didn't fill the cart.
+    //Works with Observable<boolean> in order to update according the the cart-items.
+    return this._cartItemsService.followCartItemsSubject().pipe(
 
-    return false
-
-  }
-
+      filter(newItems => newItems != null),
+      map((newItems) => {
+        if (newItems.length > 0) {
+          return true;
+        }
+        else {
+          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Empty Cart', detail: `Your cart is empty. Please add products before payment.` })
+          this.router.navigate(['/store']);
+          return false;
+        }
+      }))
+    }
 }

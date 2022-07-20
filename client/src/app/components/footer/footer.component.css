@@ -1,10 +1,10 @@
 div {
-  height: 100%;
+  border: 2px solid black;
 }
 
 p {
   position: relative;
   margin: 0;
   top: 50%;
-  transform: translateY(-50%);
+  text-align: center;
 }

@@ -15,7 +15,6 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
 
   currentUser: IUser;
-  searchedInput: string;
   subscription: Subscription;
 
   constructor(
@@ -24,9 +23,7 @@ export class HeaderComponent implements OnInit {
     private _productsService: ProductsService,
     private _categoriesService: CategoriesService,
     private _stateService: StateService
-
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.subscription = this._usersService.followCurrentUser().subscribe((currentUser) => {

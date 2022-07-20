@@ -3,7 +3,6 @@ const cartsLogic = require('./carts-logic');
 const cartItemsLogic = require('./cart-items-logic');
 const fs = require('fs/promises');
 
-
 async function addNewOrder(order) {
     await validateOrder(order);
     let id = await ordersDal.addNewOrder(order);
@@ -46,6 +45,7 @@ async function getLastPurchaseDate(userInfo) {
 
 async function validateOrder(order) {
     let isCartBelongToUser = await cartsLogic.validateCartForUser(order.cartId, order.userId);
+    let currentDay = new Date().toISOString().slice(0, 10);
     if (!isCartBelongToUser) {
         "Illegal request."
     }
@@ -62,7 +62,7 @@ async function validateOrder(order) {
         throw new Error("Shipping street is limited to 100 characters.");
     }
 
-    if (order.shippingDate < order.orderDate) {
+    if (order.shippingDate < currentDay) {
         throw new Error("Invalid shipping date.");
     }
 
@@ -77,15 +77,18 @@ async function validateOrder(order) {
 
 async function createReceipt(orderRequest) {
     cartId = orderRequest.cartId;
+    let finalPrice = (Math.round(orderRequest.finalPrice * 100) / 100).toFixed(2);
     let receipt = 'Receipt No. ' + cartId;
+    receipt += '\n'
     let cartItemsArray = await cartItemsLogic.getCartItemsByCartId(orderRequest.cartId);
     for (let cartItem of cartItemsArray) {
+        let calculatedProductPriceDualQuantity =(Math.round(cartItem.productPrice * cartItem.quantity * 100) / 100).toFixed(2);
         receipt += `
-    ${cartItem.productName} X ${cartItem.quantity}
+    ${cartItem.productName} X ${cartItem.quantity}  ${calculatedProductPriceDualQuantity} 
 _______________________________________________`
     }
     receipt += `
-Total: ${orderRequest.finalPrice}
+Total: ${finalPrice}
 Payment: ${orderRequest.paymentLastDigits}`
 
     await fs.writeFile('./receipts/' + cartId + '.txt', receipt);

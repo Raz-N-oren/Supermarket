@@ -12,6 +12,7 @@ import { RegisterStepTwoComponent } from './components/register-step-two/registe
 import { BeforeShoppingComponent } from './components/before-shopping/before-shopping.component';
 import { StoreComponent } from './components/store/store.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
+import { OrderGuard } from './guards/order.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
     ],
   },
   { path: "store", canActivate: [LoginGuard], component: StoreComponent },
-  { path: "order", canActivate: [LoginGuard], component: OrderComponent },
+  { path: "order", canActivate: [LoginGuard, OrderGuard], component: OrderComponent },
   { path: "doc", component: DocumentationComponent },
   { path: "", redirectTo: "/landing-page/login", pathMatch: "full" },
   { path: "**", component: Page404Component },

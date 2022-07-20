@@ -49,6 +49,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { AddOrEditProductComponent } from './components/add-or-edit-product/add-or-edit-product.component';
 import { DocumentationComponent } from './components/documentation/documentation.component';
+import { MarkerPipe } from './pipes/marker.pipe';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { DocumentationComponent } from './components/documentation/documentation
     AddOrEditCartItemModalComponent,
     OrderComponent,
     AddOrEditProductComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    MarkerPipe
   ],
   imports: [
     BrowserModule,

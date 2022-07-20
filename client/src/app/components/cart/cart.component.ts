@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { DataView } from 'primeng/dataview';
+import { Subscription } from 'rxjs';
 import ICartItems from 'src/app/models/ICartItems.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import { CartsService } from 'src/app/services/carts.service';
@@ -14,8 +16,12 @@ export class CartComponent implements OnInit {
 
   @Input() isOrder: boolean;
 
+  cartItemsArray: ICartItems[];
+  subscription: Subscription;
+  searchValue: string;
   isModalOpen = false;
   cartItemToEdit: ICartItems;
+  @ViewChild("dv") dataView: DataView;
 
   constructor(
     private _cartItemsService: CartItemsService,
@@ -25,20 +31,26 @@ export class CartComponent implements OnInit {
       ) { }
 
   ngOnInit(): void {
+    this.subscription= this._cartItemsService.followCartItemsSubject().subscribe((cartItems) => {
+      this.cartItemsArray = cartItems;
+    });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onShowConfirmClicked() {
     this.messageService.clear();
-    this.messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: 'Are you sure?', detail: 'Confirm to proceed' });
+    this.messageService.add({ key: 'cc', sticky: true, severity: 'warn', summary: 'Are you sure?', detail: 'Confirm to proceed' });
   }
 
   onConfirmClicked() {
-    this.messageService.clear('c');
+    this.messageService.clear('cc');
     this.onClearCartItemsClicked();
   }
 
   onRejectClicked() {
-    this.messageService.clear('c');
+    this.messageService.clear('cc');
   }
 
   onClearCartItemsClicked = () => {
@@ -62,6 +74,13 @@ export class CartComponent implements OnInit {
 
   onBackToStoreClicked = () => {
     this.router.navigate(['/store'])
+  }
+
+  onSearchChange = (searchInputValue: string) => {
+    this.dataView.filter(searchInputValue);
+    if(this.isOrder){
+      this.searchValue = searchInputValue
+    }
   }
 
 }

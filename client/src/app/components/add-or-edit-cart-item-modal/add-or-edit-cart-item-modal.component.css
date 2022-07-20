@@ -10,6 +10,10 @@
   width: 50px;
 }
 
+.add-or-edit-modal{
+  text-align: center;
+}
+
 .amount-input-container {
   display: flex;
   justify-content: center;
@@ -28,10 +32,6 @@
 .img {
   height: 125px;
   width: 125px;
-  border-radius: 4px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
-    0 1px 3px 0 rgb(0 0 0 / 72%);
-  box-sizing: border-box;
   margin-bottom: 20px;
 }
 
@@ -41,3 +41,5 @@
   top: 50%;
   transform: translateY(50%);
 }
+
+

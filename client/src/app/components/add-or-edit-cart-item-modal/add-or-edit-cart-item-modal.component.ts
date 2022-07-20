@@ -19,7 +19,8 @@ export class AddOrEditCartItemModalComponent implements OnInit {
   currentCart: ICart;
   isEdit: boolean = false;
   serverCartItem: IServerCartItem;
-  subscription: Subscription;
+  subscriptionArray: Subscription[] = [];
+  cartItemsArray: ICartItems[];
 
   @Input() isModalOpen: boolean = false;
   @Output() isModalOpenChange = new EventEmitter()
@@ -34,16 +35,20 @@ export class AddOrEditCartItemModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this._CartsService.followCurrentCart().subscribe(newCart => {
+    let cartSubscription = this._CartsService.followCurrentCart().subscribe(newCart => {
       this.currentCart = newCart
     })
+
+    let cartItemSubscription= this._cartItemsService.followCartItemsSubject().subscribe((cartItems) => {
+      this.cartItemsArray = cartItems;
+    });
 
     if (this.cartItemInModal) {
       this.amountToAdd = this.cartItemInModal.quantity;
       this.isEdit = true;
     }
     if (this.productToAdd) {
-      this.cartItemInModal = this._cartItemsService.cartItemsArray.find((cartItem) => { return cartItem.productId == +this.productToAdd.id });
+      this.cartItemInModal = this.cartItemsArray.find((cartItem) => { return cartItem.productId == +this.productToAdd.id });
       if (!this.cartItemInModal) {
         this.convertProductToCartItem();
       }
@@ -52,9 +57,12 @@ export class AddOrEditCartItemModalComponent implements OnInit {
         this.isEdit = true;
       }
     }
+    this.subscriptionArray.push(cartSubscription, cartItemSubscription)
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptionArray.forEach((sub) => {
+      sub.unsubscribe();
+    });
   }
 
   onHideModalClicked() {

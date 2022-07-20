@@ -1,17 +1,17 @@
 <div class="cart-container">
   <p-dataView
     #dv
-    [value]="_cartItemsService.cartItemsArray"
+    [value]="cartItemsArray"
     filterBy="productName"
   >
     <ng-template pTemplate="header">
-      <h4>My Cart</h4>
+      <h4 class="title">My Cart</h4>
       <input
         class="search"
         type="search"
         pInputText
         placeholder="Search by Product Name"
-        (input)="dv.filter($any($event.target).value)"
+        (input)="onSearchChange($any($event.target).value)"
       />
       <div class="total-amount" *ngIf="_cartItemsService.cartItemsTotalPrice">
         <p>
@@ -28,7 +28,7 @@
             [alt]="ICartItems.productName"
           />
           <div class="product-list-detail">
-            <div class="product-name">{{ ICartItems.productName }}</div>
+            <div class="product-name"[innerHTML]="ICartItems.productName | marker: searchValue"> </div>
             <div class="product-quantity">
               Amount: {{ ICartItems.quantity }}
             </div>
@@ -68,7 +68,7 @@
       label="Clear Cart"
       class="footer-button"
       (click)="onShowConfirmClicked()"
-      [disabled]="_cartItemsService.cartItemsArray.length == 0"
+      [disabled]="cartItemsArray?.length == 0"
     ></button>
     <button
       pButton
@@ -77,7 +77,7 @@
       *ngIf="!isOrder"
       class="footer-button"
       (click)="onPaymentClicked()"
-      [disabled]="_cartItemsService.cartItemsArray.length == 0"
+      [disabled]="cartItemsArray?.length == 0"
     ></button>
   </span>
   <span class="p-buttonset cart-buttons-set">
@@ -86,7 +86,7 @@
       pRipple
       *ngIf="isOrder"
       label="Back to store"
-      class="footer-button"
+      class="footer-button back-to-store"
       (click)="onBackToStoreClicked()"
     ></button>
   </span>
@@ -98,20 +98,37 @@
   [cartItemInModal]="cartItemToEdit"
 ></app-add-or-edit-cart-item-modal>
 
-<p-toast position="top-center" key="c" (onClose)="onRejectClicked()" [baseZIndex]="5000">
+<p-toast
+  position="top-center"
+  key="cc"
+  (onClose)="onRejectClicked()"
+  [baseZIndex]="5000"
+>
   <ng-template let-message pTemplate="message">
-      <div class="p-flex p-flex-column" style="flex: 1">
-          <div class="p-text-center">
-              <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
-              <h4>{{message.summary}}</h4>
-              <p>{{message.detail}}</p>
-          </div>
-          <div class="p-grid p-fluid">
-              <div class="p-col-6 clearModalButtonDiv">
-                  <button type="button"  pButton (click)="onConfirmClicked()" label="Yes" class="p-button-success clearModalButton"></button>
-                  <button type="button" pButton (click)="onRejectClicked()" label="No" class="p-button-secondary clearModalButton"></button>
-              </div>
-          </div>
+    <div class="p-flex p-flex-column" style="flex: 1">
+      <div class="p-text-center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+        <h4>{{ message.summary }}</h4>
+        <p>{{ message.detail }}</p>
       </div>
+      <div class="p-grid p-fluid">
+        <div class="p-col-6 clearModalButtonDiv">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirmClicked()"
+            label="Yes"
+            class="p-button-success clearModalButton"
+          ></button>
+          <button
+            type="button"
+            pButton
+            (click)="onRejectClicked()"
+            label="No"
+            class="p-button-secondary clearModalButton"
+          ></button>
+        </div>
+      </div>
+    </div>
   </ng-template>
 </p-toast>

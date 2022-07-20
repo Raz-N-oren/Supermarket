@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { IOrder } from './../models/IOrder.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -55,15 +56,9 @@ export class OrdersService {
       })
   }
 
-  public addNewOrder(order: IOrder): void {
-    this._http.post<IOrder>(this.baseUrl, order)
-      .subscribe((order) => {
-      },
-        err => {
-          console.log(err);
-          this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Failed to add new order.' });
-        }
-      )
+  public addNewOrder(order: IOrder): Observable<IOrder> {
+    return this._http.post<IOrder>(this.baseUrl, order);
+
   }
 
   public getReceipt = (cartId) => {

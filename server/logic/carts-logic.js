@@ -9,6 +9,10 @@ async function getLastCart(userId) {
 }
 
 async function openCart(userInfo) {
+    let lastCart = await getLastCart(userInfo.userId)
+    if(lastCart?.isOpen){
+        throw new Error("You have a cart already.")
+    }
     let role = userInfo.role;
     if (role != "user") {
         throw new Error("Invalid open cart request.");

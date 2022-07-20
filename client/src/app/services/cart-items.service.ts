@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { BehaviorSubject, Observable } from 'rxjs';
 import ICartItems from '../models/ICartItems.model';
 import { IServerCartItem } from '../models/IServerCartItem.model';
 
@@ -9,9 +10,11 @@ import { IServerCartItem } from '../models/IServerCartItem.model';
 })
 export class CartItemsService {
 
-  public cartItemsArray: ICartItems[] = [];
+
   public cartItemsTotalPrice: number;
   public baseUrl: string = 'http://localhost:3001/cart-items/';
+  private cartItemsArray: ICartItems[];
+  private cartItemsSubject = new BehaviorSubject<ICartItems[]>(null);
 
   constructor(
     private _http: HttpClient,
@@ -26,6 +29,7 @@ export class CartItemsService {
         for (let cartItem of cartItems) {
           this.cartItemsTotalPrice += cartItem.productPrice * cartItem.quantity;
         }
+        this.cartItemsSubject.next(this.cartItemsArray);
       },
         err => {
           console.log(err);
@@ -62,7 +66,7 @@ export class CartItemsService {
     this._http.delete(this.baseUrl + cartItemId)
       .subscribe((cartItem) => {
         this.getCartItemsByCartId(cartId);
-        this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: "The Product has been deleted." });
+        this._messageService.add({ key: 'appToast-right', severity: 'success', summary: 'Success', detail: "The product has been deleted." });
       },
         err => {
           console.log(err);
@@ -80,5 +84,13 @@ export class CartItemsService {
           console.log(err);
           this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Your Cart Cannot be cleared.' });
         })
+  }
+
+  followCartItemsSubject = () : Observable<ICartItems[]> => {
+    return this.cartItemsSubject.asObservable();
+  }
+
+  setCartItems = (cartItems: ICartItems[]) => {
+    this.cartItemsSubject.next(cartItems);
   }
 }

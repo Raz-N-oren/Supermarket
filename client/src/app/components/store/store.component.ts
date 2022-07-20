@@ -1,8 +1,10 @@
+import { CategoriesService } from 'src/app/services/categories.service';
 import { StateService } from 'src/app/services/state.service';
 import { Component, OnInit } from '@angular/core';
 import IUser from 'src/app/models/IUser.model';
 import { UsersService } from 'src/app/services/users.service';
 import { Subscription } from 'rxjs';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-store',
@@ -17,7 +19,9 @@ export class StoreComponent implements OnInit {
 
   constructor(
     private _usersService: UsersService,
-    private _stateService: StateService
+    private _stateService: StateService,
+    private _categoriesService: CategoriesService,
+    private _productsService: ProductsService
   ) { }
 
   ngOnInit(): void {
@@ -25,10 +29,13 @@ export class StoreComponent implements OnInit {
     this.subscription = this._usersService.followCurrentUser().subscribe((currentUser) => {
       this.currentUser = currentUser;
     })
+    this._categoriesService.selectedCategory = 0;
+    this._productsService.getAllProducts();
   }
 
   ngOnDestroy(): void {
     this._stateService.isStore = false;
     this.subscription.unsubscribe();
+    this._stateService.searchedInput = '';
   }
 }

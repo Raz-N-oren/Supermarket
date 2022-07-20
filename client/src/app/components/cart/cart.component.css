@@ -39,7 +39,7 @@
 img {
   min-width: 25%;
   max-height: 100px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
   margin: 2rem 0;
 }
 
@@ -119,4 +119,16 @@ img {
 
 .clearModalButtonDiv{
   display: flex;
+}
+
+.p-text-center{
+  text-align: center;
+}
+
+.title{
+  text-align: center;
+}
+
+.back-to-store{
+  width: 100%;
 }

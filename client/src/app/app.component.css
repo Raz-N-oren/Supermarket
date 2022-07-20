@@ -1,27 +1,12 @@
-section {
-  height: 100%;
-  border: 2px solid black;
-  text-align: center;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-rows: 6% 89% 5%;
-  grid-template-columns: repeat(12, 1fr);
-}
 
-header {
-  grid-column: span 12;
-  border: 2px solid black;
-}
+@media screen and (max-width: 960px) {
+  .main{
+    height: 100%;
+    overflow-y: auto;
+    margin: 10px;
+  }
 
-main {
-  grid-column: span 12;
-  border: 2px solid black;
-  overflow-y: auto;
-  padding: 2px;
-  margin-top: 12px;
-}
-
-footer {
-  grid-column: span 12;
-  border: 2px solid black;
+  .app{
+    width: 100vw;
+  }
 }

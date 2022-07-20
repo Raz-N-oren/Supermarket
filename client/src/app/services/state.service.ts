@@ -13,6 +13,7 @@ import { UsersService } from './users.service';
 export class StateService {
 
   isStore: boolean;
+  searchedInput: string;
 
   cart: ICart;
   cities: string[] = [
@@ -96,6 +97,7 @@ export class StateService {
       }
     })
 
+
     let userData: string = sessionStorage.getItem("userData");
 
     if (userData) {
@@ -108,7 +110,7 @@ export class StateService {
         this._cartItemsService.getCartItemsByCartId(newCart.id)
       }
       else {
-        this._cartItemsService.cartItemsArray = [];
+        this._cartItemsService.setCartItems(null);
       }
     })
   }

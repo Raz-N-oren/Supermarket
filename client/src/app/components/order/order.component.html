@@ -77,7 +77,7 @@
           >Street Address is too long.</small
         >
       </div>
-      <h3 class="title">Payment Details</h3>
+      <h3 class="title payment">Payment Details</h3>
       <div class="payment">
         <p>Please enter credit card number</p>
         <span class="order-form-input">
@@ -114,9 +114,10 @@
       </div>
     </form>
   </div>
+  <p-toast key="error-toast" position="top-center"></p-toast>
   <p-toast
     position="center"
-    key="c"
+    key="order-toast"
     (onClose)="onCloseToastClicked()"
     [baseZIndex]="5000"
   >

@@ -1,8 +1,9 @@
 .store {
   width: 100%;
-  height: 88vh;
+  height: 89vh;
   position: relative;
   display: flex;
+  text-align: center;
 }
 
 app-cart {
@@ -13,7 +14,7 @@ app-cart {
   flex-direction: column;
   min-width: 25%;
   padding: 10px;
-  height: 85vh;
+  height: 86vh;
   overflow-y: auto;
 }
 
@@ -23,7 +24,7 @@ app-products-container {
     0 1px 3px 0 rgb(0 0 0 / 12%);
   display: inline-flex;
   min-width: 69%;
-  height: 85vh;
+  height: 86vh;
   overflow-y: auto;
 }
 
@@ -35,7 +36,7 @@ app-add-or-edit-product {
   flex-direction: column;
   min-width: 25%;
   padding: 10px;
-  height: 85vh;
+  height: 86vh;
   overflow-y: auto;
 }
 
@@ -45,4 +46,25 @@ app-add-or-edit-product {
 
 .cart-button {
   min-width: 50px;
+}
+
+@media screen and (max-width: 960px) {
+  .store {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  app-add-or-edit-product {
+    width: 91vw;
+  }
+
+  app-cart {
+    width: 91vw;
+    height: fit-content;
+    max-height: 80vh;
+  }
+
+  .cart-button {
+    margin: 10px 0 10px 0;
+  }
 }

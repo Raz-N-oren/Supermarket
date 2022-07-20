@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <a href="#" class="navbar-brand">🏪 Supermarket</a>
+  <a *ngIf="currentUser" class="welcome">
+    Welcome {{ currentUser.firstName }} {{ currentUser.lastName }}
+  </a>
   <button
     class="navbar-toggler"
     type="button"
@@ -11,34 +14,24 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a *ngIf="currentUser" class="welcome">
-    Welcome {{ currentUser.firstName }} {{ currentUser.lastName }}
-  </a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     </ul>
 
     <form *ngIf="currentUser" class="form-inline my-2 my-lg-0">
       <button *ngIf="currentUser?.role == 'admin'" class="btn btn-outline-success my-2 my-sm-0" (click)="router.navigate(['/doc'])">Documentation</button>
+      <input
+      *ngIf="_stateService.isStore"
+      [(ngModel)]="_stateService.searchedInput"
+      (ngModelChange)="onSearchInputChanged($event)"
+      name="searchedInput"
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+      />
       <button class="log-out-button" (click)="onLogOutClicked()">
         Log out
-      </button>
-      <input
-        *ngIf="_stateService.isStore"
-        [(ngModel)]="searchedInput"
-        (ngModelChange)="onSearchInputChanged($event)"
-        name="searchedInput"
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button
-        class="btn btn-outline-primary my-2 my-sm-0"
-        type="submit"
-        *ngIf="_stateService.isStore"
-      >
-        Search
       </button>
     </form>
   </div>

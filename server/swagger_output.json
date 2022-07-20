@@ -326,12 +326,10 @@
     },
     "/carts": {
       "get": {
-        "tags" :[
-          "carts"
-        ],
+        "tags": ["carts"],
         "summary": "Get last cart for the current user.",
         "description": "Returns the last cart that belonged to current user.",
-        "parameters":[
+        "parameters": [
           {
             "name": "authorization",
             "in": "header",
@@ -340,23 +338,379 @@
             "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
           }
         ],
-        "responses":{
-          "200":{
-            "schema":{
-              "type":"object",
-              "$ref":"#/definitions/Cart"
-            } 
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Cart"
+            }
           },
           "401": {
             "description": "Unauthorized, no valid token."
           },
-          "600":{
+          "600": {
             "description": "Cannot get cart."
+          }
+        }
+      },
+      "post": {
+        "tags": ["carts"],
+        "summary": "Open a new cart.",
+        "description": "Opens a new cart for the current user.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Cart"
+            }
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Cannot open new cart."
+          }
+        }
+      }
+    },
+    "/cart-items": {
+      "post": {
+        "tags": ["cart-items"],
+        "summary": "Add product to cart.",
+        "description": "Add selected product to current user's cart.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Cart-item to add"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Product has been added to cart."
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Failed to add product to cart."
+          }
+        }
+      },
+      "put": {
+        "tags": ["cart-items"],
+        "summary": "update quantity.",
+        "description": "Update cart item's quantity.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Cart-item to update"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Product's quantity has been updated."
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Cannot update cart item quantity."
+          }
+        }
+      }
+    },
+    "/cart-items/{id}": {
+      "get": {
+        "tags": ["cart-items"],
+        "summary": "Get cart items by cart id.",
+        "description": "Returns all the cart items by the current cart id and also validate match to the correct user id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "example": 17
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Cart-item"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Failed to get cart-items from data base."
+          }
+        }
+      },
+      "delete": {
+        "tags": ["cart-items"],
+        "summary": "Delete cart item.",
+        "description": "Delete cart item from the current cart.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The product has been deleted."
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Failed to Delete product from cart."
+          }
+        }
+      }
+    },
+    "/cart-item/remove_all/{id}": {
+      "delete": {
+        "tags": ["cart-items"],
+        "summary": "Clear cart",
+        "description": "Delete all cart items from current cart.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Your cart has been cleared."
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Failed to clear your cart."
+          }
+        }
+      }
+    },
+    "/orders": {
+      "post": {
+        "tags": ["orders"],
+        "summary": "Add new order.",
+        "description": "Validate the request's parameters and add new order, close the current cart and create a receipt.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Your order has been Confirmed"
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Failed to add new order."
+          }
+        }
+      }
+    },
+    "/orders/busy_days": {
+      "get": {
+        "tags": ["orders"],
+        "summary": "Get busy days.",
+        "description": "Returns an array of busy days, days with more than 3 orders.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "2022-07-23T21:00:55.000Z"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Cannot get busy days."
+          }
+        }
+      }
+    },
+    "/orders/amount_of_orders": {
+      "get": {
+        "tags": ["orders"],
+        "summary": "Get amount of orders.",
+        "description": "Calculate the amount of orders made on the website and return the total.",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "integer",
+              "example": 18
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized, no valid token."
+        },
+        "600": {
+          "description": "Cannot get amount of orders."
+        }
+      }
+    },
+    "/orders/last_purchase": {
+      "get": {
+        "tags": ["orders"],
+        "summary": "Get customer's last purchase date.",
+        "description": "Returns a string of the user's last purchase.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "example": "2022-07-23T21:00:55.000Z"
+            }
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Cannot get busy days."
+          }
+        }
+      }
+    },
+    "/orders/{cartId}": {
+      "get": {
+        "tags": ["orders"],
+        "summary": "Get receipt.",
+        "description": "Get the receipt for the cart requested at the path. \nReturns a text file to download.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjU5MzA5MTgsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjU4MTY4MTYyfQ.sH6SUvXWdC99ZIwLfzRJ626HCZO6rZAo3vd9EbKazU8"
+          },
+          {
+            "name": "cartId",
+            "type": "integer",
+            "in": "path",
+            "required": true,
+            "example": "17"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. Receipt has been sent."
+          },
+          "401": {
+            "description": "Unauthorized, no valid token."
+          },
+          "600": {
+            "description": "Faild to get a receipt"
           }
         }
       }
     }
-
   },
   "definitions": {
     "User": {
@@ -546,6 +900,112 @@
         "categoryId": {
           "type": "integer",
           "example": 9
+        }
+      }
+    },
+    "Cart-item to add": {
+      "type": "object",
+      "required": ["productId", "quantity", "cartId"],
+      "properties": {
+        "productId": {
+          "type": "integer",
+          "example": 4
+        },
+        "quantity": {
+          "type": "integer",
+          "example": 2
+        },
+        "cartId": {
+          "type": "integer",
+          "example": 14
+        }
+      }
+    },
+    "Cart-item to update": {
+      "type": "object",
+      "required": ["id", "productId", "quantity", "cartId"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 5
+        },
+        "productId": {
+          "type": "integer",
+          "example": 4
+        },
+        "cartId": {
+          "type": "integer",
+          "example": 14
+        },
+        "quantity": {
+          "type": "integer",
+          "example": 5
+        }
+      }
+    },
+    "Cart-item": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 49
+        },
+        "productId": {
+          "type": "integer",
+          "example": 35
+        },
+        "quantity": {
+          "type": "integer",
+          "example": 5
+        },
+        "productName": {
+          "type": "string",
+          "example": "Artichoke"
+        },
+        "price": {
+          "type": "number",
+          "example": 12
+        },
+        "productImg": {
+          "type": "string",
+          "example": "artichoke.png"
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "required": [
+        "cartId",
+        "finalPrice",
+        "city",
+        "street",
+        "shippingDate",
+        "paymentLastDigits"
+      ],
+      "properties": {
+        "cartId": {
+          "type": "integer",
+          "example": 17
+        },
+        "finalPrice": {
+          "type": "integer",
+          "example": 505
+        },
+        "city": {
+          "type": "integer",
+          "example": "Tel Aviv-Yafo"
+        },
+        "street": {
+          "type": "string",
+          "example": "Dizengoff"
+        },
+        "shippingDate": {
+          "type": "string",
+          "example": "2022-07-23 20:89:55"
+        },
+        "paymentLastDigits": {
+          "type": "integer",
+          "example": 3056
         }
       }
     }
