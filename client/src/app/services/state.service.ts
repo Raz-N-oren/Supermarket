@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import ICart from '../models/ICarts.model';
+import IUser from '../models/IUser.model';
 import { CartItemsService } from './cart-items.service';
 import { CartsService } from './carts.service';
 import { CategoriesService } from './categories.service';
@@ -14,6 +15,7 @@ export class StateService {
 
   isStore: boolean;
   searchedInput: string;
+  currentUser: IUser;
 
   cart: ICart;
   cities: string[] = [
@@ -90,6 +92,7 @@ export class StateService {
       if (newUser) {
         this._cartsService.getLastCart();
         this._ordersService.getLastPurchaseDate();
+        this.currentUser = newUser;
       }
       else {
         this._cartsService.setCurrentCart(null);
@@ -107,7 +110,12 @@ export class StateService {
 
     this._cartsService.followCurrentCart().subscribe((newCart) => {
       if (newCart) {
-        this._cartItemsService.getCartItemsByCartId(newCart.id)
+        if (newCart.isOpen == false && this.currentUser.role == 'user' ) {
+          this._cartsService.openCart();
+        }
+        else {
+          this._cartItemsService.getCartItemsByCartId(newCart.id)
+        }
       }
       else {
         this._cartItemsService.setCartItems(null);

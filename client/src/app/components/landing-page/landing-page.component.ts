@@ -7,6 +7,7 @@ import IUser from 'src/app/models/IUser.model';
 import { CartItemsService } from 'src/app/services/cart-items.service';
 import ICart from 'src/app/models/ICarts.model';
 import { Subscription } from 'rxjs';
+import ICartItems from 'src/app/models/ICartItems.model';
 
 @Component({
   selector: 'app-landing-page',
@@ -18,13 +19,14 @@ export class LandingPageComponent implements OnInit {
   currentUser: IUser;
   cart: ICart;
   subscriptionArray: Subscription[] = [];
+  cartItemsArray: ICartItems[];
 
   constructor(
     public _products: ProductsService,
     public _orders: OrdersService,
     private _users: UsersService,
     private _carts: CartsService,
-    public _cartItems: CartItemsService
+    public _cartItems: CartItemsService,
   ) { }
 
   ngOnInit(): void {
@@ -36,9 +38,11 @@ export class LandingPageComponent implements OnInit {
       this.cart = newCart;
     })
 
-    this.subscriptionArray.push(userSubscription, cartSubscription)
-    console.log("Landing",this.cart);
+    let cartItemsSubscription = this._cartItems.followCartItemsSubject().subscribe((cartItems) => {
+      this.cartItemsArray = cartItems;
+    });
 
+    this.subscriptionArray.push(userSubscription, cartSubscription, cartItemsSubscription)
   }
 
   ngOnDestroy() {
@@ -46,7 +50,5 @@ export class LandingPageComponent implements OnInit {
       sub.unsubscribe();
     });
   }
-
-
 
 }

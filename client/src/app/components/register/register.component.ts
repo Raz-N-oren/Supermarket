@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("REGISTER ON");
 
     this.items = [{
       label: 'First Step',
@@ -25,9 +26,10 @@ export class RegisterComponent implements OnInit {
     ];
   }
 
+  ngOnDestroy(): void {
+    console.log("Register Destoryed");
 
-
-
-
+    sessionStorage.removeItem("register");
+  }
 
 }

@@ -25,22 +25,13 @@ export class OrderGuard implements CanActivate {
   ) { }
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let currentUser: IUser;
-    let currentCart: ICart;
     this._usersService.followCurrentUser().subscribe((newUser) => {
       currentUser = newUser;
-    })
-    this._cartsService.followCurrentCart().subscribe((newCart) => {
-      currentCart = newCart;
     })
 
     //Deny access to admins.
     if (currentUser?.role == "admin") {
       this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Unauthorized', detail: 'Admins are not allowed in here.' })
-      this.router.navigate(['/landing-page/before-shopping']);
-      return false;
-    }
-
-    if(!currentCart){
       this.router.navigate(['/landing-page/before-shopping']);
       return false;
     }
@@ -61,4 +52,5 @@ export class OrderGuard implements CanActivate {
         }
       }))
     }
+
 }

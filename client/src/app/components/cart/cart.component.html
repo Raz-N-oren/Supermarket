@@ -10,7 +10,7 @@
         class="search"
         type="search"
         pInputText
-        placeholder="Search by Product Name"
+        placeholder="Search product in cart"
         (input)="onSearchChange($any($event.target).value)"
       />
       <div class="total-amount" *ngIf="_cartItemsService.cartItemsTotalPrice">

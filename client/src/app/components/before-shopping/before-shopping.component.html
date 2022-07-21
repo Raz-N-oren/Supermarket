@@ -3,22 +3,21 @@
     <h3
       *ngIf="
         !_ordersService.lastPurchaseDate &&
-        !cart &&
         currentUser.role == 'user'
       "
     >
       Welcome to your first purchase
     </h3>
-    <h3 *ngIf="currentUser?.role == 'user' && cart">Welcome Back!</h3>
+    <h3 *ngIf="currentUser?.role == 'user' && _ordersService.lastPurchaseDate">Welcome Back!</h3>
 
     <p-button
       (click)="onResumeShoppingClicked()"
-      *ngIf="cart && currentUser.role == 'user'"
+      *ngIf="cart && cartItemsArray?.length > 0 && currentUser.role == 'user'"
       >Resume Shopping</p-button
     >
     <p-button
       (click)="onStartShoppingClicked()"
-      *ngIf="!cart && currentUser.role == 'user'"
+      *ngIf="currentUser?.role == 'user' && (!cart || (cart && cartItemsArray?.length == 0) )"
       >Start Shopping</p-button
     >
     <p-button (click)="onGoToStoreClicked()" *ngIf="currentUser.role == 'admin'"

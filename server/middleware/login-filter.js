@@ -7,9 +7,6 @@ let { secret } = config;
 function authenticateJwtRequestToken() {
 
     return expressJwt({ secret, algorithms: ['sha1', 'RS256', 'HS256'] }).unless(request => {
-        // console.log("Method = " + request.method);
-        // console.log("request.url = " + request.url);
-
         if (request.method == 'POST' && request.url.endsWith('/users/')) {
             return true;
         };

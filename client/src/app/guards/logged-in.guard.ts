@@ -31,9 +31,7 @@ export class LoggedInGuard implements CanActivate {
       return true;
     }
     this.router.navigate(['/landing-page/before-shopping']);
-    console.log("loggedInGuard");
     if (this.role && this.role != 'guest') {
-      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Access denied', detail: 'You are already logged in' });
       return false
     }
 

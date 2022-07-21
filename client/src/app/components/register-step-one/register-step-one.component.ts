@@ -56,7 +56,6 @@ export class RegisterStepOneComponent implements OnInit {
       this._usersService.userRegisterData.password = this.registeredUserData.password;
       sessionStorage.setItem("register", JSON.stringify(this._usersService.userRegisterData));
       this.router.navigate(['/landing-page/register/step-two']);
-      console.log(this._usersService.userRegisterData);
     }
   }
 

@@ -1,3 +1,4 @@
+import { StateService } from './../../services/state.service';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -22,6 +23,7 @@ export class AddOrEditProductComponent implements OnInit {
     private _productsService: ProductsService,
     private _categoriesService: CategoriesService,
     private formBuilder: UntypedFormBuilder,
+    private _stateService: StateService
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +76,7 @@ export class AddOrEditProductComponent implements OnInit {
     }
     this.isEdit = null;
     this.productForm.reset();
+    this._stateService.searchedInput = '';
   }
 
   onResetFormClicked = () => {

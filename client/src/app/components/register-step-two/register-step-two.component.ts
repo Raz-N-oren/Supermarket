@@ -45,7 +45,6 @@ export class RegisterStepTwoComponent implements OnInit {
     this._usersService.userRegisterData.lastName = this.registerUserData.lastName;
 
     this._usersService.addNewUser(this._usersService.userRegisterData);
-    sessionStorage.removeItem("register");
   }
 
   goBackToStepOne(): void {

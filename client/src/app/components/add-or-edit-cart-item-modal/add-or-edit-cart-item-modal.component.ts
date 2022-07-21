@@ -76,6 +76,10 @@ export class AddOrEditCartItemModalComponent implements OnInit {
       quantity: this.amountToAdd,
       productId: this.cartItemInModal.productId
     }
+    if(this.serverCartItem.quantity < 0 || this.serverCartItem.quantity > 20){
+      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'Quantity must be between 1-20' });
+    }
+    else{
     if (this.isEdit) {
       if (this.serverCartItem.quantity == 0) {
         this._cartItemsService.removeFromCart(this.serverCartItem.id, this.currentCart.id);
@@ -87,12 +91,12 @@ export class AddOrEditCartItemModalComponent implements OnInit {
     else {
       if (this.serverCartItem.quantity == 0) {
         this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Error', detail: 'No amount was chosen.' });
-
       }
       else {
         this._cartItemsService.addCartItem(this.serverCartItem);
       }
     }
+  }
     this.onHideModalClicked();
 
   }

@@ -43,7 +43,7 @@ export class OrderComponent implements OnInit {
       city: [this.currentUserValue.city, [Validators.required]],
       street: ["", [Validators.required, Validators.maxLength(60)]],
       shippingDate: [null, [Validators.required]],
-      creditCard: [0, [Validators.required, Validators.pattern("^[0-9\-]+$")]]
+      creditCard: [null, [Validators.required, Validators.pattern("^[0-9\-]+$")]]
     });
 
     this.subscription = this._usersService.followCurrentUser().subscribe((currentUser) => {
@@ -78,10 +78,10 @@ export class OrderComponent implements OnInit {
     this._orderService.addNewOrder(orderRequest).subscribe((order) => {
       this._messageService.add({ key: 'order-toast', sticky: true, severity: 'success', summary: 'Your order has been Confirmed', detail: 'Download receipt?' });
     },
-      err => {
-        console.log(err);
-        this._messageService.add({ key: 'error-toast', severity: 'error', summary: 'Error', detail: 'Failed to add new order.' });
-      }
+    err => {
+      console.log(err);
+      this._messageService.add({ key: 'error-toast', severity: 'error', summary: 'Error', detail: 'Failed to add new order.' });
+    }
     )
   }
 
@@ -95,6 +95,10 @@ export class OrderComponent implements OnInit {
     let cartId = this._cartService.getCart().id;
     this._orderService.getReceipt(cartId).subscribe(blob => {
       saveAs(blob, cartId + '.txt');
+    },
+    err => {
+      console.log(err);
+      this._messageService.add({ key: 'error-toast', severity: 'error', summary: 'Error', detail: 'Failed to get receipt.' });
     })
   }
 }

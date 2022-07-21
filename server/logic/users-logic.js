@@ -21,7 +21,6 @@ async function addUser(userRegistrationData) {
 
 async function loginUser(userLoginData) {
   userLoginData.password = hashPassword(userLoginData.password);
-  console.log("Hashed password : " + userLoginData.password);
 
   let userData = await usersDal.loginUser(userLoginData)
   if (!userData) {
@@ -30,12 +29,9 @@ async function loginUser(userLoginData) {
   let userId = userData.userId;
   let userCart = await cartLogic.getLastCart(userId);
   let tokenInfo = { userId: userData.userId, role: userData.role }
-  console.log("tokenInfo", tokenInfo);
   const token = jwt.sign(tokenInfo, config.secret);
 
   const successfulLogInResponse = { token: token, firstName: userData.firstName, lastName: userData.lastName, city: userData.city, street: userData.street, userCart };
-  console.log(token);
-
   return successfulLogInResponse;
 }
 
@@ -45,7 +41,6 @@ function hashPassword(password) {
 }
 
 function validateUserData(userRegistrationData) {
-  console.log("userRegistrationData", userRegistrationData);
   let format = /[^a-zA-Z]/g;
   if (!userRegistrationData.userEmail) {
     throw new Error("Invalid email or password");
