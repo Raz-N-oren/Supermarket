@@ -1,3 +1,4 @@
+import { StateService } from './../../services/state.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import ICategories from 'src/app/models/ICategories.model';
@@ -21,6 +22,7 @@ export class ProductsContainerComponent implements OnInit {
   constructor(
     public _products: ProductsService,
     public _categoriesService: CategoriesService,
+    private _stateService: StateService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class ProductsContainerComponent implements OnInit {
   }
 
   onSelectedCategoryClicked = (event: any) => {
+    this._stateService.searchedInput = '';
     let selectedCategoryName = event.originalEvent.target.innerText;
     let selectedCategory = this.categoriesArray.find((category) => {
       return category.name == selectedCategoryName

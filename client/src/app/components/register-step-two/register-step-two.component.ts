@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-register-step-two',
@@ -24,6 +25,7 @@ export class RegisterStepTwoComponent implements OnInit {
     private _usersService: UsersService,
     public _stateService: StateService,
     private formBuilder: UntypedFormBuilder,
+    private _messageService: MessageService,
     private router: Router
   ) { }
 
@@ -55,6 +57,10 @@ export class RegisterStepTwoComponent implements OnInit {
     let lastSavedRegister = sessionStorage.getItem("register");
     if (lastSavedRegister) {
       this._usersService.userRegisterData = JSON.parse(lastSavedRegister);
+    }
+    else {
+      this._messageService.add({ key: 'appToast', severity: 'error', summary: 'Invalid user data', detail: "Please fill step one first." });
+      this.router.navigate(['landing-page/register/step-one']);
     }
   }
 
