@@ -17,6 +17,11 @@
   text-align: center;
 }
 
+h4{
+  text-decoration: underline;
+  font-style: italic;
+}
+
 .general-info{
   padding-top: 20px;
 }

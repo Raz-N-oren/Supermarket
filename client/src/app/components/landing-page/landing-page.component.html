@@ -3,9 +3,9 @@
     <router-outlet></router-outlet>
   </div>
   <div class="about card">
-    <p>Welcome to supermarket Online!
+    <p>Welcome to Supermarket Online!
       In our supermarket you will find the freshest groceries at the cheapest prices in Israel!
-      We deliver all over Israel and our delivery service is easy, fast and FREE
+      We deliver all over Israel and our delivery service is easy, fast and FREE!
       All you need to do is fill your cart and we will get it to you in no time!</p>
     <img
       src="/assets/images/Grocery.png"
@@ -14,17 +14,18 @@
     />
   </div>
   <div class="general-info card">
+    <h4>General Info:</h4>
     Amount of products: <br />
     <p class="amountOfProducts">{{ _products.amountOfProducts }}</p>
     Amount of orders: <br />
     {{ _orders.amountOfOrders }} <br />
     <br />
     <div *ngIf="_orders.lastPurchaseDate &&(!cartItemsArray || (cart && cartItemsArray?.length == 0) ) ">
-      <h6>Your last order was at:</h6>
+      <h6>Your last order was made on:</h6>
       <h6>{{ _orders.lastPurchaseDate | date: "fullDate" }}</h6>
     </div>
     <div *ngIf="cart?.isOpen && cartItemsArray?.length > 0">
-      You have an opened cart from {{ cart.creationDate | date: "fullDate" }}
+      You have an open cart from {{ cart.creationDate | date: "fullDate" }}
     </div>
   </div>
 </div>

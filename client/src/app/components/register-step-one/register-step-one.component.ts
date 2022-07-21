@@ -29,8 +29,8 @@ export class RegisterStepOneComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRegisterForm = this.formBuilder.group({
-      userId: [this.registeredUserData.userId, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]+$')]],
-      userEmail: [this.registeredUserData.userEmail, [Validators.required, Validators.email, Validators.maxLength(40)]],
+      userId: [this._usersService.userRegisterData.userId, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]+$')]],
+      userEmail: [this._usersService.userRegisterData.userEmail, [Validators.required, Validators.email, Validators.maxLength(40)]],
       password: [this.registeredUserData.password, [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       verifiedPassword: [this.registeredUserData.verifiedPassword],
       isUserNotRegistered: [this.isUserNotRegistered, [Validators.requiredTrue]],

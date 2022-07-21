@@ -106,7 +106,7 @@ import { MarkerPipe } from './pipes/marker.pipe';
     MessagesModule,
     ToastModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }, CategoriesService, MessageService],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,3 @@
-import { CartsService } from './services/carts.service';
 import { Component, OnInit } from '@angular/core';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { StateService } from './services/state.service';

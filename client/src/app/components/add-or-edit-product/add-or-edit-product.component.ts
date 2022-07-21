@@ -58,6 +58,7 @@ export class AddOrEditProductComponent implements OnInit {
     this.subscriptionArray.forEach((sub) => {
       sub.unsubscribe();
     });
+    this._productsService.setCurrentProduct(null)
   }
 
   onSubmitClicked = () => {
