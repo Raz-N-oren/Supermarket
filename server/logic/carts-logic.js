@@ -1,8 +1,8 @@
- const cartsDal = require('../dal/carts-dal');
+const cartsDal = require('../dal/carts-dal');
 
 async function getLastCart(userId) {
     let lastCart = await cartsDal.getLastCart(userId);
-    if(lastCart){
+    if (lastCart) {
         lastCart.isOpen = !!lastCart.isOpen;
     }
     return lastCart;
@@ -10,7 +10,7 @@ async function getLastCart(userId) {
 
 async function openCart(userInfo) {
     let lastCart = await getLastCart(userInfo.userId)
-    if(lastCart?.isOpen){
+    if (lastCart?.isOpen) {
         throw new Error("You have a cart already.")
     }
     let role = userInfo.role;
@@ -36,7 +36,7 @@ async function validateCartForUser(cartId, userId) {
     return isCartBelongToUser;
 }
 
-async function closeCart(cartId){
+async function closeCart(cartId) {
     await cartsDal.closeCart(cartId)
 }
 

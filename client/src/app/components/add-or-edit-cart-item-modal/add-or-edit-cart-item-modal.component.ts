@@ -15,7 +15,6 @@ import { CartsService } from 'src/app/services/carts.service';
 })
 export class AddOrEditCartItemModalComponent implements OnInit {
 
-  amountToAddError: boolean = false;
   currentCart: ICart;
   isEdit: boolean = false;
   serverCartItem: IServerCartItem;
@@ -102,8 +101,8 @@ export class AddOrEditCartItemModalComponent implements OnInit {
     if (this.amountToAdd <= 0) {
       this.amountToAdd = 0;
     }
-    else if (this.amountToAdd > 10) {
-      this.amountToAdd = 10;
+    else if (this.amountToAdd > 20) {
+      this.amountToAdd = 20;
     }
     else {
       this.amountToAdd--;
@@ -114,8 +113,8 @@ export class AddOrEditCartItemModalComponent implements OnInit {
     if (this.amountToAdd < 0) {
       this.amountToAdd = 0;
     }
-    else if (this.amountToAdd >= 10) {
-      this.amountToAdd = 10;
+    else if (this.amountToAdd >= 20) {
+      this.amountToAdd = 20;
     }
     else {
       this.amountToAdd++;

@@ -75,7 +75,6 @@ const validateProduct = (product) => {
   }
 }
 
-
 module.exports = {
   getAllProducts,
   getProductsByCategory,

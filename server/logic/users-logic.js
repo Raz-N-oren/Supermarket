@@ -1,9 +1,6 @@
 let usersDal = require('../dal/users-dal');
 const cartLogic = require('../logic/carts-logic');
 const crypto = require("crypto");
-const tokenDecoder = require("../utils/token-decoder")
-
-
 const jwt = require('jsonwebtoken');
 const config = require('../config/config.json');
 
@@ -33,12 +30,12 @@ async function loginUser(userLoginData) {
   let userId = userData.userId;
   let userCart = await cartLogic.getLastCart(userId);
   let tokenInfo = { userId: userData.userId, role: userData.role }
-  console.log("tokenInfo",tokenInfo);
+  console.log("tokenInfo", tokenInfo);
   const token = jwt.sign(tokenInfo, config.secret);
-  
+
   const successfulLogInResponse = { token: token, firstName: userData.firstName, lastName: userData.lastName, city: userData.city, street: userData.street, userCart };
   console.log(token);
-  
+
   return successfulLogInResponse;
 }
 
@@ -48,7 +45,7 @@ function hashPassword(password) {
 }
 
 function validateUserData(userRegistrationData) {
-  console.log("userRegistrationData",userRegistrationData);
+  console.log("userRegistrationData", userRegistrationData);
   let format = /[^a-zA-Z]/g;
   if (!userRegistrationData.userEmail) {
     throw new Error("Invalid email or password");

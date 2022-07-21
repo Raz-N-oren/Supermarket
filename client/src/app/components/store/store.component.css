@@ -48,6 +48,10 @@ app-add-or-edit-product {
   min-width: 50px;
 }
 
+.hide-button-div{
+  margin: 10px 10px 0 10px;
+}
+
 @media screen and (max-width: 960px) {
   .store {
     flex-wrap: wrap;

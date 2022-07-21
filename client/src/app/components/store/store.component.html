@@ -3,6 +3,7 @@
   <app-add-or-edit-product
     *ngIf="hide && currentUser.role == 'admin'"
   ></app-add-or-edit-product>
+  <div class="hide-button-div">
   <button
     *ngIf="currentUser.role == 'user'"
     pButton
@@ -23,5 +24,6 @@
     #openClose
     (click)="hide = !hide"
   ></button>
+  </div>
   <app-products-container [hide]="hide"></app-products-container>
 </div>

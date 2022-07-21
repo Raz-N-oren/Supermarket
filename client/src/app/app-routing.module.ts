@@ -1,3 +1,4 @@
+import { AdminGuard } from './guards/admin.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { OrderComponent } from './components/order/order.component';
 import { NgModule } from '@angular/core';
@@ -31,7 +32,7 @@ const routes: Routes = [
   },
   { path: "store", canActivate: [LoginGuard], component: StoreComponent },
   { path: "order", canActivate: [LoginGuard, OrderGuard], component: OrderComponent },
-  { path: "doc", component: DocumentationComponent },
+  { path: "doc",canActivate: [LoginGuard, AdminGuard], component: DocumentationComponent },
   { path: "", redirectTo: "/landing-page/login", pathMatch: "full" },
   { path: "**", component: Page404Component },
 ];

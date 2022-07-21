@@ -29,7 +29,6 @@ async function addNewProduct(product) {
     let productData = await connection.executeWithParameters(sql, parameters);
 
     return productData.insertId;
-
 }
 
 async function deleteProduct(productId) {
@@ -55,9 +54,6 @@ async function editProduct(product) {
 
     await connection.executeWithParameters(sql, parameters);
 }
-
-
-
 
 module.exports = {
     getAllProducts,
