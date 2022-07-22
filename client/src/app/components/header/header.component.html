@@ -19,7 +19,7 @@
     </ul>
 
     <form *ngIf="currentUser" class="form-inline my-2 my-lg-0">
-      <button *ngIf="currentUser?.role == 'admin'" class="btn btn-outline-success my-2 my-sm-0" (click)="router.navigate(['/doc'])">Documentation</button>
+      <button *ngIf="currentUser?.role == 'admin'" class="btn btn-outline-primary my-2 my-sm-0" (click)="router.navigate(['/doc'])">Documentation</button>
       <input
       *ngIf="_stateService.isStore"
       [(ngModel)]="_stateService.searchedInput"

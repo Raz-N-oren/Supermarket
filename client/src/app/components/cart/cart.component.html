@@ -61,6 +61,8 @@
     </ng-template>
   </p-dataView>
   <span class="p-buttonset cart-buttons-set">
+  </span>
+  <span class="p-buttonset cart-buttons-set">
     <button
       pButton
       pRipple
@@ -79,8 +81,6 @@
       (click)="onPaymentClicked()"
       [disabled]="cartItemsArray?.length == 0"
     ></button>
-  </span>
-  <span class="p-buttonset cart-buttons-set">
     <button
       pButton
       pRipple
