@@ -100,7 +100,6 @@ export class StateService {
       }
     })
 
-
     let userData: string = sessionStorage.getItem("userData");
 
     if (userData) {

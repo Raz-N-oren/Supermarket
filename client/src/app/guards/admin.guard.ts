@@ -30,6 +30,4 @@ export class AdminGuard implements CanActivate {
       return true;
     }
   }
-
-
 }

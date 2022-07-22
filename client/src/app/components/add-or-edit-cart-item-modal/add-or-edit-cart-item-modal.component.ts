@@ -98,7 +98,6 @@ export class AddOrEditCartItemModalComponent implements OnInit {
     }
   }
     this.onHideModalClicked();
-
   }
 
   onMinusButtonClicked() {
@@ -135,5 +134,4 @@ export class AddOrEditCartItemModalComponent implements OnInit {
       productImage: this.productToAdd.imgUrl
     }
   }
-
 }

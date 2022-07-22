@@ -10,7 +10,6 @@ import { IServerCartItem } from '../models/IServerCartItem.model';
 })
 export class CartItemsService {
 
-
   public cartItemsTotalPrice: number;
   public baseUrl: string = 'http://localhost:3001/cart-items/';
   private cartItemsArray: ICartItems[];

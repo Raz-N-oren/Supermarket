@@ -39,5 +39,4 @@ export class RegisterComponent implements OnInit {
     }
     sessionStorage.removeItem("register");
   }
-
 }

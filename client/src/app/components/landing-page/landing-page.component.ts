@@ -50,5 +50,4 @@ export class LandingPageComponent implements OnInit {
       sub.unsubscribe();
     });
   }
-
 }

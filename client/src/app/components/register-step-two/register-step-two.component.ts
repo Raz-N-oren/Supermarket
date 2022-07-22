@@ -11,7 +11,6 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./register-step-two.component.css']
 })
 export class RegisterStepTwoComponent implements OnInit {
-
   registerUserData: any = {
     firstName: "",
     lastName: "",
@@ -63,5 +62,4 @@ export class RegisterStepTwoComponent implements OnInit {
       this.router.navigate(['landing-page/register/step-one']);
     }
   }
-
 }

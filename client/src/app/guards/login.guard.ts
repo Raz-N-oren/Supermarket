@@ -7,7 +7,6 @@ import { CanActivate, Router } from '@angular/router';
 })
 export class LoginGuard implements CanActivate {
   private role: string = 'guest';
-
   public constructor(private router: Router) { }
 
   canActivate(): boolean {
@@ -28,5 +27,4 @@ export class LoginGuard implements CanActivate {
     this.router.navigate(['/']);
     return false
   }
-
 }

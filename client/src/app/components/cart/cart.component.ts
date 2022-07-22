@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
 import { Subscription } from 'rxjs';
 import ICartItems from 'src/app/models/ICartItems.model';
@@ -82,5 +82,4 @@ export class CartComponent implements OnInit {
       this.searchValue = searchInputValue
     }
   }
-
 }

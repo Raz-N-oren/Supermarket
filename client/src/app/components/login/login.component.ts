@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
     this.subscription = this._usersService.followCurrentUser().subscribe((newUser) => {
       this.currentUser = newUser;
     })
-
   }
 
   ngOnDestroy() {
@@ -70,7 +69,6 @@ export class LoginComponent implements OnInit {
         if(response.userCart && response.userCart.isOpen){
         this._cartService.setCurrentCart(response.userCart);
         }
-
         this.router.navigate(['/landing-page/before-shopping']);
       },
       error => {

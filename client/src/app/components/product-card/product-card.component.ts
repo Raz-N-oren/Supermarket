@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-
 import IProduct from 'src/app/models/IProduct.model';
 import IUser from 'src/app/models/IUser.model';
-
 import { ProductsService } from 'src/app/services/products.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -45,5 +43,4 @@ export class ProductCardComponent implements OnInit {
   onEditProductClicked=(productToEdit: IProduct)=>{
     this._products.setCurrentProduct(productToEdit);
   }
-
 }

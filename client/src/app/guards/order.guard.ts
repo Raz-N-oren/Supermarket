@@ -1,27 +1,21 @@
 import { CartsService } from './../services/carts.service';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { filter, map, Observable } from 'rxjs';
 import IUser from '../models/IUser.model';
 import { CartItemsService } from '../services/cart-items.service';
 import { UsersService } from '../services/users.service';
-import ICart from '../models/ICarts.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderGuard implements CanActivate {
-  private role: string;
-
   public constructor(
     private router: Router,
     public _cartItemsService: CartItemsService,
     private _messageService: MessageService,
-    private _usersService: UsersService,
-    private _cartsService: CartsService
-
+    private _usersService: UsersService
   ) { }
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let currentUser: IUser;

@@ -44,9 +44,7 @@ export class BeforeShoppingComponent implements OnInit {
         this.cart = newCart;
       }
     })
-
     this.subscriptionArray.push(userSubscription, cartSubscription, cartItemsSubscription);
-
   }
 
   ngOnDestroy() {
@@ -69,5 +67,4 @@ export class BeforeShoppingComponent implements OnInit {
   onGoToStoreClicked = () => {
     this.router.navigate(['/store']);
   }
-
 }

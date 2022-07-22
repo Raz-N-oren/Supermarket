@@ -2,11 +2,8 @@ import { StateService } from './../../services/state.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import ICategories from 'src/app/models/ICategories.model';
-import { CartItemsService } from 'src/app/services/cart-items.service';
-import { CartsService } from 'src/app/services/carts.service';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
-
 
 @Component({
   selector: 'app-products-container',
@@ -48,6 +45,5 @@ export class ProductsContainerComponent implements OnInit {
     else {
       this._products.getProductsByCategory(selectedCategory.id)
     }
-
   }
 }

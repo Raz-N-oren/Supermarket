@@ -34,9 +34,6 @@ export class LoggedInGuard implements CanActivate {
     if (this.role && this.role != 'guest') {
       return false
     }
-
     return false
-
   }
-
 }

@@ -32,8 +32,8 @@ export class OrderComponent implements OnInit {
     private _cartItemsService: CartItemsService,
     private _cartService: CartsService,
     private _usersService: UsersService,
-    private _messageService: MessageService,
-  ) { }
+    private _messageService: MessageService
+    ) { }
 
   ngOnInit(): void {
     this._orderService.busyDays = [];
@@ -49,7 +49,6 @@ export class OrderComponent implements OnInit {
     this.subscription = this._usersService.followCurrentUser().subscribe((currentUser) => {
       this.currentUser = currentUser;
     })
-
   }
 
   ngOnDestroy(): void {
@@ -81,8 +80,7 @@ export class OrderComponent implements OnInit {
     err => {
       console.log(err);
       this._messageService.add({ key: 'error-toast', severity: 'error', summary: 'Error', detail: 'Failed to add new order.' });
-    }
-    )
+    })
   }
 
   onCloseToastClicked = () => {
