@@ -2,7 +2,7 @@ let connection = require("./connection-wrapper");
 
 async function getLastCart(userId) {
     let sql = `SELECT id, creation_date as creationDate, is_open as isOpen
-    FROM supermarket.carts
+    FROM carts
     where creation_date in (select max(creation_date) from carts where user_id = ?)`;
     let parameters = [userId]
     let [cart] = await connection.executeWithParameters(sql, parameters);

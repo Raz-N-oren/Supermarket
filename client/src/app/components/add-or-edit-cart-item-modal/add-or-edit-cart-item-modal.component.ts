@@ -47,7 +47,7 @@ export class AddOrEditCartItemModalComponent implements OnInit {
       this.isEdit = true;
     }
     if (this.productToAdd) {
-      this.cartItemInModal = this.cartItemsArray.find((cartItem) => { return cartItem.productId == +this.productToAdd.id });
+      this.cartItemInModal = this.cartItemsArray.find((cartItem) => { return cartItem.productId == this.productToAdd.id });
       if (!this.cartItemInModal) {
         this.convertProductToCartItem();
       }
@@ -127,7 +127,7 @@ export class AddOrEditCartItemModalComponent implements OnInit {
   convertProductToCartItem = () => {
     this.cartItemInModal = {
       id: null,
-      productId: +this.productToAdd.id,
+      productId: this.productToAdd.id,
       productName: this.productToAdd.name,
       productPrice: +this.productToAdd.price,
       quantity: 0,
